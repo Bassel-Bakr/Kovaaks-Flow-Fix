@@ -9,6 +9,12 @@ explains the numbers in it. Status and data are as of 2026-09-24.
 Every scenario uses the Egyptian window look with the palace courtyard (see `look.md`). The look does not change
 the drill: targets spawn in the same places, and nothing covers them.
 
+**Centred on the crosshair (2026-09-25).** The base map's target grid is centred 0.6° left of and 1.5° below the
+crosshair, and every Flow Fix spawn area used to inherit that offset. At the user's request, every spawn area is now
+centred on the crosshair (`CY, CZ = 0, 0` in `gen_specs.py`): each layout moved 30 units right and 80 up, and the
+window moved with it. Target sizes, spacing and scoring are unchanged, and no angle moves by more than 1.5°, so runs
+before and after compare, although the scenario hash changed.
+
 **In game.** Every description starts with the flowchart problem it targets ("Chinese weakness-targeted static
 flowchart: ..."), then says what it trains, how it works and how it scores (2026-09-24). The search tags are
 "Flow Fix, flowfix, Static, Clicking, Bassel, Bakr, Egypt"; the aim type is Clicking, subtype Static.

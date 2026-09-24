@@ -1,7 +1,8 @@
 """Generate specs.json for the flowfix scenario set.
 
 Sizes and distances are relative to cA sixshot dense: target radius 65, grid about
-1185 x 1050 map units centred on (y=-30, z=-80), MapScale 3.15.
+1185 x 1050 map units, MapScale 3.15. Its grid is centred on (y=-30, z=-80), 0.6 deg left of and 1.5 deg below the
+crosshair; every Flow Fix spawn area is centred on the crosshair instead (user, 2026-09-24).
 """
 import json
 from pathlib import Path
@@ -10,7 +11,10 @@ SCEN = "C:/Program Files (x86)/Steam/steamapps/common/FPSAimTrainer/FPSAimTraine
 BASE = SCEN + "/cA sixshot dense.sce"
 POKE_SRC = SCEN + "/VT 1w1ts Advanced Pokeball.sce"
 ROT_SRC = SCEN + "/ClickTrack 3t.sce"
-CY, CZ = -30.0, -80.0
+BASE_CY, BASE_CZ = -30.0, -80.0   # the centre of cA sixshot dense's grid
+# The centre of every spawn area, and so of the window: the crosshair, dead centre (user, 2026-09-24). Until then
+# it was the base map's centre, and the whole window sat 0.6 deg left and 1.5 deg low.
+CY, CZ = 0.0, 0.0
 FAR = "100000.0"
 
 
@@ -51,7 +55,8 @@ def base_volumes():
         if o.get("name") == "SpawnVolume" and any(p["name"] == "TeamMask" and p["value"] == 2 for p in o["properties"]):
             _, y, z = (float(t) for t in o["location"].split(","))
             _, sy, sz = (float(t) for t in o["scale"].split(","))
-            out.append({"y": y, "z": z, "size_y": sy, "size_z": sz, "permitted_profile": "target"})
+            out.append({"y": y - BASE_CY + CY, "z": z - BASE_CZ + CZ, "size_y": sy, "size_z": sz,
+                        "permitted_profile": "target"})
     return out
 
 

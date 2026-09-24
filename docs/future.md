@@ -12,7 +12,8 @@ changes should wait for data (3 runs of the current build) rather than intent.
   0.8 s (`HealthRegenPerSec` -1.25); once more than about 85% are caught, tighten it to 0.6 s (-1.667).
 - **Pathing:** the respawn delay (0.25-0.4 s) is still unconfirmed in game. A run where killed spots refill instantly
   would look the same in the stats, so it needs a visual check.
-- **In-play FPS with the courtyard:** read `Avg FPS` in the stats of the next runs, with the user's usual theme.
+- **In-play FPS with the 2026-09-25 look:** the user read 910 FPS on low settings in the Sand Test. Read `Avg FPS` in
+  the stats of the next runs, with the user's usual theme, and check that the restart hitch is gone.
 
 ## Scenario ideas
 
@@ -32,12 +33,16 @@ changes should wait for data (3 runs of the current build) rather than intent.
 
 ## Look ideas
 
-- **Always-dark backing for the stencils.** Themes do not repaint props, so a dark plain prop behind the head and the
-  lions would stay dark in every theme. The prop names in the editor's anime pack are unknown here; if the user lists
-  them, a new sampler can test them (see `backing_sampler.py`, `backing_test.py`).
-- **Courtyard under all-alike themes.** 30 of the user's 149 themes paint every surface type the same; there the
-  courtyard reads only by its silhouette against the sky. A screenshot under one of them would show whether the
-  portico or the towers need a stencil treatment too.
+- **The sculpts under all-alike themes.** The bust and the lions are no longer stencils, so under the 30 themes that
+  paint every surface type the same they read by their shape and shading alone, and not at all at full brightness.
+  A screenshot under one of them would show whether they need anything, such as a prop, which themes do not repaint.
+- **Courtyard under all-alike themes.** Under the same themes the courtyard reads only by its silhouette against the
+  sky. A screenshot would show whether the portico or the towers need more contrast.
+- **More detail in the sculpts.** `make_lion.py` and `make_pharaoh.py` can take more parts (mane locks, paw toes, the
+  nemes' brow band) at little cost to the frame rate; each triangle costs file size, though. Coarser cells (lions 10,
+  bust 8) would save about 20% more if the file ever needs it.
+- **One outline per sign.** The text is overlapping round strokes. Merging each sign's strokes into one outline
+  would cut the text's triangles further and remove the overlaps.
 - **Variety between scenarios.** The court fits each window already; small per-scenario touches (the pool, the palm
   types) could help tell scenarios apart at a glance, if the user wants that.
 
@@ -52,6 +57,8 @@ changes should wait for data (3 runs of the current build) rather than intent.
   perspective. Promoted to a project tool, it would preview any look change without the game.
 - **Crash guards in the build.** Fail the build if a map has more than 3 material groups, or a mesh with an index out
   of range, before anything can reach the game.
+- **Slim the base map's objects.** `SLIM_MESHES` only touches custom meshes. The plain blocks (window stone, court
+  blocks) could merge into meshes and be slimmed too, if the file size or the restart hitch ever matters again.
 - **Version control.** The project became a git repository on 2026-09-24 (built outputs, test builds and `retired/`
   are ignored; see `.gitignore`). Commit each approved change with its docs.
 - **The wiki.** `decoration.md`, `mechanics.md` and `docs/` are written to be moved into a wiki as they are.

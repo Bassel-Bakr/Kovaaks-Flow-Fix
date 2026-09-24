@@ -23,7 +23,9 @@ import final_render as R  # noqa: E402
 SRC = Path("test_out/shots_src")
 OUT = Path("test_out/screenshots")
 ZOOM = 1.36
-Y_SHIFT = 15                       # the game frames the window a little below the centre
+# The game's own screenshot of Check (2026-09-24) showed the window about 1.5 degrees below the centre, as it
+# was then; 15 pixels matched it. Since 2026-09-25 the window is centred on the crosshair, so no shift.
+Y_SHIFT = 0
 SRC.mkdir(parents=True, exist_ok=True)
 OUT.mkdir(parents=True, exist_ok=True)
 

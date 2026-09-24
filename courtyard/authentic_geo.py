@@ -184,7 +184,7 @@ def layout(path):
         if o.get("type") != "brush":
             continue
         x, y, z = (float(t) for t in o["location"].split(","))
-        if not -3200 < x < -2800:
+        if not -3600 < x < -2800:          # the window, and the turned lions and their plinths (to -3500)
             continue
         pp = window_polys(o, ms)
         polys += pp

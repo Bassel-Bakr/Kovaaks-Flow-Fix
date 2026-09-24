@@ -1,4 +1,9 @@
 {
+ "credits": {
+  "author": "Bassel Bakr",
+  "project": "Flow Fix: KovaaK's static clicking scenarios with an ancient Egyptian look",
+  "source": "https://github.com/Bassel-Bakr/Kovaaks-Flow-Fix"
+ },
  "glyphs": [
   {
    "name": "ankh",

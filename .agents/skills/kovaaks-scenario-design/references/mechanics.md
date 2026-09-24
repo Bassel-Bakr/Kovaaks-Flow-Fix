@@ -232,6 +232,29 @@ prints its results, so read them.
   about free: the user's copy without them read the same as the full room.
 - **Checking merged meshes:** test each triangle's bounds, not the mesh's. A merged wall has a hole where the
   targets are, so its overall bounds always overlap them (check_scene.py does this).
+- **Smooth statues (2026-09-25).** Sculpted meshes with one normal per vertex, shared by neighbouring triangles, load
+  and shade smoothly in game: the lions (about 8,000 triangles each) and the pharaoh's bust (about 16,700). A mesh
+  of 7,500 triangles in two sections loaded, and so did 13 meshes above 4,000 vertices in one map.
+- **Mesh size is file size.** Our builds write mesh data the way the game does: one number per line, deeply
+  indented, with every number to 6 decimals. The window look with the stencils was 12 MB per scenario. The first
+  build with the sculpts and the round text was 39 MB (about 100,000 vertices), and the user saw a hitch on every
+  restart. Triangle count did not hurt the frame rate: that build read 900 FPS or more.
+- **Compact mesh text loads (2026-09-25).** The game read, without complaint:
+  - mesh data with one vertex per line (`{"location":...,"normal":...,"tangent":...,"uv0":...}`) and 60 indices
+    per line;
+  - numbers with 4 decimals instead of 6;
+  - `-0.0000` values.
+
+  The rest of the map stayed indented. With these (`COMPACT_MESHES` in `build.py`), the same map took 8.7 MB
+  instead of 21.9 MB.
+- **Faces the fixed eye cannot see (2026-09-25).** In these scenarios the player never moves (MaxSpeed 0, no jump,
+  gravity 0), so a face that points away from the eye is never visible. `SLIM_MESHES` in `build.py` leaves those out
+  (with a 20-unit margin round the eye) and drops the vertices only they used. In the Sand Test that cut triangles
+  from 53,854 to 30,685 and the file from 8.7 MB to 5.2 MB. It loaded, and the user saw nothing missing. Such a
+  mesh looks hollow from behind in the map editor.
+- **Unused vertices and slivers.** Sections carry only the vertices their triangles use. Triangles under 0.05 square
+  units, left by cutting colour boundaries into a mesh, are dropped. They are far below a pixel, and some were
+  wound against their smoothed normals.
 
 ## Map materials and themes
 
@@ -277,6 +300,9 @@ prints its results, so read them.
 - **The user's FPS limit** was 400 on 2026-09-23 (`Max FPS (config): 400`, `Avg FPS` about 402 in every run) and is
   1000 since 2026-09-24 (about 820 average in play with the window look). Read both fields in the stats: a look costs
   nothing in play while the uncapped rate stays well above the limit.
+- **Triangles are cheap, objects and rotated blocks are not (2026-09-25).** The sculpted lions added about 15,000
+  triangles in 2 objects, and the user read 850 FPS. The whole 2026-09-25 look read 910 FPS on low settings with
+  about 30,500 mesh triangles in 51 meshes. Budget objects and file size, not triangles.
 - **Compare frame time, not FPS.** The user's baseline drifts between sessions (plain Overflick read 780 on
   2026-09-23 and 850 on 2026-09-24). Convert to milliseconds (1000 / FPS) and compare against a baseline
   measured in the same session. The mesh-sign Egypt room cost 0.23 ms (780 to 660 FPS) and then 0.25 ms (850 to 700 FPS).

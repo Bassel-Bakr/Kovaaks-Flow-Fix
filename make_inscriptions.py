@@ -17,6 +17,8 @@ import json
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
+from credits import CREDITS
+
 FONT = r"C:\Windows\Fonts\seguihis.ttf"
 OVER = 8                     # oversampling factor
 COVER = 0.33                 # a pixel is carved when at least this share of it is ink
@@ -138,7 +140,7 @@ def line(text, em):
 
 
 def main():
-    out = {"text": TEXT, "signs": {}, "cartouche": {}, "lines": {}, "strokes": {}}
+    out = {"credits": CREDITS, "text": TEXT, "signs": {}, "cartouche": {}, "lines": {}, "strokes": {}}
     chars = {c for k in ("welcome", "maker", "filler", "madeby", "name") for c in TEXT[k] if c != " "}
     for em in COLUMN_EMS:
         out["signs"][str(em)] = {c: sign(c, em) for c in sorted(chars)}

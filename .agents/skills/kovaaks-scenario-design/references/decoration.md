@@ -379,8 +379,9 @@ builds that check_scene.py passed.
   group 1 `ceiling` 0f2a4d. That slot holds the signs in the full room, and the window look copies its colour to
   its own sign slot (group 1 `ground`). The switch is off by default, because in the full room that slot also
   paints the ceiling.
-- **Art:** a pharaoh's head (golden face, lapis nemes, no uraeus) standing on the cornice in the middle; a
-  recumbent lion on a plinth beside each pilaster, facing the window.
+- **Art (until 2026-09-25):** a pharaoh's head (golden face, lapis nemes, no uraeus) standing on the cornice in the
+  middle; a recumbent lion on a plinth beside each pilaster, facing the window. Both became sculpts on 2026-09-25
+  (see "The 2026-09-25 look").
 - **Head placement.** The user asked to see the head placements side by side before choosing. So
   `window_mockups.py` rendered three options (`WINDOW_HEAD` in `egypt.py`) in one image:
   - A (`"lintel_split"`): the head sits in the middle of a raised lintel. The welcome line is split beside it, 2
@@ -449,7 +450,8 @@ and allowed pyramids as distant landmarks.
 - **Cost.** 18 objects: 10 blocks and 8 custom meshes, about 2,400 triangles. The user read 875 FPS without a theme
   override and 880 with one on the test scenario (no Overflick reading that session).
 - **Palette.** Two slots repainted, as the user approved: group 0 `wall` from dark umber to palace grey 5d6066 (the
-  sign outlines turn dark grey too), and the free group 1 `ceiling` to paving grey 77736b.
+  sign outlines turn dark grey too), and the free group 1 `ceiling` to paving grey 77736b. On 2026-09-25 the walls
+  turned sandstone and the two slots swapped roles (see "The 2026-09-25 look").
 - **Safety.** Nothing stands in front of the targets closer than about 194 wall-plane units outside the envelope;
   every tall piece is at least 26 degrees off-centre; nothing stands behind the head or in front of the lions.
   check_scene.py passes on all 13 scenarios.
@@ -460,6 +462,89 @@ and allowed pyramids as distant landmarks.
   with eight palm columns and doorways, an enclosure wall and the pyramid field, 19 objects and about 6,200
   triangles. The user preferred the judge's pick. The judge had noted that the doorways make the palace look like a
   doll's house and that the concept lacks the castle feel.
+
+## The 2026-09-25 look: sandy walls, sculpts, smooth text (in all 13 scenarios)
+
+The user refined the look one step at a time in a single test scenario, `Flow Fix Sand Test` (Overflick with each
+change). They checked it in game and then asked for it in all 13. The earlier builds are in `retired/window look
+with stencil art (installed until 2026-09-25)/`, and each Sand Test version is in `retired/tests/`.
+
+- **Sandy walls.** The user asked for "the walls of atmosphere". A render of the atmosphere concept's palace front
+  (flat cavetto coping, limestone dado, buttress strips) showed that they meant its colour, not its shape: "No, I
+  want the sandy walls". A comparison offered three options: limestone walls, sandstone walls on a grey floor, and
+  sandstone walls with a sand floor. The user picked "A floor, C walls": sandstone c9a877 walls on the grey court.
+  - All eight slots were taken, so two slots swapped. Group 1 `ceiling` (the paving grey) became sandstone for the
+    palace walls, portico roofs and towers.
+  - Group 0 `wall` (the palace grey 5d6066) became the paving grey 77736b for the court floor. The palms and the
+    sign outlines share that slot, so they turned a slightly lighter grey.
+  - Under a theme, the walls now take the ceiling paint, like the window stone, and the floor takes the wall paint.
+  - Code: `courtyard/final_geo.py` has `WALL` and `FLOOR`, the slots of the walls and the floor.
+- **The window centred on the crosshair.** The user asked for "the player crosshair dead center of the frame". The
+  cause was the base map's target grid, centred 0.6° left of and 1.5° below the crosshair, and all 13 scenarios
+  inherited it. `gen_specs.py` now centres every spawn area on the crosshair, and the window follows.
+- **The pharaoh's head, placement.** The user asked for the head "lowered and moved in front of the stone". Two
+  options were rendered:
+  - `front_cornice`: in front of the cornice, the chin at the cornice base.
+  - `front_lintel`: lowered onto the lintel, with the two welcome lines moved apart to clear it.
+
+  The user tried `front_lintel`. The text gets smaller in five scenarios: Overflick and Hesitation 0.91 to 0.79,
+  Lingering 0.98 to 0.85, Pathing 1.05 to 0.91, Speed Build 0.68 to 0.55. The research answer to "where would the
+  head go in real life" was:
+  - A front-facing head on a gate has no real model.
+  - Real gates put a centrepiece on the lintel's centre line: the winged sun (ruled out) or the king's cartouches.
+  - The king also appeared in the Window of Appearances itself, or as statues flanking the gate.
+- **The lions, facing the player.** Guardian lions face whoever approaches a gate, so the user asked for the lions to
+  face the player. Three versions followed:
+  1. A front-view stencil drawing. The user rejected it: "I want the same lion from before just rotated. I don't
+     want a stencil lion".
+  2. The profile art extruded into a block statue, head toward the player, shaped across by part. Seen from the
+     player, it read as a blocky mass.
+  3. After the user asked about detail ("what if change distance snap size to 2"), a smooth sculpted statue. Snap
+     size is an editor setting only; builds write exact coordinates.
+
+  The user said the first sculpt "looks like a dog", because the mane sat too far back. The mane now starts just
+  behind the eyes, wraps the cheeks, rises past the ears and runs back over the shoulders.
+- **How the sculpts are made** (`sculpt.py`, `make_lion.py`, `make_pharaoh.py`; the JSON files carry the result):
+  - Each statue is a signed distance field. Its parts are ellipsoids, tapered capsules and rounded boxes. Parts in
+    one group blend with a smooth minimum (radius 16 for the lion's body, 10 to 14 on the bust); groups meet with a
+    smaller one, so the mane stays a distinct mass. Small ellipsoids cut the eyes, nostrils and mouth.
+  - Naive surface nets turn the field into quads: one vertex per crossed cell, at the mean of its edge crossings.
+    The lion uses 9-unit cells, the bust 7.
+  - Every vertex takes the field's gradient as its normal, so the statue shades smoothly.
+  - Each quad is wound outward by the grid edge it crosses. The smoothed normals are wrong at a few sharp folds.
+  - Colour is read at the vertices. A triangle whose vertices differ in colour is cut along the colour boundary,
+    found by bisection on its edges, so stripes, collar rings and painted eyes get clean edges. The first bust gave
+    each quad one colour, and the user called it "pixelated".
+  - Hidden flat faces (the bust's back, the lions' undersides) and slivers under 0.05 square units are dropped.
+- **The lion sculpt:** a torso, chest, rump and haunches; folded hind legs and hind paws beside the body; forelegs
+  stretched forward with paws; a head, muzzle and chin; two ears; a tail curled up over the rump. The accent group
+  (ochre) is a mane ruff behind the face, the mane over the shoulders, ruffs round the cheeks, the chest bib and the
+  tail tuft. The right lion is a mirror image, so both tails lean outward. It lies on a limestone plinth that runs
+  under it toward the player.
+- **The bust:** after Tutankhamun's mask. It has:
+  - a golden face, jaw, nose, ears and neck, with lapis eyes, brows and mouth painted as colour regions;
+  - a lapis beard with gold braid bands;
+  - a nemes (dome, side flaps, lappets) in lapis and gold stripes 14 units high;
+  - a broad collar in 15-unit lapis and gold rings.
+
+  There is no cobra. Its back is flat, 100 units in front of the lintel, just clear of the cornice's 96-unit step.
+  Its lapis is group 0 `ground` and its gold group 1 `ramp`.
+- **Smooth text.** The user asked whether the text could be smoothed like the statues.
+  - Every stroke of a sign and of its outline is now a stadium (round ends) in the sign's mesh (`ROUND_STROKES`), so
+    strokes meet in round joints. The ends use 2 facets on the 6-unit body strokes and 3 on the 11-unit outline.
+  - The traced skeleton is averaged over 5 pixels before simplification (`strokes.SMOOTH`), so curves stay curves.
+    `EPS` went from 4 to 1.5, but the user saw that "lines aren't straight". It settled at 3: of the joints that
+    bend less than 20° (wobbles in straight lines), 1.5 left 29 and 3 leaves 9. There are 174 strokes, up from 158.
+- **Cost and file size.** The Sand Test with every change read 910 FPS on low settings. On the way there:
+  - Its file first reached 39 MB and about 100,000 vertices, most of them in the text (one vertex set per
+    triangle), and the user saw a hitch on every restart.
+  - Shared stroke vertices, compact mesh text and dropping faces the fixed eye cannot see brought it to 5.2 MB,
+    30,685 triangles and 31,433 vertices (see mechanics.md, Custom meshes).
+
+  Each scenario is now 104 objects, 51 of them meshes, and about 5 MB.
+- **Credits.** Every asset JSON starts with a `"credits"` entry naming the user, from `credits.py`.
+- **Screenshots.** `make_screenshots.py` rendered all 13, centred now (`Y_SHIFT` 0). The user's own in-game
+  screenshot of Check, which showed the old look, is in `retired/screenshots (installed until 2026-09-25)/`.
 
 ## The text
 
