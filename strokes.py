@@ -10,7 +10,8 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 FONT = r"C:\Windows\Fonts\seguihis.ttf"
 EM = 120         # render size in pixels (72 left fragments inside the vulture and a lumpy foot)
-EPS = 4.0        # simplification tolerance in pixels
+EPS = 3.0        # simplification tolerance in pixels (4.0 before the traces were smoothed; 1.5 left straight lines wavy)
+SMOOTH = 2       # traces are averaged over 2 * SMOOTH + 1 pixels first, so curves stay curves without pixel steps
 MIN_LEN = 6      # drop traces shorter than this many pixels
 # Signs whose detail is too fine for the font's line art to survive thinning: drawn explicitly.
 ZIGZAG = {"𓈖": 4}   # water ripple: number of teeth
@@ -99,6 +100,19 @@ def trace(g):
     return paths
 
 
+def smooth(path, k=None):
+    """A traced path averaged over 2k + 1 neighbours (fewer near its ends, which stay fixed)."""
+    k = SMOOTH if k is None else k
+    if k <= 0 or len(path) < 3:
+        return path
+    out = [path[0]]
+    for i in range(1, len(path) - 1):
+        h = min(k, i, len(path) - 1 - i)
+        win = path[i - h:i + h + 1]
+        out.append((sum(p[0] for p in win) / len(win), sum(p[1] for p in win) / len(win)))
+    return out + [path[-1]]
+
+
 def rdp(pts, eps=EPS):
     if len(pts) < 3:
         return pts
@@ -130,7 +144,7 @@ def sign_strokes(char, em=EM):
     g = thin(render(char, em))
     segs = []
     for path in trace(g):
-        pts = rdp(path, EPS)   # read EPS at call time, so callers can change it
+        pts = rdp(smooth(path), EPS)   # read EPS and SMOOTH at call time, so callers can change them
         segs += [((a[1], a[0]), (b[1], b[0])) for a, b in zip(pts, pts[1:])]
     ys = [c for s in segs for c in (s[0][0], s[1][0])]
     zs = [c for s in segs for c in (s[0][1], s[1][1])]

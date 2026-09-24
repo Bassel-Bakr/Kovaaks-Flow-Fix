@@ -55,6 +55,9 @@ STROKE_W, OUTLINE_W = 6.0, 2.5     # stroke width, and how far the dark backing 
 # Custom meshes ("procedural" brushes, 21 installed maps use them): each sign becomes one object with two
 # sections (strokes, outline) instead of ~20-50 blocks. Block count is what costs FPS. Off until confirmed.
 MESH_SIGNS = False
+# ROUND_STROKES (user, 2026-09-25: make the text smoother): in a mesh, each stroke of a sign (and of its outline)
+# has semicircular ends, so strokes meet in round joints instead of square block corners.
+ROUND_STROKES = False
 # Decoration meshes (2026-09-24): the user's profiling put most of the room's cost in object count (about 1 FPS
 # per object at ~700 FPS), so each decoration element (frame, pilasters, winged sun, frieze...) becomes one
 # custom-mesh object with one section per material. The room shell stays plain boxes. Off until confirmed.
@@ -84,12 +87,23 @@ WINDOW_ONLY = False
 # "lintel_alone" (the head alone on the raised lintel; the welcome line on the left pilaster, the maker line and the
 # cartouche sharing the right one). WINDOW_LIONS: a recumbent lion on a plinth beside each pilaster base, the pair
 # facing the window. The art (bitmaps "pharaoh" and "lion") comes from egypt_glyphs.json or EXTRA_ART.
+# Head options asked for on 2026-09-24 ("lowered and moved in front of the stone"): "front_cornice" stands the head
+# in front of the cornice with its chin at the cornice base; "front_lintel" lowers it onto the lintel, in front of
+# the cornice and the lintel, and moves the two copies of the welcome line apart to clear it.
 WINDOW_HEAD = None
+HEAD_IN_FRONT = ("front_cornice", "front_lintel")
+# HEAD_SCULPT (user, 2026-09-25): in front of the stone, the head is the sculpted bust from make_pharaoh.py
+# (pharaoh_statue.json) instead of the pixel stencil.
+HEAD_SCULPT = False
 WINDOW_LIONS = False
+# LION_TURNED (user, 2026-09-24: "the same lion from before just rotated", "not a stencil lion", then "sculpt a smooth
+# statue"): each lion is a smooth sculpted statue (make_lion.py, lion_statue.json) in the old art's pose, lying with
+# its head toward the player like guardian lions flanking an approach.
+LION_TURNED = False
 # COURTYARD (the user's pick, 2026-09-24): the palace courtyard around the window, from the design workflow (the
 # judge's merge of the lean and authentic concepts; code in courtyard/final_geo.py). Needs WINDOW_ONLY and the lions,
-# since the portico starts past the lion plinths. It repaints group 0 wall to palace grey (the sign outlines turn dark
-# grey too, as the user approved) and group 1 ceiling to the paving grey.
+# since the portico starts past the lion plinths. It repaints group 0 wall to the paving grey (the court floor, the
+# palms and the sign outlines) and group 1 ceiling to sandstone (the palace walls, portico roofs and towers).
 COURTYARD = False
 COURT_GROUP = 100                  # editor groups of the court pieces, one per piece
 # LINTEL_MIRROR: the welcome line carved twice from the centre of the lintel outward, the left copy mirrored, so
@@ -211,6 +225,65 @@ class Scene:
                                      sum(p[i] * tv[i] for i in range(3)) / UV_UNIT)) for p in q]
             sec["i"] += [base, base + 1, base + 2, base, base + 2, base + 3]
 
+    def mesh_tris(self, m, origin, mirror, slots):
+        """Add a sculpted mesh (lion_statue.json: vertices, vertex normals, triangles per colour, stored wound so
+        (B - A) x (C - A) points out) to the open mesh, at origin, its s axis flipped if mirror is -1."""
+        ox, oy, oz = origin
+        for part, tris in m["triangles"].items():
+            sec = self.mesh.setdefault(slots[part], {"v": [], "i": []})
+            index = {}
+            for t in tris:
+                if mirror < 0:                               # a mirror image turns the winding over
+                    t = (t[0], t[2], t[1])
+                for vi in t[::-1]:                           # installed winding: (B - A) x (C - A) against the normal
+                    if vi not in index:
+                        x, y, z = m["vertices"][vi]
+                        nx, ny, nz = m["normals"][vi]
+                        p, n = (ox + x, oy + mirror * y, oz + z), (nx, mirror * ny, nz)
+                        tu = (-n[1], n[0], 0.0) if abs(n[2]) < 0.9 else (1.0, 0.0, 0.0)
+                        ln = math.sqrt(sum(k * k for k in tu))
+                        tu = tuple(k / ln for k in tu)
+                        index[vi] = len(sec["v"])
+                        sec["v"].append((p, n, tu, (p[0] / UV_UNIT, (p[1] + p[2]) / UV_UNIT)))
+                    sec["i"].append(index[vi])
+
+    def _mesh_round_stroke(self, p0, p1, face_x, width, depth, slot):
+        """A stroke with semicircular ends (a stadium) standing depth proud of face_x, added to the open mesh. The
+        ends have 2 or 3 facets: the body stroke is about 1.5 screen pixels wide from the spawn, the outline 3."""
+        (y0, z0), (y1, z1) = p0, p1
+        length = math.hypot(y1 - y0, z1 - z0)
+        uy, uz = ((y1 - y0) / length, (z1 - z0) / length) if length > 1e-6 else (1.0, 0.0)
+        r, base = width / 2, math.atan2(uz, uy)
+        steps = 2 if r < 4 else 3
+        ring = []                                    # counter-clockwise in (y, z): round the end, then the start
+        for cy, cz, a0 in ((y1, z1, base - math.pi / 2), (y0, z0, base + math.pi / 2)):
+            for k in range(steps + 1):
+                a = a0 + math.pi * k / steps
+                ring.append((cy + r * math.cos(a), cz + r * math.sin(a)))
+        x0 = face_x - depth
+        sec = self.mesh.setdefault(slot, {"v": [], "i": []})
+        # Shared vertices (2026-09-25; one set per triangle made the scenario file three times larger): the face
+        # is a fan over one ring, and the sides share two rings whose normals point straight out from the stroke,
+        # which is exact on the round ends and on the long sides alike.
+        centres = [(y1, z1)] * (steps + 1) + [(y0, z0)] * (steps + 1)
+        b = len(sec["v"])
+        for (y, z) in ring:                                              # the face
+            sec["v"].append(((x0, y, z), (-1.0, 0.0, 0.0), (0.0, uy, uz), (y / UV_UNIT, z / UV_UNIT)))
+        for x in (x0, face_x):                                           # the sides: front ring, back ring
+            for (y, z), (cy, cz) in zip(ring, centres):
+                ny, nz = (y - cy) / r, (z - cz) / r
+                sec["v"].append(((x, y, z), (0.0, ny, nz), (1.0, 0.0, 0.0), (x / UV_UNIT, (y + z) / UV_UNIT)))
+        n = len(ring)
+        for k in range(1, n - 1):
+            # the ring runs counter-clockwise seen from the player (-x), so (B - A) x (C - A) points toward +x,
+            # against the face normal (-x): the installed winding
+            sec["i"] += [b, b + k, b + k + 1]
+        f, bk = b + n, b + 2 * n
+        for k in range(n):
+            j = (k + 1) % n
+            # quad (front k, front j, back j, back k); its outward normal points away from the stroke's axis
+            sec["i"] += [f + k, bk + j, f + j, f + k, bk + k, bk + j]
+
     def new_group(self, label):
         """Start a new editor group: blocks added from now on can be selected together in the map editor."""
         self.group += 1
@@ -268,7 +341,11 @@ class Scene:
 
     def stroke(self, p0, p1, face_x, width, depth, slot):
         """A straight stroke on the front wall from p0 to p1 ((y, z) points): one rotated block, centred on
-        the line and extended by half its width at both ends so joints close."""
+        the line and extended by half its width at both ends so joints close. In a mesh with ROUND_STROKES, a
+        stroke with round ends instead, so strokes meet in round joints like a pen line."""
+        if ROUND_STROKES and self.mesh is not None:
+            self._mesh_round_stroke(p0, p1, face_x, width, depth, slot)
+            return
         (y0, z0), (y1, z1) = p0, p1
         length = math.hypot(y1 - y0, z1 - z0)
         uy, uz = ((y1 - y0) / length, (z1 - z0) / length) if length > 1e-6 else (1.0, 0.0)
@@ -449,6 +526,13 @@ def standing_relief(scene, rows, y_left, z_bottom, pixel, back_x):
     scene.relief(rows, place, pixel, BODY_D, outline=not STENCIL_ART, flat=STENCIL_ART)
 
 
+def load_statue(name):
+    """A sculpt from make_lion.py or make_pharaoh.py (lion_statue.json, pharaoh_statue.json), or None if it has
+    not been made."""
+    p = Path(__file__).with_name(name)
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+
+
 def load_glyphs():
     p = Path(__file__).with_name("egypt_glyphs.json")
     if p.exists():
@@ -457,8 +541,12 @@ def load_glyphs():
 
 
 # The window look as the user approved it on 2026-09-24 (the Window Test): used by every Flow Fix scenario.
-WINDOW_LOOK = dict(MESH_SIGNS=True, DARK_TEXT=True, WINDOW_ONLY=True, WINDOW_HEAD="top", WINDOW_LIONS=True,
-                   LINTEL_MIRROR=True, STENCIL_ART=True, COURTYARD=True)
+# Since 2026-09-25 (the user's Sand Test): the sculpted bust on the lintel, the sculpted lions facing the player,
+# round text strokes, and the sandy palace walls (in the COURTYARD palette). STENCIL_ART now only matters for the
+# pixel fallbacks.
+WINDOW_LOOK = dict(MESH_SIGNS=True, DARK_TEXT=True, WINDOW_ONLY=True, WINDOW_HEAD="front_lintel", WINDOW_LIONS=True,
+                   LINTEL_MIRROR=True, STENCIL_ART=True, COURTYARD=True, LION_TURNED=True, HEAD_SCULPT=True,
+                   ROUND_STROKES=True)
 
 
 def add_window(m, spawn_volumes, max_target_radius):
@@ -496,9 +584,13 @@ def add_egypt(m, spawn_volumes, max_target_radius):
         # whole head turned into one grey shape. The gold takes the ramp slot of group 1 (the ledge strip too).
         m["materialSets"][0]["ground"] = _mat("MI_WA_PureColor", "1e4c9aff", 0.35)
         m["materialSets"][1]["ramp"] = _mat("MI_WA_PureColor", "d4a02aff", 0.5)
-        if COURTYARD:                     # palace walls (and the sign outlines) grey; the free slot as paving
-            m["materialSets"][0]["wall"] = _mat("MI_WA_PureColor", "5d6066ff", 0.25)
-            m["materialSets"][1]["ceiling"] = _mat("MI_WA_PureColor", "77736bff", 0.3)
+        if COURTYARD:
+            # Sandy palace walls on a grey court (user, 2026-09-24: "A floor, C walls"). Every slot is taken, so
+            # the court floor shares group 0 wall with the sign outlines and the palms (paving grey, slightly
+            # lighter than the palace grey 5d6066 they had before), and the free group 1 ceiling colours the
+            # palace walls, portico roofs and towers in sandstone.
+            m["materialSets"][0]["wall"] = _mat("MI_WA_PureColor", "77736bff", 0.3)
+            m["materialSets"][1]["ceiling"] = _mat("MI_WA_PureColor", "c9a877ff", 0.3)
 
     wall = next(o for o in m["objects"] if o.get("type") == "brush" and o["location"].startswith("-2899.999512"))
     wall["materialSets"] = [{"group": 0, "surface": "wall"} for _ in range(6)]
@@ -571,7 +663,7 @@ def add_egypt(m, spawn_volumes, max_target_radius):
     art.update(EXTRA_ART)
     head = art.get("pharaoh") if WINDOW_ONLY and WINDOW_HEAD else None
     lintel_h = 150.0
-    if head and WINDOW_HEAD != "top":    # a raised lintel carries the head: its height plus 20 above and below
+    if head and WINDOW_HEAD not in ("top",) + HEAD_IN_FRONT:   # a raised lintel: head height plus 20 above and below
         lintel_h = len(head) * ART_PIXEL + 40
     zc = tz1 + 20 + lintel_h             # cornice base
     cornice = [(0, 20, 30, OCHRE), (20, 60, 42, LIME), (60, 100, 62, LIME), (100, 140, 86, LIME), (140, 165, 96, LIME)]
@@ -617,16 +709,37 @@ def add_egypt(m, spawn_volumes, max_target_radius):
         cy = (oy0 + oy1) / 2
         if WINDOW_HEAD == "top":
             standing_relief(s, head, cy - hw / 2, top, ART_PIXEL, FRONT - 20)
+        elif WINDOW_HEAD in HEAD_IN_FRONT:  # standing just in front of the cornice's widest step (96 proud)
+            zb = zc if WINDOW_HEAD == "front_cornice" else tz1 + 20
+            bust = load_statue("pharaoh_statue.json") if HEAD_SCULPT else None
+            if bust:                      # the sculpted bust, its flat back against the cornice's front
+                s.mesh_tris(bust, (FRONT - 100 - bust["length"], cy, zb), 1, {"lapis": FLOOR, "gold": GOLD})
+            else:
+                standing_relief(s, head, cy - hw / 2, zb, ART_PIXEL, FRONT - 100)
         else:
             front_relief(s, head, cy - hw / 2, (tz1 + zc + hh) / 2, ART_PIXEL, FRONT)
         s.finish()
         s.body_slot, s.accent_slot = slots
     lion = art.get("lion") if WINDOW_ONLY and WINDOW_LIONS else None
     plinth_y = {}                         # the lion plinths' y extents, per side (the court starts past them)
+    statue = load_statue("lion_statue.json") if lion and LION_TURNED else None
     if lion:                              # a lion on a plinth beside each pilaster base, the pair facing the window
         lw = len(lion[0]) * ART_PIXEL
         for side, a, b in pil:
             s.section = "lion right" if side > 0 else "lion left"
+            if LION_TURNED:               # head toward the player, body running back to the wall
+                y_in = a - 15 if side < 0 else b + 15             # the pilaster base's outer edge
+                half = max(abs(v[1]) for v in statue["vertices"])
+                yc_lion = y_in + side * (40 + half)
+                plinth_y[side] = (min(yc_lion - half - 30, y_in), max(yc_lion + half + 30, y_in))
+                x_head = FRONT - 20 - statue["length"]
+                s.box(x_head - 30, FRONT, *plinth_y[side], pz0, pz0 + 70, LIME)                     # plinth
+                s.begin_mesh()
+                # the tail leans to +s in the sculpt; mirror the left lion so both tails lean outward
+                s.mesh_tris(statue, (x_head, yc_lion, pz0 + 70), -1 if side < 0 else 1,
+                            {"body": s.body_slot, "accent": s.accent_slot})
+                s.finish()
+                continue
             rows = lion if side < 0 else [r[::-1] for r in lion]   # drawn facing right, so the left one as is
             y_in = a - 15 if side < 0 else b + 15                 # the base's outer edge
             y0 = y_in - 40 - lw if side < 0 else y_in + 40
@@ -717,9 +830,12 @@ def add_egypt(m, spawn_volumes, max_target_radius):
                    for segs, dy, dz, label in items]
         carve(flipped, c - gap / 2 - w, top_z, FRONT)
 
-    if WINDOW_ONLY and WINDOW_HEAD in (None, "top") and LINTEL_MIRROR:
+    if WINDOW_ONLY and WINDOW_HEAD == "front_lintel":      # the two copies move apart to clear the head
+        mirrored_lintel(ins["text"]["welcome"], pil[0][2] + 70, pil[1][1] - 70, tz1 + 15, zc - 15,
+                        gap=len(head[0]) * ART_PIXEL + 60)
+    elif WINDOW_ONLY and WINDOW_HEAD in (None, "top", "front_cornice") and LINTEL_MIRROR:
         mirrored_lintel(ins["text"]["welcome"], pil[0][2] + 70, pil[1][1] - 70, tz1 + 15, zc - 15)
-    elif WINDOW_ONLY and WINDOW_HEAD in (None, "top"):   # the welcome line across the lintel, between the capitals
+    elif WINDOW_ONLY and WINDOW_HEAD in (None, "top", "front_cornice"):   # the welcome line across the lintel, between the capitals
         lintel_line(ins["text"]["welcome"], pil[0][2] + 70, pil[1][1] - 70, tz1 + 15, zc - 15, "lintel")
     elif WINDOW_ONLY and WINDOW_HEAD == "lintel_split":   # split at the word break nearest the middle
         words = ins["text"]["welcome"].split()

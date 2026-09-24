@@ -22,13 +22,13 @@ WINDOWS = r"D:\Projects\flowfix\out"      # the current builds (test_out/egypt_w
 # ---- palette (8 slots) ---------------------------------------------------------------------------------
 PALACE, LAPIS, LIME, OCHRE = (0, "wall"), (0, "ground"), (0, "ceiling"), (0, "ramp")
 BACK, NAVY, PAVE, GOLD = (1, "wall"), (1, "ground"), (1, "ceiling"), (1, "ramp")
-PAL = {PALACE: ("5d6066", 0.25),   # RETINT: was dark umber 2b1d12 / 0.2 (sign outlines); now palace grey + outlines
+PAL = {PALACE: ("77736b", 0.30),   # RETINT: dark umber 2b1d12, then palace grey 5d6066; now paving grey: floor, palms, outlines
        LAPIS: ("1e4c9a", 0.35),    # unchanged: headdress
        LIME: ("eadbb6", 0.35),     # unchanged: limestone (ConcretePoured)
        OCHRE: ("9a3f22", 0.30),    # unchanged: red ochre
        BACK: ("c8c8c8", 0.40),     # unchanged: target backdrop, nothing new uses it
        NAVY: ("0f2a4d", 0.30),     # unchanged: signs, lions, outlines; + pool water
-       PAVE: ("77736b", 0.30),     # FREE slot repainted: court paving only
+       PAVE: ("c9a877", 0.30),     # FREE slot repainted: paving grey 77736b, now sandstone walls (user, 2026-09-24)
        GOLD: ("d4a02a", 0.50)}     # unchanged: face, sill strip; + column bands and capitals
 
 # ---- fixed numbers ---------------------------------------------------------------------------------------
@@ -45,17 +45,24 @@ XTB = -2900.0            # tower back (a shallow tower stays a narrow sliver at 
 T_TOP = 780.0            # tower wall top (absolute)
 Y_FAR = 5400.0           # off-screen extent of walls and floor
 COL_PITCH = 330.0
+WALL = PAVE              # slot of the palace walls, portico roofs and towers: sandstone (user, 2026-09-24)
+FLOOR = PALACE           # slot of the court floor: paving grey, shared with the palms and the sign outlines
 X_PALM = -1500.0         # palm stencil plane (4500 from the eye), in the garden behind the palace
 Z_PYR = -1200.0          # pyramid bases (hidden behind the palace wall)
 
 
 def load(name):
-    """Layout of one built scenario (window polys, F, yc, envelope) plus the extents in layouts.json."""
+    """Layout of one window build (window polys, F, yc, envelope), with the stone, plinth and lion extents read
+    from the build itself (2026-09-24; layouts.json holds the design workflow's extents, now out of date)."""
     L = A.layout(os.path.join(WINDOWS, f"Flow Fix {name}.sce"))
-    ex = json.load(open(os.path.join(HERE, "layouts.json")))[name]
-    L.update(name=name, stoneL=ex["stone_y"][0], stoneR=ex["stone_y"][1], plinthL=ex["plinthL"][2],
-             plinthR=ex["plinthR"][3], cornice=ex["cornice_top"], head=ex["head"], lionL=ex["lionL"],
-             lionR=ex["lionR"])
+    F = L["F"]
+    lime = [v for q in L["window"] if q["slot"] == LIME for v in q["pts"]]
+    upper = [v[1] for v in lime if v[2] > F + 150]             # pilasters, capitals and cornice, above the plinths
+    L.update(name=name, stoneL=min(upper), stoneR=max(upper), plinthL=min(v[1] for v in lime),
+             plinthR=max(v[1] for v in lime))
+    for key, outside in (("lionL", lambda y: y < L["stoneL"]), ("lionR", lambda y: y > L["stoneR"])):
+        pts = [v for q in L["window"] if q["slot"] != LIME for v in q["pts"] if v[2] < F + 450 and outside(v[1])]
+        L[key] = [min(v[i] for v in pts) if k == 0 else max(v[i] for v in pts) for i in range(3) for k in (0, 1)]
     return L
 
 
@@ -236,7 +243,7 @@ def court(L):
         objs.append({"name": name, "kind": "mesh", "stage": stage, "polys": polys})
 
     # 1. Paving and the axial pool (navy water, limestone kerb as 4 editable blocks)
-    box("court floor", "A", -4900, XW1, yc - Y_FAR, yc + Y_FAR, F - 60, F, PAVE, ground=0)
+    box("court floor", "A", -4900, XW1, yc - Y_FAR, yc + Y_FAR, F - 60, F, FLOOR, ground=0)
     px0, px1, pw, kw, kh = -4450.0, -3450.0, 330.0, 45.0, 30.0
     box("pool water", "A", px0, px1, yc - pw, yc + pw, F, F + 5, NAVY, ground=1)
     box("pool kerb near", "A", px0 - kw, px0, yc - pw - kw, yc + pw + kw, F, F + kh, LIME)
@@ -255,9 +262,9 @@ def court(L):
         info[f"py0_{side}"], info[f"py1_{side}"] = py0, py1
 
         # 2. Palace front wall (behind the backdrop plane: can never cover a target)
-        box(f"palace wall {side}", "A", XW0, XW1, *sorted((y_wall0, Y(Y_FAR))), F, Z_TOP, PALACE)
+        box(f"palace wall {side}", "A", XW0, XW1, *sorted((y_wall0, Y(Y_FAR))), F, Z_TOP, WALL)
         # 3. Portico roof / architrave (a plain block, palace grey)
-        box(f"portico roof {side}", "A", XP, XW0, *sorted((py0, py1)), Z_TOP - ROOF_H, Z_TOP, PALACE)
+        box(f"portico roof {side}", "A", XP, XW0, *sorted((py0, py1)), Z_TOP - ROOF_H, Z_TOP, WALL)
         # render-only: the roof's shadow on the back wall for the assumed sun (-0.55, -0.35, 0.75)
         dz, dy = 340 * 0.75 / 0.55, 340 * 0.35 / 0.55
         # left: the tower blocks the low sun at the outer end, so the whole span is shaded; right: the sun
@@ -276,11 +283,11 @@ def court(L):
         yi0, yi1 = Y(Y_TW), Y(Y_TW + BATTER)
         xt1 = XT + BATTER
         yf = Y(Y_FAR)
-        tw = [poly([(XT, yi0, F), (XT, yf, F), (xt1, yf, T_TOP), (xt1, yi1, T_TOP)], PALACE, out=(-1, 0, 0)),
-              poly([(XT, yi0, F), (XTB, yi0, F), (XTB, yi1, T_TOP), (xt1, yi1, T_TOP)], PALACE, out=(0, -sg, 0)),
-              poly([(xt1, yi1, T_TOP), (XTB, yi1, T_TOP), (XTB, yf, T_TOP), (xt1, yf, T_TOP)], PALACE, out=(0, 0, 1)),
-              poly([(XTB, yi0, F), (XTB, yf, F), (XTB, yf, T_TOP), (XTB, yi1, T_TOP)], PALACE, out=(1, 0, 0)),
-              poly([(XT, yf, F), (XTB, yf, F), (XTB, yf, T_TOP), (xt1, yf, T_TOP)], PALACE, out=(0, sg, 0))]
+        tw = [poly([(XT, yi0, F), (XT, yf, F), (xt1, yf, T_TOP), (xt1, yi1, T_TOP)], WALL, out=(-1, 0, 0)),
+              poly([(XT, yi0, F), (XTB, yi0, F), (XTB, yi1, T_TOP), (xt1, yi1, T_TOP)], WALL, out=(0, -sg, 0)),
+              poly([(xt1, yi1, T_TOP), (XTB, yi1, T_TOP), (XTB, yf, T_TOP), (xt1, yf, T_TOP)], WALL, out=(0, 0, 1)),
+              poly([(XTB, yi0, F), (XTB, yf, F), (XTB, yf, T_TOP), (XTB, yi1, T_TOP)], WALL, out=(1, 0, 0)),
+              poly([(XT, yf, F), (XTB, yf, F), (XTB, yf, T_TOP), (xt1, yf, T_TOP)], WALL, out=(0, sg, 0))]
         sky += tw
         sky += crown(xt1, XTB, yi1, yf, T_TOP, 1.25, ret=True, vis=vis)
         mesh(f"skyline {side}", "A", sky)
