@@ -19,6 +19,8 @@ the safety rules.
 | --- | --- |
 | `gen_specs.py` | Every scenario's design. Edit this to change a scenario. Writes `specs.json`. |
 | `build.py` | Turns `specs.json` into `.sce` files in `out/`, with the window look (`egypt.py`) and the courtyard (`courtyard/`). |
+| `make_lion.py`, `make_pharaoh.py`, `sculpt.py` | The sculpted lions and pharaoh's bust (`lion_statue.json`, `pharaoh_statue.json`). |
+| `make_screenshots.py` | Renders each scenario's picture for KovaaK's scenario list. |
 | `check_view.py`, `check_scene.py` | Checks: no target off screen, nothing covering a target. |
 | `playlist.py`, `install.py` | The `Flow Fix` playlist, and the installer (copies changed files; `--dry-run` previews). |
 | `stats_*.py` | Read-only analysis of the user's runs. |

@@ -17,7 +17,10 @@ this folder.
 | `check_view.py` | Fails a layout that can put a target off screen (103 FOV, 16:9). |
 | `check_frame.py` | Fails an arena whose frame can overlap a target on screen. |
 | `egypt.py` | Ancient Egyptian window room built from carved Cube brushes and custom meshes (the user's requested look). Used when a spec has `"arena": "egypt"`. `WINDOW_ONLY` builds the window look. The pixel art for the pharaoh's head and the lions comes from `egypt_glyphs.json`. That file also holds older art: 16 hand-drawn signs, the winged sun and a frieze tile. |
-| `strokes.py` | Turns font signs into straight strokes: renders the line art, thins it (Zhang-Suen), traces it and simplifies it (RDP). Each stroke becomes one rotated block. With `MESH_SIGNS` on, the strokes of each sign merge into one custom mesh. The water sign is drawn as an explicit zigzag. |
+| `strokes.py` | Turns font signs into straight strokes: renders the line art, thins it (Zhang-Suen), traces it, smooths the trace (`SMOOTH`) and simplifies it (RDP, `EPS` 3). With `MESH_SIGNS` on, the strokes of each sign merge into one custom mesh, and with `ROUND_STROKES` each stroke has round ends. The water sign is drawn as an explicit zigzag. |
+| `sculpt.py` | Tools for the smooth statues: distance-field parts (ellipsoids, tapered capsules, rounded boxes), smooth union, surface nets with smooth normals, colour boundaries cut exactly into the mesh, and `write()` for the JSON. |
+| `make_lion.py`, `make_pharaoh.py` | Sculpt the guardian lion (`lion_statue.json`) and the pharaoh's bust (`pharaoh_statue.json`). Rerun one after changing its parts; the build only reads the JSON. |
+| `credits.py` | The credits (the user, Bassel Bakr) that head every asset JSON: `lion_statue.json`, `pharaoh_statue.json`, `inscriptions.json`, `egypt_glyphs.json`. |
 | `rotation_test.py` | The calibration scenario that established how brush rotation works (retired; results are in mechanics.md). |
 | `make_inscriptions.py` | Renders the user's hieroglyph text into `inscriptions.json`. `egypt.py` reads only its `"strokes"` and `"text"` keys. Every stroke sign comes from the Segoe UI Historic font. Only the water sign is drawn by hand, as a zigzag. The pixel keys (`"signs"`, `"cartouche"`, `"lines"`) still mix in hand-drawn signs from `egypt_glyphs.json`: ankh, djed, was sceptre, vulture, owl, reed, water, mouth and bread. These were made for the old pixel build, and the room does not use them. Needs PIL and the font; the build itself doesn't. |
 | `preview_front.py` | Renders a flat front view of a built map to PNG, for checking a layout without the game. |
@@ -25,11 +28,11 @@ this folder.
 | `courtyard_test.py` | `python courtyard_test.py authentic` builds the authentic concept as `Flow Fix Courtyard Authentic` for comparison. The chosen court is part of the window look now. |
 | `fps_probe.py` | Builds `Flow Fix FPS Probe`: Overflick plus one small block. It tested whether the room's cost per frame is fixed, paid as soon as anything stands on the wall. It is not: the cost is spread across the pieces. Retired. |
 | `check_scene.py` | Fails any map where a brush or prop in front of the targets overlaps the projected target envelope. It works for any decoration; run it on every look. |
-| `egypt_test.py` | Builds four look tests into `test_out/`. `Flow Fix Egypt Test` is the full room. `Mesh Test` makes each sign one custom mesh. `Window Test` is the current look: the window with the stencil head and lions, the mirrored welcome line and the courtyard. `Egypt Test FLAT` uses flat colours, for an FPS comparison. It also builds all 13 layouts in each look into `test_out/egypt_all`, `egypt_mesh_all` and `egypt_window_all`, so `check_scene.py` can check them. |
+| `egypt_test.py` | Builds four look tests into `test_out/`. `Flow Fix Egypt Test` is the full room. `Mesh Test` makes each sign one custom mesh. `Window Test` is the 2026-09-24 look: the window with the stencil head and lions, the mirrored welcome line and the courtyard. `Egypt Test FLAT` uses flat colours, for an FPS comparison. It also builds all 13 layouts in each look into `test_out/egypt_all`, `egypt_mesh_all` and `egypt_window_all`, so `check_scene.py` can check them. |
 | `window_mockups.py` | Builds the head placement options and renders them side by side into `test_out/window mockups.png`. Installs nothing. |
-| `backing_sampler.py`, `backing_test.py` | Backing experiments (retired): a numbered row of candidate props, and one prop (Sandstorm by default) behind the head and lions, as an always-dark backing that themes cannot repaint. The user stopped at the stencil without a backing. |
+| `backing_sampler.py`, `backing_test.py` | Backing experiments (retired): a numbered row of candidate props, and one prop (Sandstorm by default) behind the head and lions, as an always-dark backing that themes cannot repaint. The user stopped at the stencil without a backing, and the sculpts replaced the stencils on 2026-09-25. |
 | `.agents/skills/` | The agent-neutral skills, indexed in `.agents/skills/README.md` (`SKILL.md` plus references). |
-| `make_screenshots.py` | Renders each scenario's picture for KovaaK's scenario list into `test_out/screenshots/` (854 x 480 JPG, the player's view of the window and courtyard, no targets). Copy them to `SaveGames/Scenarios/Screenshots/<scenario name>.jpg`; never overwrite a screenshot the user took in game. |
+| `make_screenshots.py` | Renders each scenario's picture for KovaaK's scenario list into `test_out/screenshots/` (854 x 480 JPG, the player's view of the window and courtyard, no targets). Copy them to `SaveGames/Scenarios/Screenshots/<scenario name>.jpg`. Move a screenshot the user took in game to `retired/` rather than overwrite it; on 2026-09-25 the user asked for all 13 to be rendered, and their Check screenshot of the old look went to `retired/screenshots (installed until 2026-09-25)/`. |
 | `.gitignore` | Keeps generated files (`out/`, `specs.json`, `test_out/`), local state (`installed.json`) and the `retired/` archive out of git. |
 | `docs/` | Human-facing docs: `scenarios.md` (every scenario's design, evidence and verdict), `look.md` (the shared look), `future.md` (suggestions), `README.md` (index and the loop). Keep them current with every change. |
 | `prop_test.py`, `prop_sampler.py`, `frame_test.py` | Retired prop tests for a frame that themes cannot repaint. Prop Test checks whether themes repaint props. Prop Sampler shows every candidate prop so the user can pick the opaque ones. Frame Test builds the arena frame from Container props. |
@@ -85,6 +88,9 @@ GitHub Copilot and other agents that support the format discover them there; any
   `id` in `gen_specs.py`, and Check is always last.
 - **Test scenarios.** Keep only one installed at a time. With several, the user opened the wrong one;
   superseded tests go to `retired/tests/`.
+- **Credits in assets.** Every asset JSON the project makes (`lion_statue.json`, `pharaoh_statue.json`,
+  `inscriptions.json`, `egypt_glyphs.json`) starts with a `"credits"` entry naming the user, Bassel Bakr. The
+  entry comes from `credits.py`; a new asset file gets it too (user, 2026-09-25).
 - **Inscriptions.** The user reads and writes hieroglyphs and supplied the room's text. Reproduce it
   faithfully and never fill space with meaningless signs. Keep at least 3 pixels between outlined signs,
   or their outlines fuse.
@@ -92,11 +98,15 @@ GitHub Copilot and other agents that support the format discover them there; any
   meshes cut the map from 587 objects to 150. That saved about 0.21 ms per frame (Egypt Test 580 FPS, Mesh
   Test 660). Merging 122 axis-aligned decoration blocks into meshes saved nothing measurable, and big
   surfaces cost the same as mesh or block (Mesh Test B, 2026-09-24). So signs are meshes (`MESH_SIGNS`) and decoration stays blocks, which stay
-  editable. The window look is about 84 room objects, 43 of them custom meshes: the signs, the pharaoh's head
-  and the two lions; the courtyard adds 18 (10 blocks, 8 meshes). Sign outlines are on again.
-  Compare frame time (1000/FPS) against Overflick read in the same session. Report the object count with
-  every look change, and ask for an FPS check. The user's limit was 400 FPS on 2026-09-23 and is 1000 since
-  2026-09-24 (`Max FPS (config)` in the stats); in play they averaged about 820 with the window look.
+  editable. Since 2026-09-25 each scenario is 104 map objects (2 from the base map), 51 of them custom meshes:
+  the signs, the sculpted bust, the two sculpted lions and the court's meshes. That is about 30,500 mesh
+  triangles and about 5 MB. Mesh triangles are cheap for the frame rate but not for the file: the game writes
+  mesh data one number per line, and a 39 MB build gave the user a hitch on every restart. So `build.py` writes
+  meshes compactly and leaves out faces the fixed eye can never see (`COMPACT_MESHES`, `SLIM_MESHES`).
+  Compare frame time (1000/FPS) against Overflick read in the same session. Report the object count, triangle
+  count and file size with every look change, and ask for an FPS check. The user's limit was 400 FPS on
+  2026-09-23 and is 1000 since 2026-09-24 (`Max FPS (config)` in the stats). In play they averaged about 820
+  with the window look; the 2026-09-25 look read 910 on low settings.
 - **The user saves their own copies** into the Scenarios folder (e.g. `Flow Fix Mesh Test d.sce`, an editor
   copy used for profiling). `install.py` only retires names listed in `installed.json`, so those stay put.
   Test scenarios are installed by hand and never enter that list.
@@ -166,11 +176,20 @@ map setting can prevent this. The Egyptian window look replaced it. The Arena, P
 
 Still open:
 - The window look is in all 13 scenarios since 2026-09-24, at the user's request (`ARENA_DEFAULT = "window"`,
-  `egypt.WINDOW_LOOK`), with the stencil head and lions and no prop backing (the user dropped the Backing
-  Sampler), and since later that day with the palace courtyard around it (`egypt.COURTYARD`, the user's pick from
-  the design workflow). Earlier builds are in `retired/plain look (installed until 2026-09-24)/` and
-  `retired/window look without courtyard (installed until 2026-09-24)/`. No test scenario is installed. The
-  courtyard's FPS was read only as a test (875 without a theme override, 880 with one); ask for an in-play check.
+  `egypt.WINDOW_LOOK`), with the palace courtyard since later that day (`egypt.COURTYARD`, the user's pick from
+  the design workflow). On 2026-09-25, after the Sand Test, the look changed in all 13:
+  - sandstone palace walls on a grey court;
+  - the sculpted pharaoh's bust on the lintel;
+  - sculpted lions facing the player;
+  - smooth round-stroked text;
+  - the window centred on the crosshair;
+  - compact, slimmed files;
+  - new screenshots for all 13.
+
+  Earlier builds are in `retired/`, one folder per look: `plain look (installed until 2026-09-24)`,
+  `window look without courtyard (installed until 2026-09-24)` and `window look with stencil art (installed until
+  2026-09-25)`. The Sand Test and its earlier versions are in `retired/tests/`. No test scenario is installed.
+  Ask for an in-play FPS reading and whether the restart hitch is gone.
 - Calibration on 2026-09-24 (details in `docs/scenarios.md`): Check validated (the small target at
   1.5 keeps points-per-second parity on the new layout), Pathing validated after the four-cluster change,
   Early Braking works after the spacing change, Speed Build works, Recovery is clean at 3 s but weak on its own
