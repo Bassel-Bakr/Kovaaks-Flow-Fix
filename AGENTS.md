@@ -28,7 +28,7 @@ this folder.
 | `egypt_test.py` | Builds four look tests into `test_out/`. `Flow Fix Egypt Test` is the full room. `Mesh Test` makes each sign one custom mesh. `Window Test` is the current look: the window with the stencil head and lions, the mirrored welcome line and the courtyard. `Egypt Test FLAT` uses flat colours, for an FPS comparison. It also builds all 13 layouts in each look into `test_out/egypt_all`, `egypt_mesh_all` and `egypt_window_all`, so `check_scene.py` can check them. |
 | `window_mockups.py` | Builds the head placement options and renders them side by side into `test_out/window mockups.png`. Installs nothing. |
 | `backing_sampler.py`, `backing_test.py` | Backing experiments (retired): a numbered row of candidate props, and one prop (Sandstorm by default) behind the head and lions, as an always-dark backing that themes cannot repaint. The user stopped at the stencil without a backing. |
-| `skills/` | The agent-neutral skills, indexed in `skills/README.md` (`SKILL.md` plus references). `.claude/skills/` holds Claude Code adapters that point here. |
+| `.agents/skills/` | The agent-neutral skills, indexed in `.agents/skills/README.md` (`SKILL.md` plus references). |
 | `make_screenshots.py` | Renders each scenario's picture for KovaaK's scenario list into `test_out/screenshots/` (854 x 480 JPG, the player's view of the window and courtyard, no targets). Copy them to `SaveGames/Scenarios/Screenshots/<scenario name>.jpg`; never overwrite a screenshot the user took in game. |
 | `.gitignore` | Keeps generated files (`out/`, `specs.json`, `test_out/`), local state (`installed.json`) and the `retired/` archive out of git. |
 | `docs/` | Human-facing docs: `scenarios.md` (every scenario's design, evidence and verdict), `look.md` (the shared look), `future.md` (suggestions), `README.md` (index and the loop). Keep them current with every change. |
@@ -56,11 +56,11 @@ KovaaK's paths:
 `docs/scenarios.md` holds each scenario's design and calibration verdict, `docs/look.md` the look, `docs/future.md`
 ideas that are not approved yet, and `docs/courtyard/` the courtyard design record. Update them in the same change as `gen_specs.py` or `egypt.py`.
 
-## Skills (`skills/`)
+## Skills (`.agents/skills/`)
 
-The skills are agent-neutral and live in `skills/<name>/SKILL.md` (with references). Any agent can read them.
-Claude Code discovers skills in `.claude/skills/`; those copies are thin adapters that point back to `skills/`,
-so edit only the files in `skills/`.
+The skills follow the open Agent Skills format and live in `.agents/skills/<name>/SKILL.md` (with references).
+GitHub Copilot and other agents that support the format discover them there; any other agent should read
+`.agents/skills/README.md` and the matching `SKILL.md` before that kind of task.
 
 - **kovaaks-scenario-design:** designing or changing a drill. Confirmed mechanics are in
   `references/mechanics.md`; decoration (materials, themes, props, meshes, rotations, the Egypt look, art
@@ -158,7 +158,7 @@ so edit only the files in `skills/`.
 
 ## State and open items
 
-The scenario history and verdicts are in `docs/scenarios.md`; the look's history is in `skills/kovaaks-scenario-design/references/decoration.md`.
+The scenario history and verdicts are in `docs/scenarios.md`; the look's history is in `.agents/skills/kovaaks-scenario-design/references/decoration.md`.
 
 The grey arena is closed. The Arena Test loads without a crash, and after the spawn-volume size fix no
 target spawns on its frame. Themes that paint every surface type the same hide its frame and panel, and no

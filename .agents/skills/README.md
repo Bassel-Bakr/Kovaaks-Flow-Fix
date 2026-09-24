@@ -2,8 +2,8 @@
 
 Agent-neutral instructions for working on Flow Fix. Any agent can use them: read the matching `SKILL.md` before
 starting that kind of task and follow it. Each file starts with a `name` and a `description` that says when it
-applies. Tools that discover skills automatically can point at this folder (Claude Code uses the adapters in
-`.claude/skills/`, which only point back here). Edit skills here, never in an adapter.
+applies. They follow the open Agent Skills format, so tools that support it (GitHub Copilot, and others that read
+`.agents/skills/`) find them here automatically.
 
 | Skill | Use it when |
 | --- | --- |

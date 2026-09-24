@@ -6,8 +6,8 @@
 | [courtyard/](courtyard/) | The courtyard design record: the concept renders, the chosen design's player view and plan, and the design workflow's full result (`workflow_result.json`). |
 | [look.md](look.md) | The shared look: the Egyptian window, its text and art, the palace courtyard, the palette, the frame-rate cost and how it is built. |
 | [future.md](future.md) | Suggestions for future changes: calibration still to do, scenario and look ideas, code and tooling. |
-| [`../skills/kovaaks-scenario-design/references/mechanics.md`](../skills/kovaaks-scenario-design/references/mechanics.md) | Confirmed KovaaK's mechanics: the .sce format, targets, scoring, geometry, rotation, custom meshes, performance, crash recovery. |
-| [`../skills/kovaaks-scenario-design/references/decoration.md`](../skills/kovaaks-scenario-design/references/decoration.md) | The full decoration record for the wiki: materials, themes, props, brushes, custom meshes, the art pipeline, the Egypt look and courtyard in detail, the text, the history and the research sources. |
+| [`../.agents/skills/kovaaks-scenario-design/references/mechanics.md`](../.agents/skills/kovaaks-scenario-design/references/mechanics.md) | Confirmed KovaaK's mechanics: the .sce format, targets, scoring, geometry, rotation, custom meshes, performance, crash recovery. |
+| [`../.agents/skills/kovaaks-scenario-design/references/decoration.md`](../.agents/skills/kovaaks-scenario-design/references/decoration.md) | The full decoration record for the wiki: materials, themes, props, brushes, custom meshes, the art pipeline, the Egypt look and courtyard in detail, the text, the history and the research sources. |
 | [`../AGENTS.md`](../AGENTS.md) | The working guide: files, commands, the user's preferences, safety rules and open items. |
 | [`../Flow Fix guide.md`](../Flow%20Fix%20guide.md) | The player-facing guide, installed next to the scenarios: which scenario to play for which symptom. |
 

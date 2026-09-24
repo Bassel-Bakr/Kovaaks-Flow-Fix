@@ -2,7 +2,7 @@
 
 Every Flow Fix scenario since 2026-09-24 shares one look. This page is the short overview. The full record for the
 wiki (materials, themes, props, custom meshes, the art pipeline, the research and its sources, and the history of
-every change) is in `skills/kovaaks-scenario-design/references/decoration.md`, and the confirmed map
+every change) is in `.agents/skills/kovaaks-scenario-design/references/decoration.md`, and the confirmed map
 mechanics are in `references/mechanics.md` next to it.
 
 ## What the player sees
