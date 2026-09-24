@@ -1,0 +1,19 @@
+# Generated at any time from the sources in this repository.
+# Built scenarios and playlist: python gen_specs.py && python build.py specs.json out
+out/
+# Written by gen_specs.py
+specs.json
+# Test scenarios, renders and screenshots: egypt_test.py, courtyard_test.py, make_screenshots.py
+test_out/
+__pycache__/
+*.pyc
+
+# Local state and archives: not generated, but specific to this machine and too large for the repository.
+# install.py's list of what it installed into this machine's KovaaK's folder
+installed.json
+# Old installed scenarios and backups (about 0.5 GB); nothing there is ever deleted
+retired/
+
+# Scratch files from editing sessions
+_*.py
+*.sce_

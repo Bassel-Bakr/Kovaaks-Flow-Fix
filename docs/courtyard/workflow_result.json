@@ -1,0 +1,663 @@
+{
+ "research": [
+  {
+   "findings": [
+    {
+     "element": "Medinet Habu: the palace behind the Window of Appearances",
+     "description": "Ramesses III's ceremonial palace was mudbrick and stood beside the temple's first court. It was joined to that court by a Window of Appearances in the court's south wall, 'between the fourth and fifth columns'. Courtiers and ambassadors gathered in the court below. The king climbed an inner stair to the window, stood above the crowd and threw down rewards. The palace behind it had a 16-column antechamber (the window) and a 4-column audience hall with a throne dais. A second phase added an upper storey. The Harris Papyrus calls the window 'fine gold'. This is exactly the relationship the map needs: a court whose far wall holds the royal window, seen from the court floor.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Mortuary_Temple_of_Ramesses_III",
+      "https://isac.uchicago.edu/sites/default/files/uploads/shared/docs/oic10.pdf",
+      "https://isac.uchicago.edu/sites/default/files/uploads/shared/docs/oip54.pdf"
+     ]
+    },
+    {
+     "element": "Medinet Habu: religious and captive details around the window",
+     "description": "A cavetto cornice with a row of carved cobras (uraeus frieze) ran above the window. Below it was a row of projecting heads of twenty foreign captives. The court belongs to a mortuary temple, with Osirid colossi on one side. Leave out the cobras, the Osirid statues and anything temple-related. The captive heads are royal propaganda rather than cult imagery, but they are violent; skipping them is recommended.",
+     "religious": true,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Mortuary_Temple_of_Ramesses_III",
+      "https://isac.uchicago.edu/sites/default/files/uploads/shared/docs/oic10.pdf"
+     ]
+    },
+    {
+     "element": "The Egyptian 'castle': Medinet Habu's migdol gate and enclosure",
+     "description": "This is the closest Egyptian equivalent to thundah's castle. The precinct is enclosed by a mudbrick wall 315 x 210 m, 18 m high and 10 m thick. The gatehouse is a 'migdol' modelled on Syrian fortresses: two crenellated towers about 22 m high, with the gateway between them. A crenellated stone wall about 4 m high stood in front. A glossary calls half-circle merlons 'Egyptian merlons' and names Medinet Habu as the example. Buhen (Middle Kingdom) is the earliest confirmed fortress with battlements: mudbrick walls about 10 m high and 5 m thick, with towers at intervals. Usable motifs: rounded merlons on a wall top, a pair of battered towers. Both are secular and military.",
+     "religious": false,
+     "sources": [
+      "https://homepages.bluffton.edu/~sullivanm/egypt/thebes/medhabu/medhabu.html",
+      "https://isac.uchicago.edu/research/publications/oip/medinet-habu-vol-viii-eastern-high-gate-translations-texts",
+      "https://en.wikipedia.org/wiki/Battlement",
+      "https://en.wikipedia.org/wiki/Merlon",
+      "https://en.wikipedia.org/wiki/Buhen"
+     ]
+    },
+    {
+     "element": "Amarna Great Palace: Broad Court and the projecting window terrace",
+     "description": "The entrance opened into a court about 160 m square. Its east and west sides were lined with rows of royal statues, many of them granite colossi of the king. A deep columned portico ran across the back of the court, with a central projecting terrace four columns deep. The Window of Appearance probably stood there. The state apartments also had a sunken garden with a row of small chambers on each side. The building was finished with faience mouldings and tiles, hard-stone inlaid hieroglyphs, and inlaid, gilded columns in plant forms. It stood on gypsum foundations that kept the plan. Idea to borrow: set the palace front back so the window reads as a projecting bay at the centre of a long palace front.",
+     "religious": false,
+     "sources": [
+      "https://www.amarnaproject.com/amarna-the-place/central-city/",
+      "https://www.touregypt.net/featurestories/royalestate.htm",
+      "https://www.metmuseum.org/essays/art-architecture-and-the-city-in-the-reign-of-amenhotep-iv-akhenaten-ca-13531336-b-c"
+     ]
+    },
+    {
+     "element": "Amarna: religious imagery in the palaces and window scenes",
+     "description": "The Broad Court colossi of Akhenaten are described as Osirid (Osiris pose). Some column shafts show the king and queen making offerings to the god. Tomb scenes of the Window of Appearance (e.g. Parennefer, Amarna Tomb 7) show the Aten sun disc with rays above the royal couple. Leave out all of these: statues in Osirid pose, offering scenes, and the Aten disc and rays.",
+     "religious": true,
+     "sources": [
+      "https://www.touregypt.net/featurestories/royalestate.htm",
+      "https://the-ancient-pharaohs.blogspot.com/2017/07/el-amarna-public-buildings-penehsy.html",
+      "https://en.wikipedia.org/wiki/Amarna_Tomb_7"
+     ]
+    },
+    {
+     "element": "Painted pavements (Amarna Great Palace, Maru-Aten)",
+     "description": "The floors were gypsum plaster painted with nature scenes. In the Great Palace pavement, a central path of bound foreign captives, meant to be trodden underfoot, divided the scene. On each side was a pond with fish and water-lilies and birds fluttering over it, framed by marshes of waving papyrus with wildfowl. A Maru-Aten floor fragment in Cairo shows ducks flying over tufts of reeds and papyrus among floating leaves. The pond, papyrus and ducks are secular. Maru-Aten itself was a sacred precinct (the floor motif is not). The captive path is political rather than religious; skip it.",
+     "religious": false,
+     "sources": [
+      "https://www.jstor.org/stable/3822071",
+      "https://egypt-museum.com/fragment-of-paving-from-tell-el-amarna/",
+      "https://www.flickr.com/photos/gballardice/23357529170/",
+      "https://www.amarnaproject.com/amarna-the-place/central-city/"
+     ]
+    },
+    {
+     "element": "Amarna North Palace: courts and garden court",
+     "description": "An isolated rectangular palace facing west to the river, built in sections around an open space, symmetrical on an east-west axis. The entrance is through the west façade between two short pylons. The main inner court holds a large depression, rectangular at ground level, now read as a deep well, with a row of tree pits along its north side. A limestone conduit carried its water to a sunken garden court in the north-east corner. That garden was divided by mud ridges into cubit-sized plots, surrounded by small rooms with windows onto it, and ringed with limestone pillar bases. The walls of the 'Green Room' carry a continuous marsh painting: waterfowl, papyrus, and a lotus channel between black silt banks. There was also a many-columned hall whose central columns were spaced wider to carry a raised roof. The altar court with its offering tables is religious; leave it out.",
+     "religious": false,
+     "sources": [
+      "https://www.amarnaproject.com/amarna-the-place/north-palace/",
+      "https://en.wikipedia.org/wiki/Northern_Palace_(Amarna)",
+      "https://www.metmuseum.org/art/collection/search/548565",
+      "https://the-past.com/review/travel/amarna-part-i/"
+     ]
+    },
+    {
+     "element": "Malqata (Amenhotep III): a whitewashed palace with red columns and a painted pool floor",
+     "description": "Mudbrick, with many bricks stamped with the king's cartouche. Walls were plastered and painted bright white outside, richly coloured inside. The King's Palace covers more than 150 x 100 m and is roughly symmetrical around a central court. The central columned hall (about 50 x 25 m with the royal rooms) has two rows of columns: wooden shafts, probably painted red, on round limestone bases, with papyrus-cluster or lily capitals and clerestory lighting. Wooden columns beside the throne were painted in alternating coloured bands. The floor of the central hall was painted as a pool on the main axis, full of plants and fish with ducks, with reed and papyrus thickets. Ceilings had running spirals with rosettes. A large pleasure lake and gardens lay outside, and the Birket Habu harbour nearby. Stone was used only for column bases, lintels and some floors.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Malkata",
+      "https://ancientegyptonline.co.uk/malkatapalace/",
+      "https://www.digital-epigraphy.com/public/readings/virtual-malqata-the-amenhotep-iii-palace-3d-reconstruction-project-accuracy-versus-authenticity-",
+      "https://www.metmuseum.org/art/collection/search/544502",
+      "https://arce.org/resource/virtual-malqata/"
+     ]
+    },
+    {
+     "element": "Malqata: vulture ceilings",
+     "description": "The royal bedchamber ceiling showed the goddess Nekhbet. In the reconstruction, the central aisle of the columned hall is covered by a succession of winged vultures. Both are religious; leave them out. The ceiling's alternating ox skulls (bucrania) are an Aegean-style ornament, safer to skip too.",
+     "religious": true,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Malkata",
+      "https://www.digital-epigraphy.com/public/readings/virtual-malqata-the-amenhotep-iii-palace-3d-reconstruction-project-accuracy-versus-authenticity-",
+      "https://www.metmuseum.org/art/collection/search/544502"
+     ]
+    },
+    {
+     "element": "Deir el-Ballas North Palace",
+     "description": "A late 17th-Dynasty campaign palace. It has columned courts and a long entrance corridor grouped around an elevated central platform on casemate foundations (up to about 5 m preserved). The platform carried the raised royal rooms and made the palace look like a fortified 'migdol' tower. Arnold puts it in an enclosure of 156 x 303 m. Walls and floors were painted as pools of fish and tracts of flowering shrubs. It is a precedent for a palace with a raised royal block and a fortress-like silhouette, which fits the castle idea.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Deir_el-Ballas",
+      "https://www.ancientegyptarchaeologyfund.com/deir-el-ballas-full-history/"
+     ]
+    },
+    {
+     "element": "Merenptah's palace at Memphis: throne room columns and colours",
+     "description": "The throne room was about 60 x 40 ft, with six white limestone columns about 26 ft high carrying papyrus capitals. Their bases had eight petals in low relief, alternately blue and gold, and the top bands also alternated blue and gold. The walls were mudbrick with fine white stucco. A dado of red and blue niches framed papyrus and lotus bunches on yellow fields. The brick floor was white stucco with colour designs. Door frames and window slabs were limestone. It is a good palette source: white stucco, limestone, and blue, gold and red bands.",
+     "religious": false,
+     "sources": [
+      "https://www.penn.museum/sites/journal/897/"
+     ]
+    },
+    {
+     "element": "Merenptah's palace: religious details",
+     "description": "Mid-shaft reliefs show religious ceremonies. The cartouche rows are interspersed with ankh signs, and the ceiling is blue with yellow stars (a sky ceiling). Leave out all three.",
+     "religious": true,
+     "sources": [
+      "https://www.penn.museum/sites/journal/897/"
+     ]
+    },
+    {
+     "element": "Palm column proportions",
+     "description": "Sahure's granite palm column: originally about 6.45-6.65 m tall, 0.86 m across at the foot (about 7.5 diameters). The capital is 1.68 m tall (about 26% of the height), with nine fronds showing a central rib and fine ripples. Five rope bands sit under the capital, and the abacus is 0.87 m wide (about 1 diameter). Unas's column is 6.60 m tall and 0.87 m across. Palm columns came back into use under Amenhotep III. Karnak's great papyrus columns are about 6-7 diameters high. There is no written Egyptian canon for proportions or spacing. Columns were set close together because stone architraves span little, and wider capitals allowed slightly wider spacing. (These two columns come from pyramid temples, but the palm column is an architectural form, not a cult symbol.)",
+     "religious": false,
+     "sources": [
+      "https://www.metmuseum.org/art/collection/search/543936",
+      "https://www.metmuseum.org/essays/sahure-column",
+      "https://www.memphis.edu/hypostyle/tour_hall/great_columns.php",
+      "https://en.wikipedia.org/wiki/Intercolumniation",
+      "https://www.dimensions.com/element/stone-columns-egyptian-palm-leaf"
+     ]
+    },
+    {
+     "element": "Palace and house columns: wood on stone bases, painted and gilded",
+     "description": "Stone columns were used only in public buildings. Houses, and even the king's private residence, used wooden columns on stone bases a little more than twice the shaft's diameter. One large Amarna residence had 1.2 m bases, so its shafts were about 0.5-0.6 m across (my estimate). The shafts were plastered and usually painted reddish brown. The Amarna palace capitals were palm-frond forms, with coloured glaze inlays in the ribs and leaves and gilding on the stone around them. Where they would not be seen, red and blue paint replaced the inlays and yellow replaced the gold. Central halls had taller middle aisles with clerestories.",
+     "religious": false,
+     "sources": [
+      "https://www.touregypt.net/featurestories/amarnahouse.htm",
+      "https://the-ancient-pharaohs.blogspot.com/2017/07/el-amarna-public-buildings-penehsy.html",
+      "https://www.encyclopedia.com/history/news-wires-white-papers-and-books/housing-and-lighting-amarna-house-and-villa",
+      "https://www.amarnaproject.com/amarna-the-place/central-city/"
+     ]
+    },
+    {
+     "element": "Garden court layout: pool and rows of trees",
+     "description": "The standard garden has a rectangular pool in the centre, with fish, lotus and flowering edges. It is surrounded by rows of trees (sycamore fig, date palm, doum palm, pomegranate) alternating with flower beds. Pools had sloping sides with steps on one side, and vine pergolas gave shade. At Amarna the trees were planted in pits of humus with a round coping. The Nebamun painting (British Museum EA37983) shows a rectangular pool from above with three rows of trees round it, tilapia, ducks, lotus and papyrus. The King's House at Amarna had a court with rows of trees forming an avenue from its pylon entrance. The lotus has rebirth symbolism, but as a garden plant or capital it is ordinary decoration.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Gardens_of_ancient_Egypt",
+      "https://www.touregypt.net/featurestories/gardens.htm",
+      "https://www.britishmuseum.org/collection/object/Y_EA37983",
+      "https://smarthistory.org/paintings-from-the-tomb-chapel-of-nebamun/",
+      "https://www.amarnaproject.com/amarna-the-place/central-city/"
+     ]
+    },
+    {
+     "element": "Garden religious elements",
+     "description": "The Nebamun pool includes a tree goddess (Nut or Hathor) offering fruit, and a speaking sycamore. Sycamores were the sacred 'tree of life'. Amarna villa gardens had private chapels at the axis crossings. Temple gardens (Karnak, Hatshepsut's T-shaped pools) were sacred. Plant ordinary trees only: no goddess, chapel or shrine, and no T-shaped temple pool.",
+     "religious": true,
+     "sources": [
+      "https://www.britishmuseum.org/collection/object/Y_EA37983",
+      "https://en.wikipedia.org/wiki/Gardens_of_ancient_Egypt",
+      "https://www.touregypt.net/featurestories/gardens.htm"
+     ]
+    },
+    {
+     "element": "Palms: date palm and doum palm silhouettes",
+     "description": "Date palm (Phoenix dactylifera): 15-25 m tall, one straight trunk covered in leaf bases (sometimes a clump), crown of 20-30 pinnate fronds 4-6 m long, crown 6-10 m across. Doum palm (Hyphaene thebaica): up to about 15-17 m, the trunk forks in two again and again, and each branch ends in a tuft of fan leaves about 1.2 x 1.8 m, with smooth dark grey bark. It grows along the Nile in Upper Egypt and Sudan. The forked doum is the most distinctively Nilotic tree silhouette.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Date_palm",
+      "https://www.palmpedia.net/wiki/Phoenix_dactylifera",
+      "https://en.wikipedia.org/wiki/Hyphaene_thebaica",
+      "https://www.britannica.com/plant/Hyphaene"
+     ]
+    },
+    {
+     "element": "Enclosure walls: proportions, wavy courses, palace-façade niching",
+     "description": "Walls are mudbrick, and height is usually 2-3 times thickness (Abydos). Examples: Medinet Habu 18 m high and 10 m thick, Buhen 10 m and 5 m, Shunet el-Zebib 12 m and 5 m. From the Late Period on, temple enclosures used 'pan-bedding': wavy courses laid in alternating concave and convex panels, with a strong batter. It is associated with temple enclosures and read as the primeval waters, so treat it as temple architecture. The niched 'palace façade' (recessed panels, as on Shunet el-Zebib and at the base of the serekh sign O33) is a royal motif meaning the king's palace, and it suits a palace wall. Thick walls had timber and reed-mat layers every few courses.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Kom_El_Sultan",
+      "https://en.wikipedia.org/wiki/Shunet_El_Zebib",
+      "https://www.archaeologs.com/w/pan-bedding/en",
+      "https://talesfromthetwolands.org/2021/02/07/dendera-temple/",
+      "https://digitalkarnak.ucsc.edu/enclosures-and-gates/",
+      "https://en.wikipedia.org/wiki/Serekh"
+     ]
+    },
+    {
+     "element": "Serekh falcon",
+     "description": "The serekh (palace façade with the royal name) is usually topped by the Horus falcon, and some examples by the Seth animal. Use only the niched façade pattern, never the bird or animal on top.",
+     "religious": true,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Serekh",
+      "https://en.wikipedia.org/wiki/Horus_name"
+     ]
+    },
+    {
+     "element": "Giza pyramids as distant shapes: sizes, slopes, arrangement",
+     "description": "Khufu: originally 146.6 m tall on a 230.3 m base, slope 51.84 degrees (base about 1.57 x height). Khafre: 143.5 m tall on a 215.5 m base, slope 53.17 degrees. It stands on bedrock 10 m higher, so from most views it looks taller than Khufu, and it still keeps casing at its apex. Menkaure: 65.5 m tall on a 108.5 m base, slope 51.34 degrees. Three queens' pyramids stand to its south; the largest is about 25 m tall and the other two are small four-step pyramids. Khufu has three queens' pyramids on its east side. The big three stand a few hundred metres apart on a south-west diagonal, in descending size, about 9 km west of the Nile and 13 km south-west of central Cairo. They are royal tombs. As plain shapes they are allowed; the Sphinx, the valley and pyramid temples and the causeways are not.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+      "https://en.wikipedia.org/wiki/Pyramid_of_Khafre",
+      "https://en.wikipedia.org/wiki/Pyramid_of_Menkaure",
+      "https://en.wikipedia.org/wiki/Giza_pyramid_complex",
+      "https://www.si.edu/spotlight/ancient-egypt/pyramid"
+     ]
+    },
+    {
+     "element": "Pyramid colour and casing",
+     "description": "The casing was fine white Tura limestone, polished smooth. A surviving casing block is still bright, almost silvery. The exposed core today is a rougher brownish-yellow limestone. Khafre's lowest casing course was pink granite. Menkaure's lowest 16 courses (more than 20 m, about 30% of its height) were red Aswan granite. Gilded or electrum capstones are claimed but disputed: most capstones were plain stone. When finished, the pyramids would have stood out sharply, pale against the desert.",
+     "religious": false,
+     "sources": [
+      "https://web.ujaen.es/investiga/egiptologia/journalarchitecture/downloads/JAEA1_Lightbody.pdf",
+      "https://apollo-magazine.com/great-pyramid-giza-egypt-casing-stone/",
+      "https://www.snopes.com/fact-check/pyramids-white-limestone-gold/",
+      "https://en.wikipedia.org/wiki/Pyramid_of_Khafre",
+      "https://en.wikipedia.org/wiki/Pyramid_of_Menkaure"
+     ]
+    },
+    {
+     "element": "Dahshur pyramids as a second skyline",
+     "description": "From Memphis, Dahshur lies on the same western horizon as Giza. Bent Pyramid: 104.7 m tall on a 189.4 m base. It rises at 54.5 degrees to the bend at 47 m (45% of its height), then at 43.4 degrees, a unique silhouette. Red Pyramid: 105 m tall on a 220 m base, 43.4 degrees throughout, so it looks low and broad. Both are plain shapes and could balance the Giza trio on the other side of the window.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Bent_Pyramid",
+      "https://en.wikipedia.org/wiki/Red_Pyramid"
+     ]
+    },
+    {
+     "element": "Aerial perspective (what makes a shape read as distant)",
+     "description": "With distance, contrast falls, detail blurs, saturation drops, and colour shifts toward the haze colour, and the horizon is palest. Value (lightness) matters more than hue. In dusty desert air, Mie scattering whitens the haze, so distant forms go warm pale grey or tan rather than blue. KovaaK's has no fog, so the effect must come from the material: pale, low-contrast and flat.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Aerial_perspective",
+      "https://blog.runevision.com/2025/06/notes-on-atmospheric-perspective-and.html",
+      "https://perspectiveresearchcentre.com/aerial-perspective/"
+     ]
+    },
+    {
+     "element": "Palace colour palette and courtyard floors",
+     "description": "Outside: whitewashed or white-stuccoed mudbrick (Malqata, Merenptah). Stone was kept for column bases, door frames, window slabs and pavements. The Palace of Apries stood on a massive platform, with limestone columns, pavements and wall cladding. Inside: red-brown wooden columns, blue, gold and red bands, yellow fields, blue-green faience tiles and inlays (daisies, persea, lotus, fish, birds), and gilded palm capitals. Floors were gypsum or white-stuccoed brick painted with pools and marshes, and stone pavement in the state areas (North Palace).",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Malkata",
+      "https://www.penn.museum/sites/journal/897/",
+      "https://www.ucl.ac.uk/museums-static/digitalegypt//memphis/palaceback.html",
+      "https://www.brooklynmuseum.org/opencollection/objects/3377",
+      "https://www.metmuseum.org/art/collection/search/571930",
+      "https://www.amarnaproject.com/amarna-the-place/north-palace/"
+     ]
+    }
+   ],
+   "advice": "1) CONCEPT. Build the court in front of the palace front, as at Medinet Habu and Amarna. The player stands on the court floor. The existing window becomes the Window of Appearances, set as a projecting bay in a long, low palace front. Beyond the palace front, palms and pyramids show against the sky. The window and head stay the tallest and brightest things in view.\n\n2) VIEW BUDGET (eye at (-6000, 0, 0); d = x + 6000).\n- Screen size: +-51.5 degrees across and +-35.3 degrees up and down. At 1080p that is about 15 px per degree at the centre.\n- The window covers +-24.5 degrees across (pilasters) and the lions reach +-30.9 degrees.\n- Vertically the window runs from -16.7 degrees (sill) to +19.2 degrees (cornice); the head reaches +23.9 degrees.\n- A floor at z = -900 enters the view at x = -4727 (the bottom edge of the screen). Its horizon is at eye level, which is the screen centre, behind the window.\n- So the courtyard can only show in four places: the strip below the sill (-35 to -17 degrees), the two side bands (25 to 51.5 degrees on each side), and the sky.\n- At the window line the view is only +-3750 wide. Side walls in front of the window are never seen, so don't build them.\n\n3) TARGET SAFETY.\n- Anything behind x = -2927 cannot cover a target.\n- A flat floor at z = -900 is always safe.\n- A raised item in the central strip in front must be at most about 900 - 870*d/3100 units above the floor: 535 at x = -4700, 480 at -4500, 340 at -4000, 200 at -3500, 85 at -3100.\n- To also keep the lions in view, side items in front need |y| > 0.61*d.\n- Run check_scene.py on all 13 layouts.\n\n4) RECOMMENDED LAYOUT (about 15-25 objects; the budget is 60-120).\n- (a) Floor: one block, x -4800 to -2600, y +-4400, top at z = -900.\n- (b) Palace front: two wall blocks flanking the pilasters, from |y| = 1370 to 4400.\n  - Set the face about 100-200 units behind the backdrop plane (x about -2800), so the window bay projects like Amarna's central terrace.\n  - Put the top at z = +200 to +300 (1100-1200 above the floor, about 3-4.5 degrees up). That is above the horizon, so the wall hides the far ground and no huge distant floor is needed. A huge floor would also shimmer under a theme's grid texture at grazing angles.\n- (c) Crown each wall with a limestone cavetto coping and a red-ochre bead, repeating the window's own cornice. For the thundah 'castle' feel, use a row of half-round 'Egyptian merlons' (Medinet Habu) instead, as one mesh per side. Optionally add niched palace-façade panels, with no falcon.\n- (d) Foreground: a flush painted pool panel on the axis, after Malqata's pool-painted floor, at x -4400 to -3400 and y +-550. It needs almost no height: at most 5-10 units proud, with a thin limestone border. Its far edge sits about 5 degrees below the lowest targets and leads the eye to the window. Keep it calm (navy water). Low papyrus clumps at its near corners are optional; they must be 150 units tall or less at x < -4000.\n- (e) Palms: plant them in the garden behind the wall (x about -2400 to 0), with crowns against the sky at 27-51 degrees across and 8-22 degrees up. For example: x = -2000, y = +-3000 to 4400, 2500-3800 units tall.\n  - Date palms: one straight or slightly leaning trunk and 10-14 arching fronds, crown about a third of the height across.\n  - Add one forked doum palm as the Nile signature.\n  - Nothing may rise above the cornice within 26 degrees of the centre, so the head keeps its sky.\n- (f) Pyramids rise from behind the wall, at a range of about 25k-35k.\n  - Left gap, 28-44 degrees across: the Giza trio. A Khafre-like pyramid nearest the centre (slope 53.2, looks tallest), a Khufu-like one beside it (51.8), and Menkaure further out (51.3, about 45% of their height) with 1-3 tiny queens' pyramids.\n  - Right gap: optionally the Dahshur pair, the Bent pyramid (54.5 degrees, then 43.4 degrees above 45% of its height) and the Red pyramid (43.4 degrees), for balance.\n  - Size: apexes 8-10 degrees up (Menkaure about 5), so 4-6 degrees (60-120 px) show above the wall. Example: range 30000, 40 degrees across, 8 degrees up gives a centre at about (17000, -19300), a height of about 5100 above the floor and a base of about 8000.\n  - Narrow each base by cos(angle across), about 0.77 at 40 degrees. The 103 FOV stretches side objects 1/cos wide (1.31x at 40 degrees), and uncorrected pyramids look squat.\n  - The real Giza pyramids seen from a Memphite palace would be under 1 degree tall. This size is a deliberate exaggeration.\n  - Make each pyramid one custom mesh (5 faces). QuadPyramid brushes exist but are uncalibrated.\n\n5) MATERIAL SLOTS.\n- Never reuse the g1 wall slot (the backdrop). The backdrop must stay unique.\n- Floor and palace front: the free g1 ceiling slot in a mid grey clearly darker than the backdrop (e.g. PureColor 5a5d62, full-bright 0.3). This fits the user's grey preference, keeps the pale window the brightest element, and lets the navy lions read. Under any theme, all ceiling-type slots look alike, so the court then equals the window stone. The window then reads only by its navy outline, depth and shading, as it already does under Bassel 3.\n- Pyramids and copings: g0 ceiling limestone. It is pale, which reads as far away and as Tura casing. Menkaure's red granite base band can use g0 ramp.\n- Merlon and bead bands: g0 ramp (red ochre).\n- Palms: dark umber silhouettes (g0 wall), in the same style as the stencil art. There is no green slot. The only way to get green is the Tree prop, which keeps its own colours under themes, but its look is unknown, so a sampler would be needed.\n- Pool water: g1 ground (navy) for a calm look, or g0 ground (lapis) for a brighter one.\n- Gold (g1 ramp): only if gilded palm capitals are added.\n\n6) OPTIONAL SIDE PORTICOES (option B, more objects).\n- Palm columns: height about 7.5 diameters, capital about a quarter of the height, abacus about 1 diameter, base disk about 2 diameters, 5 bands under the capital. Palace columns were red-brown wood with inlaid or gilded palm capitals.\n- Columns placed in front of the window line near the screen edges fill the side bands and hide the pyramids. I'd use at most short colonnade stubs behind the ends of the palace front, kept under the wall top plus about 1000.\n\n7) FLAGS TO RAISE WITH THE USER.\n- Once any floor or wall exists, the lions' stencil holes show court, not sky. Sight lines through the lions hit the floor at x -2790 to -2210.\n- The head keeps its sky as long as nothing near the centre rises above z of about 0.35*d.\n- Brushes cast shadows. Check in game that no wall, palm or merlon shadow falls on the backdrop under the theme's sun: a dark patch behind black targets would hurt visibility.\n\n8) BUILD AND TEST.\n- Build it as one test scenario that replaces the Window Test (only one test installed at a time; retire the old one). Use DefaultNoCollision, keep every rotated piece inside meshes, and use groups 0 and 1 only.\n- Report block counts and ask for an uncapped FPS check with no theme and with Bassel 3, against the Window Test's 616 and 474. Add palms and merlons in a second step only if there is headroom.\n- Also confirm that the far pyramids render at about 20k-30k. The base map already draws a brush at x = -1,024,000, so this is probably fine.\n\n9) LEAVE OUT.\n- Religious: winged sun, uraeus or cobra friezes, vulture ceilings, the Aten disc and rays, Osirid colossi, offering scenes, altar courts and offering tables, the tree goddess, garden chapels and shrines, star ceilings, obelisks and flagstaff pylons, the sphinx, pyramid temples and causeways, the serekh falcon, ankh, djed and was.\n- Also skip the captive motifs. They are political rather than religious, but violent."
+  },
+  {
+   "findings": [
+    {
+     "element": "Who thundah is, and his castle scenarios",
+     "description": "thundah uploads to the Workshop from the Steam account RATHERBEDEADTHANFAKE (steamcommunity.com/id/ifearthefuture). That account's own KovaaK's screenshot from 2024-06-03 highlights the row 'cAt thundah' as the account's own leaderboard entry. The KovaaK's Steam hub lists its uploads as 'RVNG thundah'. Two scenarios by this account have a castle.\n\n(a) CastleTrack is a tracking scenario in the 'thundah Precise Tracking' Season 2 benchmark. The benchmark sheet's S2 tab lists thundahTrack, thundahRawControl, TrampolineTrack, CastleTrack, SkyTrack, LeafTrack, AngelTrack, TunnelTrack, CatTrack and OrbTrack. It was posted 2024-06-07, it is 138 KB, and kovaaks.com shows 4,995 plays. Its Workshop page (and the S3 versions) now says the item was removed. Its preview is the default thumbnail. No screenshot or video of it was found, and it is not on this PC. The user's stats hold no CastleTrack runs.\n\n(b) Control Paradise was posted 2026-07-19 and updated 2026-08-24. It is a tracking scenario on the map 'Paradise Palace.json', and its Workshop preview shows a full castle. It is in the local Workshop cache. The user played it 22 times on 2026-07-21. So this is almost certainly the castle the user remembers. Related local thundah maps: IcyStrafes, PlazaStrafes and SnappyStrafes, each described as 'Original scenario by thundah'. The user has also played TrampolineTrack (S2) 8 times.",
+     "religious": false,
+     "sources": [
+      "https://kovaaks.com/webapp-backend/scenario/popular?page=0&max=20&scenarioNameSearch=Castle",
+      "https://docs.google.com/spreadsheets/d/1Ya61uCCy5YcRqmCQvCpr3-qbDubVvo_NX9kfIre6d4A/gviz/tq?tqx=out:csv&sheet=Precise%20Benchmark%20S2",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3263036177",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3316588447",
+      "https://steamcommunity.com/workshop/browse/?appid=824270&searchtext=castle&browsesort=textsearch&section=readytouseitems",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3260762983",
+      "https://steamcommunity.com/id/ifearthefuture/myworkshopfiles/?appid=824270",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3768224377",
+      "https://steamcommunity.com/app/824270?l=english",
+      "https://evxl.app/leaderboards",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\824270\\3768224377\\Control Paradise.sce"
+     ]
+    },
+    {
+     "element": "thundah's castle (Control Paradise, 'Paradise Palace'): how it is composed and what frames the view",
+     "description": "Sources: the Workshop preview image, which I viewed, and the map JSON. Units are map units at MapScale 2. The player's camera offset is 0 and the hitbox is tiny, so the eye sits on the SpawnPoint.\n\nThe player stands in the middle of a sunken square pool, about 2,180 x 2,240, in the centre of a paved courtyard. The courtyard is 8 slabs of 3,288 x 4,660, about 9,900 x 14,000 in all. An invisible Clip floor sits just above the water, and the eye is about 200 above the paving. The target moves about 1,328 ahead.\n\nThe view is one symmetric axis toward a keep:\n- A crenellated curtain wall 1,470 tall, with merlons up to about 1,730. It stands 2,470-3,700 ahead, is about 3,900 wide, and is set as a shallow V.\n- Two round flanking towers, 600 across and 2,270 tall, with 800-wide corbelled caps. They sit 1,800-2,600 ahead, 1,200-2,900 to each side.\n- Behind them, a square keep block 2,240 wide, up to about 3,700, with pointed corner turrets. Its thin spires are cylinders 96 across and 800 tall.\n- On the keep, a round tower 1,200 across that rises to about 6,800 with a 1,600-wide cap.\n\nLower raised ramparts, walls 4,320 long at 2,200-3,800 to each side, run from beside the player to the keep and converge in perspective. Four big corner towers stand 4,100-5,100 out to the sides: 1,008 across, 2,240 tall, with 1,200 caps and spires.\n\nAngles from the eye: the keep wall top is at about 26 degrees and the merlons at about 34. The keep block (about 44 degrees) and the tall tower (about 56) run off the top of a 103-FOV screen. So what surrounds the targets is the wall and towers right behind them, the ramparts and towers cut off by the left and right screen edges, and the paving and pool at the bottom. In the preview, the pale sky fills roughly the upper third, but the preview camera sits further back and higher. From the real spawn, my rough render shows walls filling most of the frame and little sky.\n\nThe detail comes from repetition: 174 small blocks (80 x 140-200 x 140-200), turned in steps of -10, 20 and 38 degrees, are the merlons around the walls and round towers. The tiered towers are stacked cylinders of shrinking diameter (1,200, 800, 700, 600, 500, 400, 300).",
+     "religious": false,
+     "sources": [
+      "https://images.steamusercontent.com/ugc/11737272997015330400/F04B3FAE25C4871F5F3237C2871FCC8F06746A17/",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3768224377",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\824270\\3768224377\\Control Paradise.sce",
+      "D:\\Projects\\flowfix\\test_out\\courtyard\\paradise_behind.png",
+      "D:\\Projects\\flowfix\\test_out\\courtyard\\paradise_player_notrim.png"
+     ]
+    },
+    {
+     "element": "thundah's castle: materials, water, object count and the user's FPS",
+     "description": "Materials: one material on all 8 slots, MI_WA_grid_8 grey 7f7f7f at full-bright 0.5. So the castle reads only through its silhouette, its shading and the grid lines, which is how the user's Bassel 3 theme (all four surface types alike) renders any map.\n\nThe map has no props. It has 273 drawn brushes: 216 Cube, 56 Cylinder and 1 Trim moulding. 223 of them are rotated. It also has 3 Clip brushes and 1 Water gameObject.\n\nThe Water object sets the pool's look: BaseColor 8398ff, DepthFadeColor 40dfbe, highlight and ripple colours, WaveSpeed 0 and WaveHeight 0. It is 10.5 x 10.5 x 0.08 at the basin centre, so its half-extent is about scale x 100.\n\nThe sky is not in the scenario. No header in any of the 390 installed scenarios has a sky, fog, sun or light key, so the theme sets the sky.\n\nFPS: the user's 22 runs on 2026-07-21 averaged 359 FPS. That was the frame cap that day; every other scenario that day also shows 359. So the castle held the cap, but its exact cost is not known.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\824270\\3768224377\\Control Paradise.sce",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\stats (Control Paradise - Challenge - 2026.07.21-*.csv)"
+     ]
+    },
+    {
+     "element": "Cockroach Simulator [with easter eggs]: the most detailed installed map",
+     "description": "A giant-scale house interior; the player is the cockroach. MapScale 3.8125, 1,001 objects.\n\nBrushes: 960, all drawn, no Clips. 830 are rotated. Meshes: 640 Cube, 97 Cylinder, 78 Torus, 46 Pipe, 43 WideCapsule, 27 RampConcave, 16 RampConvex, plus Pipe90, WedgeB, Cone and Tube.\n\nStructure: floors are big slabs 64 thick (4,208 x 4,208 and 2,208 x 6,400). Walls are slabs 1,520 tall and 2,000-2,250 long, turned -90 degrees about x. The rest is furniture detail from hundreds of small repeated parts: 53 cubes of 20, 50 of 10, 49 small tori, 38 capsules and so on.\n\nProps (25): Tree x7 at scale 1 and 4 (house plants), Crate x6, Window x6 stretched non-uniformly (1.2-2.3 x 0.5-4.1 x 2.5-3.4), Barrel x4, McCoy and TimmyButton.\n\nThe 15 targets are 2,800-6,500 from the player. 736 of the 985 drawn objects sit inside the forward view cone, most of them 1,500-20,000 away.\n\nMaterials: black PureColor wall, Paint_B floor, grey PureColor on g0 ceiling (full-bright 0.69, used on 2,524 faces), WoodFloorWalnut, MetalSheet, WoodParquet, BigConcreteTiles (full-bright 1) and red SciFiPaddingB.\n\nFPS: the user's one run (2025-03-22) averaged 240. That day simple maps ran at 325-355, and a 40-brush VT Snake Track ran at about 245. That was old hardware and settings, so treat it as weak evidence that about 1,000 rotated brushes cost roughly 1 ms.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios\\Cockroach Simulator [with easter eggs].sce",
+      "stats: Cockroach Simulator [with easter eggs] - Challenge - 2025.03.22-09.15.58"
+     ]
+    },
+    {
+     "element": "Geometry Dash Lvl 1 - @wa11p1per",
+     "description": "A side-scrolling obstacle course. MapScale 6, 791 objects.\n\nBrushes: 525 drawn. 400 are DoubleRamps (10-20 unit spikes and steps) and 125 are Cubes. 475 are rotated and 7 have no collision.\n\nOther objects: 261 Teleporters, 1 Hurt volume, 2 Waypoints and 1 prop, Sandstorm, used as a 0.033 x 0.024 x 0.001 plate.\n\nThe course is a closed tube 8,976 long: two 800-tall side walls 32 thick, plus a floor and a ceiling 704 wide. It runs sideways from the player, so the player looks along it, not into an open world. Nothing lies in the forward view cone: the scenario plays through movement and teleports.\n\nMaterials: purple Timmy_A wall, GroundGravel floor at full-bright 1, black ceiling and grey ramp.\n\nLesson: detail at this scale is hundreds of tiny identical parts. There is no backdrop and no horizon. The user has no runs of it.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios\\Geometry Dash Lvl 1 - @wa11p1per.sce"
+     ]
+    },
+    {
+     "element": "Surge Tags Training Clicking: an open landscape with a mountain horizon",
+     "description": "MapScale 1.0, 382 objects.\n\nBrushes: 299 drawn and 47 Clips. Meshes: 210 Cylinder, 82 WideCapsule, 6 Cube and 1 Sphere. 290 are rotated.\n\nThe ground is one island: a single Cylinder 20,480 across and 256 thick.\n\nThe horizon is a ring of 82 huge WideCapsules as mountains. The largest are 7,954 x 15,907 x 12,000, set 15,000-36,000 from the island centre. There are also 49 rock-pillar Cylinders, 3,900-5,100 across and 8,100 tall.\n\nSmall detail comes from about 150 thin cylinders on WoodPine (20-40 across, 200-1,000 long) at odd angles: sticks and fences.\n\nProps: 8 Tree props scaled up hugely (5.7 x 5.7 x 9.2 and 12 x 12 x 15.8) at 500-24,000 from the player.\n\nThe 26 target points spread over about 20,000 x 6,000, 17,500 away on average. Materials: RockSlate wall, GroundGrass ground, WoodPine ceiling and grey ramp.\n\nFPS: the user's two runs on 2026-04-11 averaged 442. That was the cap; every other map that day also ran at 442-443. Lesson: a few very large primitives make a convincing distant horizon for very few objects.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios\\Surge Tags Training Clicking.sce",
+      "stats: Surge Tags Training Clicking - Challenge - 2026.04.11-14.46.55 / 14.48.12"
+     ]
+    },
+    {
+     "element": "Cata IC Pizz Plz LighthawkFPS: the most prop-heavy map",
+     "description": "MapScale 3.8125, 275 objects.\n\nBrushes: 173 drawn and 8 Clips. 23 are custom meshes and 89 are rotated. Meshes: 123 Cube, 40 Cylinder, 3 Pipe90, 2 Sphere and 2 QuadPyramid (1.92 on every axis, turned 45 degrees), plus a HalfRamp, a Ramp and a TriPyramid.\n\nProps (87): Column x14, stretched into thin posts (0.0625 x 0.0625 x 0.1-0.65). Window x11 (0.24-0.46). Ledge x9. Container x8, some flattened to 0.013 as panels. Tree x7 (0.44 and 0.99). Crate x7. Barrel x6, some squashed flat. Doorway x4, Signage x4, Arch x3 (one 1.9 x 0.56 x 0.56). Banner x3 (one 11.46 x 0.23 x 0.15 strip). Also Fence, McCoy, BannerB and Timmy* props. Props are mostly turned about z (45, 48, 90 or 180 degrees), and a few about x or y.\n\nThe play area is small, with everything within about 1,000 of the player. 153 of the 260 objects are behind the default facing: it is a 360-degree map.\n\nThe outer world is one 50,000 x 50,000 x 2 ground slab. Around it, about ten boxes of 2,372 x 1,876 x 10,000-30,000 stand 5,000-21,000 away as a skyline.\n\nMaterials: BrickGrey, ConcretePoured, BrickClayBeveled, orange SciFiWallD, MetalGold, red groundMoss, WoodOak and a navy-tinted GroundGrass.\n\nFPS: the user's run in 2024 averaged 143, at the 144 cap then.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios\\Cata IC Pizz Plz LighthawkFPS.sce"
+     ]
+    },
+    {
+     "element": "Frog Simulator - @wa11p1per: a pond scene",
+     "description": "MapScale 4, 278 objects.\n\nBrushes: 233 drawn and 4 Clips. Meshes: 198 DoubleRamp, 30 WideCapsule, 2 Tube, 2 Cylinder and 1 Torus. 227 are rotated and 22 have no collision.\n\nThe pond:\n- the bank is a Tube 2,628 across and 1,832 tall\n- a Torus 1,536 across\n- a thin Tube and a Cylinder disc for the water surface (PureColor 7092be on the ramp slot, full-bright 1)\n\nAround it:\n- 176 tiny DoubleRamps (about 2 x 2 x 20), turned -90 degrees on GroundGrass, as grass blades\n- 22 larger DoubleRamps as reeds\n- 30 WideCapsules (300-500 wide, 500-1,200 tall) on GroundGravel, as a ring of boulders\n- 11 Tree props at scale 1 and 2\n\nEverything is within about 1,900 of the player.\n\nFPS: the user's run in 2024 averaged 143, at the cap.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios\\Frog Simulator - @wa11p1per.sce"
+     ]
+    },
+    {
+     "element": "Other local maps that match our case (fixed view, backdrop landscapes)",
+     "description": "Iron - Tracking Warzone (Workshop cache) faces one way, like ours. It has only 15 drawn brushes and 53 Clips. It builds a bamboo shelter around the player from 116 props of one set: 48 BambooStrut, 32 RopeKnot, 15 MetalRoofing, plus crates, sandbags and an IronBanner. Behind the targets, 1,300-1,600 ahead, it places one LandscapeB prop (scale 4 x 4 x 2.7, turned -45 degrees) as the backdrop terrain, with 3 TallTree and 3 Rock props (RockB, RockD and RockG at 0.125-0.5) in front of it.\n\nFisher Simulator: a 115,200-wide thin Cylinder as the sea to the horizon, an 11,500-wide island disc, and a dock of about 340 tiny cubes.\n\nNight Lantern: 9 huge flattened Spheres (1,000 x 2,200 x 5,200, RockSlate) as hills, and Trees at scale 9-11.\n\nIcyStrafes (thundah-inspired): 198 rotated cubes. It ran at the 483 cap (2025-11-18).\n\nNone of these props (LandscapeB, TallTree, Rock*) has been seen in game here, so their look (palm or not, desert or not) is unknown.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\824270\\2885762913\\Iron - Tracking Warzone.sce",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios\\Fisher Simulator.sce",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios\\Night Lantern - @wa11p1per.sce",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\824270\\3608220530\\IcyStrafes.sce"
+     ]
+    },
+    {
+     "element": "Building blocks found across all 435 distinct local maps",
+     "description": "Game objects:\n- Water: 4 uses. Control Paradise's pool, two red Water volumes in REVENGE 1Click Reflex, and a black vertical Water sheet in REVENGE 2Click Pressure. Its properties are BaseColor, DepthFadeColor, HighlightColor1/2, RippleShadowColor, RippleHighlightColor, MurkColor, WaveSpeed and WaveHeight.\n- TextLabel: 1 use, from the new text component.\n- Others: SmileyPoint, Eye, Hurt, JumpPad and Teleporter.\n\nBrush meshes that suit Egypt:\n- QuadPyramid (50 uses): a true square pyramid, one object each.\n- TruncatedPyramid (133)\n- Dome (34) and Hemisphere (22)\n- Trim, Trim90In and Trim90Out (138 mouldings)\n- StairsB, StairsConvex and StairsSpiral\n- WedgeC and CornerB\n\nProps not in the earlier catalogue: TallTree, LandscapeB, RockB, RockD, RockG, SandBagA-C, BambooStrut, RopeKnot, MetalRoofing, IronCrate(Large), IronBanner, TimmyPortrait, FrostingSnowman, CookiePathCross and an Outlaws* set.\n\nHow detailed maps build distance: always a few huge primitives:\n- one ground slab or disc of 50,000-115,000\n- a ring of capsule mountains, or sphere hills\n- a skyline of 10-30k-tall boxes\n\nThey never use many small distant parts.\n\nThe material library has no sand material. The nearest are StoneGranite, ConcretePanels, UnpaintedBricks, BigConcreteTiles, ConcretePoured and GroundGravel.",
+     "religious": false,
+     "sources": [
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\Saved\\SaveGames\\Scenarios",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\824270"
+     ]
+    },
+    {
+     "element": "What our fixed camera can see (measured on the 13 built window layouts)",
+     "description": "Screen: tanH is 1.2572 and tanV is 0.7072 (plus or minus 35.27 degrees).\n\nThe ground line is not z = -900. In Overflick the lion plinths and pilaster bases go down to z = -968: the lion mesh starts at -898 on 70-tall plinths. Across the 13 layouts, the lowest window brush ranges from about -856 (Pathing) to -1,129 (Early Braking, Early Click).\n\nThe window plus lions spans y plus or minus 1,584 (Speed Build) to plus or minus 2,223 (Pacing Drop, Slow Start). The top of the head ranges from 1,207 to 1,480.\n\nThe floor enters the bottom of the screen at d = floor depth / 0.7072. That is 1,210 to 1,597 in front of the eye (x about -4,790 to -4,403). So the floor band in front of the window fills the lower ~28-30% of the screen height.\n\nAt the window face (x = -3,020, d = 2,980), the screen spans y plus or minus 3,746 and up to z = +2,107.\n\nSky gaps:\n- Beside the window: from yaw 28-37 degrees (depending on the layout) out to 51.5.\n- Above it: from the cornice at about 19 degrees, or the head at 22-26, up to 35.3.\n\nA side wall at |y| = W shows only where d > W/1.257. W = 2,500 appears from x = -4,011, and W = 3,000 from x = -3,614.\n\nIn front of the window, the no-go zone is each layout's opening, which already includes the 60 margin and the parallax. An object there must be either:\n- laterally outside |y| > s x d, with s from 0.26 (Speed Build) to 0.466 (Pacing Drop, Slow Start); or\n- below the line from the eye to the opening's bottom edge. The maximum height above the floor is 430-527 at d = 2,000, 324-377 at d = 2,500 and 239-256 at d = 2,900.\n\nA pool with a rim up to about 200 is therefore safe anywhere. Palms and columns must stand outside about 0.47 x d plus a margin.\n\nThe horizon (pitch 0) runs across the middle of the screen, through the target band's height. It can show only in the side gaps.",
+     "religious": false,
+     "sources": [
+      "D:\\Projects\\flowfix\\test_out\\egypt_window_all",
+      "D:\\Projects\\flowfix\\.claude\\skills\\kovaaks-scenario-design\\references\\mechanics.md"
+     ]
+    },
+    {
+     "element": "Frame-time headroom",
+     "description": "The Window Test reads 474 FPS under the user's theme, which is 2.11 ms. 400 FPS is 2.50 ms. So the whole courtyard has only about 0.39 ms before the cap. To stay 'well above 400', for example at 440 FPS (2.27 ms), leaves about 0.16 ms.\n\nThe detailed maps above prove little here, because each ran at the cap of its day. Control Paradise ran at 359 (273 brushes + Water), Surge at 442, IcyStrafes at 483, and Frog and Cata at 143. Only Cockroach (960 brushes) clearly ran below other maps.\n\nThe window's own 0.64 ms under the theme comes from 86 brushes. So cost depends on what the objects are (dense custom meshes, theme-painted area, shadows), not on the count alone.",
+     "religious": false,
+     "sources": [
+      "D:\\Projects\\flowfix\\.claude\\skills\\kovaaks-scenario-design\\references\\decoration.md",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\stats"
+     ]
+    },
+    {
+     "element": "Palace court with columned porticoes (the Amarna model)",
+     "description": "Egyptian palaces were organised around open courts reached through gateways, with colonnaded halls and porticoes around them.\n\nAt Amarna, the North Palace has two open courts divided by a pylon or a possible Window of Appearance, and its second court held a large basin or sunken garden. The Great Palace's 'harem quarter' had a sunken garden with a colonnaded hall along each long side.\n\nThis fits the user's pick. The window becomes the gateway at the end of the court, and porticoes of papyrus-bundle columns line the sides, lower than the gateway.\n\nAvoid the Great Palace's court of colossal king statues in Osiris form. Those are religious (see the separate entry).",
+     "religious": false,
+     "sources": [
+      "https://www.amarnaproject.com/amarna-the-place/north-palace/",
+      "https://en.wikipedia.org/wiki/Northern_Palace_(Amarna)",
+      "https://www.amarnaproject.com/amarna-the-place/central-city/",
+      "https://www.penn.museum/sites/journal/897/"
+     ]
+    },
+    {
+     "element": "Rectangular pool / sunken garden in the court",
+     "description": "Palace gardens centred on a rectangular pond with fish and lotus. Rows of date palms and other trees stood around it, sometimes with a stair down one side and a colonnade or wall around. Such pools are sometimes read as images of the Nile marsh or the cosmos, but a plain pool carries no deity or cult sign.\n\nThe game supports this directly. Its Water gameObject has settable colours and can be set to no waves, as thundah does. A low limestone kerb (at most about 200 high) stays below every sightline.\n\nUnknowns to test in game:\n- whether themes repaint Water\n- its FPS cost\n- whether it reflects the black targets. A reflection would put decoy targets under the window.",
+     "religious": false,
+     "sources": [
+      "https://en.wikipedia.org/wiki/Gardens_of_ancient_Egypt",
+      "https://www.touregypt.net/featurestories/gardens.htm",
+      "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\824270\\3768224377\\Control Paradise.sce"
+     ]
+    },
+    {
+     "element": "Date palms (and other garden trees)",
+     "description": "Date palms lined palace and estate pools, which makes them a natural motif.\n\nSome sources link the date palm to Re and the sycamore fig to Hathor. So use plain date palms without any added emblem, and prefer them to sycamores.\n\nThey can be built as one merged mesh each: a trunk of a few turned segments plus 8-10 frond blocks. The Tree or TallTree props are an alternative, but their look is unknown. Props keep their own colours under themes.",
+     "religious": false,
+     "sources": [
+      "https://nilescribes.org/2021/05/01/ancient-egyptian-gardens/",
+      "https://en.wikipedia.org/wiki/Gardens_of_ancient_Egypt"
+     ]
+    },
+    {
+     "element": "Distant pyramids on the horizon",
+     "description": "Pyramids are royal tombs, so they have a funerary meaning. The user allowed them as plain distant shapes: no gilded capstone, no temples, causeways or sphinx.\n\nThey must sit in the side gaps, about yaw 38-50 degrees, to clear the widest window at 37 degrees.\n\nExample sizing:\n- d = 20,000 with the apex 5 degrees above the horizon: height above the floor about 2,700, base about 4,300 at the Khufu slope of 51.8 degrees. It appears about 12 degrees wide.\n- d = 35,000 with the apex at 4 degrees: height about 3,400, base about 5,400. It appears about 9 degrees wide.\n\nThey need a ground plane out to the horizon; otherwise sky shows below the horizon. Build them as one QuadPyramid brush each, or as one custom mesh for all.",
+     "religious": false,
+     "sources": [
+      "D:\\Projects\\flowfix\\test_out\\egypt_window_all"
+     ]
+    },
+    {
+     "element": "Items to avoid from palace and gateway research",
+     "description": "The colossal king statues in Osiris form in the Amarna Great Palace court. Obelisks and temple flagstaffs. Sphinxes. The winged sun. Offering scenes.\n\nAlso keep plants to plain palms and papyrus: no Hathor-linked sycamore symbolism, and no lotus shown as a cult offering.",
+     "religious": true,
+     "sources": [
+      "https://www.amarnaproject.com/amarna-the-place/central-city/",
+      "D:\\Projects\\flowfix\\.claude\\skills\\kovaaks-scenario-design\\references\\decoration.md"
+     ]
+    }
+   ],
+   "advice": "1. What to take from thundah's castle.\n- Compose one symmetric axis. A dominant building sits right behind the targets; in our case that is the existing window, acting as the palace gateway.\n- Lower side walls converge on it.\n- Tall vertical accents at the left and right edges are cut off by the screen frame, like his corner towers.\n- Paving and a pool fill the bottom, and sky fills the top.\n- He uses one grey material for everything, so the castle reads through silhouette and shading. That is how the user's Bassel 3 theme will render our courtyard, so design for silhouette first.\n- Do not copy his size or count (273 brushes, a whole 360-degree castle). Our camera never turns, so build only the view cone.\n\n2. Build to our view cone.\n- Floor: set the courtyard floor at each layout's window base. Measured, that ranges from about -856 (Pathing) to -1,129 (Early Braking), and is -968 in Overflick, not -900. Alternatively, use one fixed floor at about -1,130 and a stepped terrace under the window that absorbs the difference.\n- The floor shows from about 1,200-1,600 in front of the eye up to the window, in the lower ~30% of the screen.\n- Anything in front of the window must stay outside |y| > 0.47·d (the widest layout) plus a margin, or stay under about 250-500 above the floor, depending on distance.\n- The side gaps run from yaw 37 to 51.5 degrees (widest layout) and are the only place the horizon shows.\n\n3. A layout that fits the user's pick and the rules (about 15-30 objects).\n- One paving brush on a ceiling-type slot. Use limestone g0 ceiling, because both ground slots are taken by lapis and navy.\n- One huge desert ground brush (50-100k), so there is a horizon.\n- A long pool on the axis in front of the window: 1 Water object with WaveSpeed and WaveHeight 0, plus 1 kerb mesh at most about 100 high.\n- Two side porticoes as one merged mesh each: papyrus-bundle columns, architrave and cavetto coping. Keep their top below eye level (under about 900 above the floor), so the gateway stays dominant and the pyramids show above them.\n- 2-3 plain pyramids at yaw 40-48 degrees and 20-40k away, with the apex 3-6 degrees above the horizon (QuadPyramid brushes or one mesh). Optionally 2-3 flattened capsules or spheres as dunes, the way Night Lantern and Surge build horizons.\n- 2-4 date palms per side as one merged mesh each, placed so their crowns don't hide the lions or the pyramids.\n- Keep the sky band above the cornice empty.\n- For a colour without a theme, repaint the free g1 ceiling slot green for the palm fronds. Under themes everything turns grey, as it does in thundah's map.\n\n4. Performance.\n- Headroom under the theme is only about 0.16-0.39 ms (474 FPS now; 400 FPS is 2.5 ms), so build and measure in stages, and have the user measure FPS with and without Bassel 3 at each one:\n  - (a) paving + ground + pyramids\n  - (b) + Water\n  - (c) + porticoes\n  - (d) + palms\n- Merge everything that doesn't need its own slot. Report object counts with each stage, as AGENTS.md asks.\n- If the budget is short, the window's dense meshes are the known 0.64 ms and are the place to win time back.\n\n5. Unknowns to test in a separate test scenario first. Keep material groups at 3 or fewer and one test installed at a time.\n- Does Water reflect the black targets (decoy risk)? Is it repainted by themes? What does it cost?\n- How do QuadPyramid faces take material slots?\n- Does a 100k ground brush behave?\n- What do Tree, TallTree, LandscapeB and Rock* look like? Only a small sampler and the user's eyes can settle this; LandscapeB could even serve as a desert backdrop.\n- check_scene.py checks brushes and props but likely not the Water gameObject. The pool is at floor level, so it is safe anyway.\n\n6. Keep to the rules. No obelisks, flagstaffs, sphinxes, Osiride colossi, winged sun or temple buildings. The pyramids stay plain, distant shapes. The courtyard is a palace court (Amarna North Palace: open courts divided by a gateway or Window of Appearance, with a basin garden), which carries no cult meaning.\n\nApproximate renders of thundah's castle from my own rough renderer: D:\\Projects\\flowfix\\test_out\\courtyard\\paradise_behind.png and paradise_player_notrim.png. The throwaway _cy_*.py scripts are deleted."
+  }
+ ],
+ "designs": [
+  {
+   "concept": "Lean Court of Appearances. The player stands on the paved court of a palace. The existing window becomes the Window of Appearances: a pale limestone gate block set in a long, low, crenellated palace front of dark grey mudbrick-like wall. From the gate outward, each side has a short plain flanking wall behind its lion, then a shallow portico: red palm columns with gilded capitals, set in shadow under a flat roof, as at Amarna and Malqata. At each screen edge stands a battered corner tower with round 'Egyptian merlons' (the Medinet Habu migdol). The towers are cut off by the screen frame the way thundah's corner towers are, and that is the castle nod. A calm navy pool with a limestone kerb lies on the axis in the lower third and leads the eye to the gate (Malqata's pool floor). Beyond the wall, against the sky, a date palm (left) and a forked doum palm (right) flank the gate. The Giza trio rises on the left and a Dahshur pair on the right, at 36-43 degrees across, as plain distant shapes whose bases are hidden by the wall. Everything is a few large pieces: 15 objects, and no props. The head stays the tallest thing on screen (v 0.447 in tan-space; towers 0.368, cornice 0.360, palms 0.381, pyramids 0.18-0.25, wall crenellations 0.12-0.135). The sky above the cornice stays empty. All geometry is relative to zf, the layout's window base (the lowest window brush: -968 in Overflick, -957 to -1129 across the 13). The palms and portico length adapt to each window's width.",
+   "elements": [
+    {
+     "name": "Court floor",
+     "geometry": "Box x -4900..-2720, y -5400..5400, z zf-60..zf (top flush with the window base; zf = -968 in Overflick). The floor enters the bottom of the screen at x about -4630.",
+     "slot": "g1 ceiling (free slot, repainted) 'paving', ceiling type, PureColor 77736b FB 0.3",
+     "objects": 1
+    },
+    {
+     "name": "Pool water",
+     "geometry": "Box x -4400..-3400, y yc-560..yc+560 (yc = window axis, -30.5 in Overflick), z zf..zf+5. On screen it spans pitch -31 to -20 degrees, below the sill.",
+     "slot": "g1 ground navy 0f2a4d FB 0.3 (floor type, shared with signs/lion bodies)",
+     "objects": 1
+    },
+    {
+     "name": "Pool kerb",
+     "geometry": "One mesh, a 60-wide ring (4 merged boxes): outer x -4460..-3340, y yc-620..yc+620, inner = water edge, z zf..zf+14. 48 tris.",
+     "slot": "g0 ceiling limestone eadbb6 FB 0.35",
+     "objects": 1
+    },
+    {
+     "name": "Palace front (per side)",
+     "geometry": "Box x -2820..-2720 (face 80 behind the backdrop plane, so it cannot cover a target). |y| from the window's pilaster edge (-1316 L / 1255 R in Overflick) to 5400, z zf..zf+1150. It sits behind the lions and the portico and hides the far ground, so no huge desert block is needed.",
+     "slot": "g0 wall, RETINTED palace grey 5d6066 FB 0.25 (wall type)",
+     "objects": 2
+    },
+    {
+     "name": "Portico roof / architrave (per side)",
+     "geometry": "Box x -3160..-2820, |y| from py0 = lion-plinth outer edge + 170 (1977 L / 1916 R in Overflick; 2393 in Pacing Drop) to 3050, z zf+1000..zf+1150. The front face is the architrave. The render fakes the roof's shadow on the back wall at zf+380..zf+1000.",
+     "slot": "g0 wall palace grey (wall type)",
+     "objects": 2
+    },
+    {
+     "name": "Colonnade (per side)",
+     "geometry": "One mesh: a stylobate box x -3220..-2820 across the portico span, z zf..zf+40; then N palm columns at x -3085, 350 apart, centred in the span (N = 3 in Overflick, 2-4 across the layouts). Each column is a base disk r 118 (zf+40..70), a shaft r 62 tapering to 57 (zf+70..735), a band (735..760), a flaring palm capital r 57 to 108 (760..955) and a 170x170 abacus (955..1000). 10-sided, 480 tris.",
+     "slot": "3 sections: g0 ceiling limestone (stylobate, bases, abaci), g0 ramp red ochre 9a3f22 (shafts), g1 ramp gold d4a02a (band, capitals)",
+     "objects": 2
+    },
+    {
+     "name": "Skyline (per side): crowns + corner tower",
+     "geometry": "One mesh. (a) Crown on the flanking wall, face x -2820, running from the pilaster to py0: a red band 12 proud at z zf+1120..1150; a two-step cavetto 30 and 52 proud at z zf+1150..1185 and zf+1185..1225; then half-round merlons 130 wide with 80 gaps, 40 thick (x -2860..-2820), each a 55-unit straight part plus a 65-radius half-round (6 segments), z zf+1225..zf+1345. (b) The same crown on the portico front (face x -3160, merlons x -3200..-3160), with end returns. (c) A battered tower. Its front face runs from x -3230 at the base to -3160 at the top, and its back is at x -2900. Its inner face runs from |y| 3050 at the base to 3120 at the top, and it extends to |y| 5400 (off screen), z zf..zf+1750. On top sits the crown at 1.25 scale (merlons 162 wide), reaching zf+1994. That puts the merlon tops level with the cornice (v 0.368 against 0.360). About 630 tris.",
+     "slot": "3 sections: g0 wall palace grey (tower body), g0 ramp red ochre (bands), g0 ceiling limestone (cavetto, merlons)",
+     "objects": 2
+    },
+    {
+     "name": "Pyramids left (Giza trio)",
+     "geometry": "One mesh of 3 plain square pyramids, each rotated about z and squashed in y by cos(yaw) to cancel the wide-FOV stretch. Khafre-like: centre (24000, -22050), 53.2 deg, apex z 7500 (8468 above the floor), base about 12.7k, apex on screen u -0.735 v 0.250. Khufu-like: (28000, -29070), 51.8 deg, apex z 8092, u -0.855 v 0.238. Menkaure-like: (25000, -29295), 51.3 deg, apex z 5518, u -0.945 v 0.178. The apexes are absolute, so their screen position is the same in every layout. Only the tops above the crenellations (v about 0.135) show. 18 tris; the base faces can be dropped.",
+     "slot": "g0 ceiling limestone",
+     "objects": 1
+    },
+    {
+     "name": "Pyramids right (Dahshur pair)",
+     "geometry": "One mesh. A Red-pyramid-like 43.4 deg one: centre (23000, 22910), apex z 7250, u 0.790 v 0.250. A steeper 52 deg one: centre (28000, 32130), apex z 7412, u 0.945 v 0.218, partly behind the first and the tower. A true Bent pyramid was tried and dropped: its bend falls below the wall line, and the bent profile read as a blob. 12 tris.",
+     "slot": "g0 ceiling limestone",
+     "objects": 1
+    },
+    {
+     "name": "Date palm (left)",
+     "geometry": "One flat stencil-style mesh facing the player at x -1500 (d 4500) in the garden behind the palace. A curved trunk 64 to 38 wide runs from (y -2543, zf) to a crown at (y -2574, z 1314). The crown is 17 arching feather fronds about 600 long with serrated edges; top of the crown at v 0.381. Per layout, u = max(0.572, cornice edge u + 0.095), so the palm always stands clear of the cornice and the head's sky (u > 0.49). 498 tris.",
+     "slot": "g0 wall palace grey (dark silhouette against the sky)",
+     "objects": 1
+    },
+    {
+     "name": "Doum palm (right, forked)",
+     "geometry": "One flat mesh at x -1500. The trunk rises from (y 2655, zf) and forks at z 765. Two branches end in crowns at (2484, 1179) and (2903, 1287), each a tuft of 9 ragged fan leaves of radius 290. Per layout, u = max(0.598, cornice edge u + 0.12). 230 tris.",
+     "slot": "g0 wall palace grey",
+     "objects": 1
+    }
+   ],
+   "palette": "Eight slots. One free slot is used, and one existing slot is retinted.\n- g0 wall: RETINT from dark umber 2b1d12 FB 0.2 to palace grey 5d6066 FB 0.25 (PureColor). It keeps its job as the sign outlines and adds the palace fronts, portico roofs, tower bodies and both palms.\n  - Why: the palace then sits on the wall type. The wall type differs from the ceiling-type window stone and paving in 105 of 149 themes, from the floor-type lion bodies in 84 and from the ramp-type columns and manes in 96. Under the user's own Bassel 3 it is the only type that is not flat full-bright 1 (it is 0.76). So the white gate, white columns and white lions separate from a shaded palace instead of melting into it.\n  - Cost: without a theme, the thin sign outlines turn from dark umber to mid-dark grey. They are still darker than the limestone, and the zoomed lintel render barely shows a difference. Under themes nothing changes.\n  - Fallback if the user refuses: keep umber and put the palace on g1 ceiling. Then, under every theme, the palace equals the window stone, and under Bassel 3 the columns and lions vanish.\n- g0 ground: unchanged, lapis 1e4c9a FB 0.35 (headdress only).\n- g0 ceiling: unchanged, limestone ConcretePoured eadbb6 FB 0.35. It covers the window stone, plus the pool kerb, stylobates, column bases and abaci, cavettos, merlons and pyramids.\n- g0 ramp: unchanged, red ochre 9a3f22 FB 0.3. It covers the window bead, bands and lion manes, plus the crown bands and column shafts (palace columns were painted red-brown).\n- g1 wall: unchanged, backdrop c8c8c8 FB 0.4. It is kept unique: nothing new uses it.\n- g1 ground: unchanged, navy 0f2a4d FB 0.3. It covers the signs, lion bodies and outline band, plus the pool water.\n- g1 ceiling: FREE slot repainted as paving, warm grey 77736b FB 0.3 PureColor, for the court floor only. The court builder must repaint it after the window look's DARK_TEXT navy copy; no window face uses that slot.\n- g1 ramp: unchanged, gold d4a02a FB 0.5. It covers the face and sill strip, plus the palm capitals and column bands.\n\nMaterial groups stay at 2 drawn groups plus None.",
+   "objects_total": 15,
+   "theme_notes": "Surface types:\n- Wall: palace, towers, palms, sign outlines, backdrop.\n- Ceiling: window stone, paving, kerb, crowns, pyramids.\n- Ramp: column shafts and capitals, bands.\n- Floor: pool, lion bodies, signs.\n\nUnder the 105 themes where wall differs from ceiling, the palace front stands apart from the gate and the paving. The columns differ from the back wall in 96 themes, and the pool from the paving in 79.\n\nEvery element of the skyline reads under every theme, because themes set the sky separately. That covers the crenellations, the tower tops, the palms, the pyramids and the head. The design is silhouette-first, as thundah's one-material castle is.\n\nBassel 3, read from its file:\n- MARBLE POLISHED on all four types.\n- Wall type at full-bright 0.76 with texture scale 0.1.\n- Floor, ceiling and ramp at full-bright 1, which means flat and unshaded.\n- Solid sky b3b4b6, sunVisible false.\n\nUnder Bassel 3, the paving, gate, columns, pool, lions and pyramids render flat white. Only the wall-type palace keeps some shading. See lean_view_bassel3.png:\n- The gate and the columns read faintly against the palace.\n- The lions read faintly against the flanking wall.\n- The pool and the floor vanish.\n- The skyline reads well.\n\nUnder themes that really are alike with full-bright below 1 (lean_view_alike.png), only silhouettes, relief shading and real shadows remain. The shadowed portico interior is then the main depth cue.\n\nOption: move the pool water to g0 wall. It then reads as a shaded rectangle under Bassel 3 and in 105 themes, at the cost of grey rather than navy water without a theme.\n\nWithout a theme, the lions now stand in front of the palace grey instead of the sky. That gives moderate contrast: navy and red on grey.",
+   "renders": [
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\lean_plan.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\lean_view.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\lean_view_bassel3.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\lean_view_alike.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\lean_view_pacing.png"
+   ],
+   "risks": "1) Lions lose their stencil sky. The flanking wall now sits behind them, so their holes show palace grey. This is the biggest cost to the approved look: faint under Bassel 3, moderate contrast without a theme. Flag it to the user.\n2) Retinting g0 wall changes the colour of the sign outlines without a theme, from umber to grey. It needs the user's OK; the fallback is above.\n3) Performance is unmeasured. The court is 15 objects (6 blocks, 9 meshes) and about 3,100 triangles as closed solids, about 1,700-2,100 facing the eye. The window is 86 objects and about 13,000 triangles. That should fit the 0.16-0.39 ms headroom, but the big floor and palace faces are theme-painted area. Stage the build and have the user read uncapped FPS with no theme and with Bassel 3 against the Window Test's 616/474:\n   - (a) floor, pool, palace fronts, roofs, skylines (9 objects)\n   - (b) plus colonnades (2)\n   - (c) plus pyramids and palms (4)\n4) Shadows: the roofs, towers and palace cast real shadows. The palace face is 80 behind the backdrop plane and the backdrop is recessed 120, so risk is low, but check that no shadow lands on the backdrop under the theme's sun. The portico shadow in the render is faked.\n5) Far pyramids sit 23-37k ahead (about 94k-117k world units after MapScale). They are untested for draw distance and shadow cascades, though the base map already draws a brush at x -1,024,000.\n6) The floor follows each layout's window base (zf -957 to -1129), so the eye height changes per scenario. In Early Braking the crenellations sit near the horizon (v 0.077) and more pyramid shows. An alternative is one fixed floor at -1129 with a podium under shallower windows (+1-2 blocks).\n7) Scale: the eye is 968 above the floor, so the palace front (1150 tall) is only about 1.2 eye heights. It reads fine by angle, but doors or windows would expose that, so none were added.\n8) Target safety was checked with check_scene.py's method (projected bounds, per solid, on the plane x -2900) on all 13 layouts: all clear, with at least 194 units of clearance on that plane. The lions are never covered by anything in front of them, and nothing enters the head's sky. It was not yet run through check_scene.py on real builds.\n9) The renders are approximations: Lambert shading with an assumed sun from the front left, a guessed default sky, and marble texture and metallic not modelled in the Bassel 3 view.\n10) Housekeeping: parallel agents also write _cy_*.py files in the project root (_cy_check, _cy_cover, _cy_dump, _cy_geo, _cy_plan, _cy_render, _cy_variants). One of them overwrote my _cy_plan.py mid-run, so I renamed mine. I deleted only my own scripts and left theirs alone. My scratch data file D:\\Projects\\flowfix\\test_out\\courtyard\\layouts.json (per-layout window extents and target envelopes) remains."
+  },
+  {
+   "concept": "The design is the Court of the Window of Appearances, seen from the court floor. The existing window becomes the projecting central bay of a long, low palace front. The front's wall face is at x = -2800, so the bay stands 220 units proud of it. The front's limestone coping sits at an absolute z of +160, which is 2.9 degrees above the horizon, so the far ground never shows and no desert plane is needed. Open colonnades line both sides of the court. Each has red-brown palm columns with gilded capitals under a limestone architrave and cavetto cornice. The screen edge cuts the nearest column, and each row recedes to the palace front, so the stylobates, architraves and cornices form converging leading lines that point at the window. In the gap between each colonnade and the window, the horizon opens above the palace front: pale limestone pyramids stand low on it. The Giza trio is on the left; Djoser's step pyramid and the Red Pyramid are on the right. Two date palms on the right, and one date palm with one forked doum palm on the left, rise from the garden behind the palace front. They frame the upper corners as dark silhouettes, in the same spirit as the stencil head and lions. A calm lapis pool with a limestone kerb sits on the axis of the paved court and leads the eye to the window. The sky above the cornice stays empty, so the head keeps its sky. The window stays the tallest, brightest and most central element. For the \"thundah castle\" feel, the design borrows his composition (one axis, a dominant gateway, walls converging on it, tall accents cut off by the screen edges, silhouette-first under a one-material theme), not his object count. It uses 10 objects: 2 blocks and 8 custom meshes. That is deliberately far below the 60-120 budget, because the theme's cost seems to track object count (see risks). The floor level F is set per layout to the window's lowest stone: Overflick -968, Pathing -957, Early Braking -1129. Everything standing on the floor is measured from F, and the palace-front top and the pyramids use absolute heights. check_scene.py passed on all 13 layouts with the courtyard added. The test copies are in D:\\Projects\\flowfix\\test_out\\courtyard\\check (not installed; the folder name may be shared with other concept runs).",
+   "elements": [
+    {
+     "name": "Court floor (paving)",
+     "geometry": "One Cube block, x -4900..-2800, y -4400..4400, z F-100..F. It begins just below the screen bottom in every layout and stops at the palace front.",
+     "slot": "g1 ceiling (ceiling type), NEW court grey PureColor 857e73, full-bright 0.3",
+     "objects": 1
+    },
+    {
+     "name": "Pool water",
+     "geometry": "One Cube block, x -4300..-3450, y -400..400, z F..F+5, flush with the floor. Its far edge is about 5 degrees below the lowest target (over 100 px in Overflick).",
+     "slot": "g0 ground (floor type), lapis 1e4c9a, full-bright 0.35 (shared with the headdress)",
+     "objects": 1
+    },
+    {
+     "name": "Pool kerb",
+     "geometry": "One custom mesh of 4 boxes, 50 wide and 20 tall (z F..F+20), ringing the water. Outer extent x -4350..-3400, y -450..450.",
+     "slot": "g0 ceiling, limestone ConcretePoured eadbb6, full-bright 0.35",
+     "objects": 1
+    },
+    {
+     "name": "Palace front",
+     "geometry": "One custom mesh. Wall: x -2800..-2500, y -4400..4400, z F..+10. Limestone dado: x -2815..-2500, z F..F+90. 14 buttress strips suggest a niched palace facade: each 130 wide and 28 deep (x -2828..-2800), at |y| = 1500, 1950, 2400, 2850, 3300, 3750 and 4200, from z F+90 to +10. Red-ochre band: x -2812..-2500, z +10..+50. Cavetto coping: flares from x -2812 at z +50 to x -2865 at z +160. The window hides the centre part. All of it lies behind the targets. Height from the floor is 1117-1289 depending on the layout.",
+     "slot": "3 sections: wall and buttresses g1 ceiling (court grey); dado and coping g0 ceiling (limestone); band g0 ramp (red ochre 9a3f22)",
+     "objects": 1
+    },
+    {
+     "name": "Colonnade left and right",
+     "geometry": "One custom mesh per side, axis at y = -2750 and +2750. Stylobate: x -4400..-2800, 560 wide (|y| 2470..3030), z F..F+60. Three palm columns per side at x = -3010, -3440 and -3870, seen at 42.6, 47.0 and 52.2 degrees (the last is cut by the screen edge). Each column: octagonal base disk r 190, z F+60..F+110; octagonal shaft r 95 tapering to 84, z F+110..F+1110; five-band collar r 89, z F+1110..F+1180; palm capital flaring from r 84 to 175, z F+1180..F+1470; abacus 200 x 200, z F+1470..F+1530. Architrave: x -4400..-2800, 220 wide, z F+1530..F+1730. Ochre band: 250 wide, z F+1730..F+1760. Cavetto cornice: flares from 250 to 350 wide, z F+1760..F+1880. The top reads 17 degrees up at the far end and 23 degrees at the near end, below the window cornice (19 degrees at its own distance).",
+     "slot": "3 sections per side: stylobate, base disks, abacus, architrave and cornice g0 ceiling (limestone); shafts and band g0 ramp (red ochre, for painted wood); collar and capital g1 ramp (gold d4a02a, for gilded palm capitals)",
+     "objects": 2
+    },
+    {
+     "name": "Palms right",
+     "geometry": "One custom mesh with two date palms. Palm 1: base (x -2000, y 3450), 2950 tall, curving 3 degrees toward the axis. Palm 2: base (-800, 5500), 3600 tall, leaning 3 degrees outward. Trunks: 6-sided, 7 rings, radius 85 tapering to 52. Each crown has a 6-sided knob and 20 arching fronds. Fronds are about 0.25 x height long (740-900), 0.27 of their length wide, serrated, V-folded, drooping 75 degrees from a start pitch of 50, 24 or 0 degrees, and two-sided (both windings). The crowns sit at 30-50 degrees across and 15-33 degrees up.",
+     "slot": "g0 wall (wall type), dark umber 2b1d12, full-bright 0.2 (shared with the sign outlines)",
+     "objects": 1
+    },
+    {
+     "name": "Palms left",
+     "geometry": "One custom mesh. A date palm at (-700, -5350), 3600 tall, leaning 4 degrees outward, built like the right palms. A doum palm at (-1900, -3650), 3100 tall: the trunk forks at two thirds of its height into two branches, each about 0.2 H long, with fan crowns of 13 short, stiff leaves. The inner crown stays at least 29 degrees from the centre.",
+     "slot": "g0 wall, dark umber 2b1d12",
+     "objects": 1
+    },
+    {
+     "name": "Pyramids left (Giza)",
+     "geometry": "One custom mesh of 4-face pyramids. Bases are at z -1500, hidden behind the palace front. Each base is narrowed by cos(angle), about 0.8, to cancel the 103-FOV side stretch. Khafre: centre (15858, -13133), apex z 3720, base 6695 square, seen at 31 degrees and 8.3 degrees up. Khufu: centre (16527, -15773), apex z 3718, base 6727, at 35 degrees and 7.7 up. Menkaure: centre (13263, -15936), apex z 2143, base 4498, at 39.6 degrees and 4.9 up. Two queens' pyramids at (11464, -15725) and (11495, -16429), apex about 1265, base about 3200, 3 degrees up. Range is 23.5-27.5k.",
+     "slot": "g0 ceiling, limestone (pale reads as distant, like Tura casing)",
+     "objects": 1
+    },
+    {
+     "name": "Pyramids right (Saqqara step pyramid, Red Pyramid)",
+     "geometry": "One custom mesh. Djoser's step pyramid: centre (11905, 10972), at 31.5 degrees, range 21k. It has six battered tiers with set-back ledges, from z +550 to +2802, on a base 3264 square. It stands on a hidden frustum-shaped rise so that all six steps show above the coping. Red Pyramid: centre (19556, 19258), at 37 degrees, range 32k, apex z 2462, base 6693, slope 43.4 degrees.",
+     "slot": "g0 ceiling, limestone",
+     "objects": 1
+    }
+   ],
+   "palette": "No existing use moves. The only change is the free slot g1 ceiling. Plan:\n- g0 wall: dark umber PureColor 2b1d12, full-bright 0.2 (unchanged). Sign, head and lion outlines, plus the palms. Being on the wall type is useful under themes: themes keep their wall paint distinct from their enemy colour, so palms never look like targets.\n- g0 ground: lapis PureColor 1e4c9a, full-bright 0.35 (unchanged). The headdress, plus the pool water. Floor type, so under 79 of 149 themes the pool differs from the ceiling-type paving. The blue also echoes the head.\n- g0 ceiling: limestone ConcretePoured eadbb6, full-bright 0.35 (unchanged). All window stone, plus the pool kerb, the palace-front dado and coping, the colonnade stylobates, base disks, abacus blocks, architraves and cornices, and the pyramids.\n- g0 ramp: red ochre PureColor 9a3f22, full-bright 0.3 (unchanged). Beads, bands and manes, plus the column shafts (palace columns were red-brown painted wood) and the bands under both copings.\n- g1 wall: target backdrop PureColor c8c8c8, full-bright 0.4. Untouched and unique; nothing in the courtyard uses it.\n- g1 ground: navy PureColor 0f2a4d, full-bright 0.3 (unchanged). Signs, lion bodies and outlines only. It is kept out of the court so the text and lions keep their own colour.\n- g1 ceiling: was FREE (0f2a4d, unused). NEW court grey PureColor 857e73, full-bright 0.3, for the paving, the palace-front wall and the buttress strips. This warm mid grey is clearly darker than the limestone and the backdrop, so the window stays the brightest mass. It fits the user's grey preference, and the navy and ochre lions read against it. Optional: MI_WA_BigConcreteTiles in the same tint would give real paving joints on the floor and masonry courses on the palace front, which adds a depth gradient. Textures cost about 10 FPS; check the shade in game, because textured tints render darker than their value.\n- g1 ramp: gold PureColor d4a02a, full-bright 0.5 (unchanged). The face and the strip under the opening, plus the palm capitals and the five-band collars (gilded palm capitals, as at Amarna). If they read too loud, the fallback is limestone capitals with only the collar in gold.\n\nWhy nothing else moves:\n- The two floor-type slots (lapis headdress, navy signs) are what keep the head and the text readable under themes. Giving either to the paving would break that.\n- The court therefore has to take the ceiling-type free slot.",
+   "objects_total": 10,
+   "theme_notes": "What themes change:\n- Themes repaint by surface type only. No props are used, so nothing escapes the repaint.\n- The court paving and palace front are on the ceiling type, the same as the window stone. Under every theme they therefore take the same material as the window. The window then separates from its surroundings by depth (the bay stands 220 in front of the palace front), shading, shadows and its navy (floor-type) outline band, not by colour. That is the cost of the only free slot being ceiling type.\n\nThemes that paint all four types alike (30 of 149, including Bassel 3; see atmos_view_bassel3.png):\n- The court becomes one pale marble plaza, like thundah's single-grey castle, and reads by silhouette against the theme's sky.\n- Palms, pyramid triangles, the colonnade columns and cornices, and the coping line all keep clear outlines against Bassel 3's grey sky (b3b4b6).\n- In Bassel 3 the wall type has full-bright 0.76 and texture scale 0.1, against 1.0 and 1 for the other types. So the palms and the backdrop still shade a little and look slightly different from the stone.\n- The pool, the lions and the signs vanish, exactly as the lions and signs already do today.\n- Every added piece is solid geometry with depth (stylobate steps, the flared cornice, buttresses, the stepped pyramid), so it keeps some relief wherever full-bright is below 1.\n\nOther theme groups:\n- Floor differs from ceiling (79 themes): the pool shows as a panel of the theme's floor inside a stone kerb.\n- Wall differs from ceiling (105 themes): the palms take the theme's wall paint and contrast with the stone colonnade and pyramids.\n- Ramp is like ceiling in 116 themes: shafts and gold capitals merge into plain stone columns. The silhouette still carries them.\n\nSky:\n- The theme sets the sky. 125 themes use preset skies with clouds, so the pyramids and palm crowns will sit against clouds there.\n- The head's sky above the cornice is untouched, because nothing rises there within 26 degrees of the centre.\n\nWithout a theme, the default colours give the look in atmos_view.png:\n- warm grey court, pale limestone, red and gold colonnades, blue pool, dark palm silhouettes, sand-pale pyramids;\n- the palette follows real palace finishes: white or limestone stone, red-painted wooden columns, gilded capitals, blue water.",
+   "renders": [
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\atmos_plan.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\atmos_view.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\atmos_view_bassel3.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\atmos_view_pacing_drop.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\atmos_view_early_braking.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\atmos_view_pathing.png"
+   ],
+   "risks": "1) Frame rate is unmeasured.\n- Size: 10 objects, 16 material sections and about 8,200 triangles, most of them in the two-sided palm fronds.\n- Screen coverage: the courtyard covers about 56% of the screen in Overflick, replacing sky. By element: floor 22.5%, palace front 11.7%, colonnades 13.2%, palms 4.4%, pool and kerb 2.9%, pyramids 1.2%.\n- Evidence that cost follows object count: the base map's wall covers 37% of the screen and cost nothing under Bassel 3, while the window's 86 objects cost 0.49 ms more under the theme. On that basis the courtyard would add about 0.07 ms under Bassel 3, giving about 455-460 FPS. This is an estimate, not a measurement.\n- Test plan: build it as one test scenario that replaces the Window Test, in stages. Stage A: floor, pool, kerb and palace front (4 objects). Stage B: add the colonnades (6). Stage C: add the palms and pyramids (10). At each stage the user reads uncapped FPS with no theme and with Bassel 3, against 616 and 474.\n- Levers if frame rate is short: 12 fronds per palm, one-sided fronds, dropping the doum, or merging the two meshes of each pair (10 objects down to 7).\n\n2) Crash safety.\n- Custom meshes and big distant meshes change map structure, so try them in a separate test scenario first (crash-loop rule).\n- Use groups 0 and 1 only, DefaultNoCollision, and the winding and MapScale rules in mechanics.md.\n- The meshes at 20-33k range should render (the base map already draws a brush at x = -1,024,000), but confirm in game.\n\n3) Target safety.\n- check_scene.py passed on all 13 layouts: 89 objects in front of the targets checked, 0 overlaps.\n- In front of the targets, only the floor, the pool (5 proud), the kerb (20 tall) and the colonnades are present.\n- Closest approach on the wall plane: the stylobate projects to |y| 2393 and the far capital to 2670, against the widest envelope of ±1384 (Pacing Drop and Slow Start).\n\n4) Lions.\n- The colonnade stylobate projects just outside the widest lions (2393 against 2333), so they sit side by side in Pacing Drop and Slow Start.\n- Once the palace front exists, the lions' stencil holes show court-grey wall instead of sky. Raise this with the user; they liked the stencil against the sky.\n\n5) Layout variation.\n- Floor F follows each layout's lowest stone. The research brief said Pathing's is -856, but the built Pathing map's lowest brush (lion plinths and pilaster bases) is at -957. So F runs from -957 to -1129 and eye height changes with it.\n- The window cornice is wider in some layouts (up to 31 degrees), so how much of Khafre and the step pyramid it hides varies by layout.\n- In Early Braking and Pacing Drop the doum crown comes within about 1 degree of the cornice corner. It stays at 29 degrees or more from the centre, outside the 26-degree head-sky rule.\n\n6) Attention.\n- The near-black umber palm crowns sit at least 29 degrees across and 15 degrees up; the saturated lapis pool sits at least 100 px below the lowest target. Neither is target-shaped, but either could pull the eye.\n- Fallbacks: navy (g1 ground) for the pool, or a lighter palm slot. Also judge whether the gold capitals are too loud.\n\n7) Shadows.\n- The colonnades and palace front cast real shadows. Only the colonnades stand in front of the backdrop, at |y| 2470 or more, so only a very low side sun could shade the backdrop. Check under the theme's sun.\n\n8) Render accuracy.\n- The renders use an assumed sun, flat tints, no textures and a guessed default sky.\n- ConcretePoured and the court grey will look different in game, and the Bassel 3 render is approximate.\n\n9) Historical licence and content rules.\n- Real palace porticoes were roofed with back walls; these colonnades are open for the view.\n- Pyramid sizes are exaggerated about 8x (true Giza from Memphis would be under 1 degree).\n- No gods, winged sun, uraeus, ankh, djed, was, scarab, sphinx, obelisk, temple or causeway is used. The pyramids are plain distant shapes.\n- Optional castle variant (not rendered): half-round \"Egyptian merlons\" on the palace-front coping. It would make the pyramid bases busier.\n\n10) Scratch files.\n- The throwaway _cy_atmos.py and _cy_measure.py are deleted. Other _cy_* files in D:\\Projects\\flowfix belong to parallel concept runs and were left alone."
+  },
+  {
+   "concept": "The court of a New Kingdom royal palace at Memphis, seen from the court floor looking west toward the pyramid field. The existing window becomes the Window of Appearances in a central bay that projects forward, as at the Amarna Great Palace. The bay sits in a long, low palace front. The front is a portico of eight palm columns in the Amarna and Malqata style: red-painted wooden shafts on round limestone bases, five gold binding bands and gilded nine-frond palm capitals. As at Medinet Habu, the window stands between the 4th and 5th columns. The columns carry a limestone architrave, a red torus bead and a three-step cavetto cornice like the window's own. Behind them is a whitewashed palace facade with two doors framed in red. The court floor is dark Nile-mud plaster. On the axis lies a calm rectangular pool with a 40-unit limestone kerb (Malqata's painted pool floor on the main axis, and the basin of the Amarna North Palace). Above the portico roofline (4.4 degrees up) there are three layers. The garden's date palms and a forked doum palm stand at the screen edges and are cut off by them. A mudbrick enclosure wall with rounded 'Egyptian merlons' (the Medinet Habu wall, Egypt's own castle) runs across the horizon. Above it show the tips of the pyramids a Memphite palace actually faced: Dahshur's Red and Bent pyramids on the left (south) and Giza's Menkaure, Khafre and Khufu on the right (north). They are white, because their Tura limestone casing was still in place in the New Kingdom. Every tall piece stands behind the backdrop plane. The head keeps its sky and the window stays the tallest and brightest thing in view. Nothing religious is used. There are 19 objects in all.",
+   "elements": [
+    {
+     "name": "Court pavement",
+     "geometry": "2 Cube blocks, z F-100..F, y yc+-5300. Front block x -5000..-2915, rear block x -2915..-2040. The split at -2915 keeps the rear block behind every layout's target back plane (-2918 at most), so it is never checked. F is the layout's lowest window point: -968 in Overflick, -856 (Pathing) to -1129 (Early Braking). yc is the window axis (-30.5 in Overflick). The floor enters the screen about 1200-1600 in front of the eye and covers about 24% of the screen.",
+     "slot": "g1 ceiling (ceiling type), repainted to Nile mudbrick: PureColor 5a534b, full-bright 0.3",
+     "objects": 2
+    },
+    {
+     "name": "Axial pool with kerb",
+     "geometry": "Water: 1 block, x -4450..-3450, y' +-330 (y' is measured from the window axis), z F..F+6. Kerb: 4 blocks, 45 wide and 40 high (z F..F+40), round the outer rectangle x -4495..-3405, y' +-375. The far kerb is at screen v = -0.37, about 5.8 degrees below the lowest target. It is the only built thing in front of the targets besides the floor. The kerb is 40 high; the limit there is about 350.",
+     "slot": "Water: g1 ground (floor type), navy 0f2a4d, full-bright 0.3 (reused). Kerb: g0 ceiling limestone (ConcretePoured eadbb6, full-bright 0.35; reused).",
+     "objects": 5
+    },
+    {
+     "name": "Portico wings (structure)",
+     "geometry": "1 custom mesh per side, 96 triangles. It runs from |y'| = the window stone's half-width minus 40 (1306 in Overflick; the end is hidden behind the pilasters) out to |y'| 5300. D = (240 - F - 50)/9.8 (118.1 in Overflick). The column axis is X_COL = -2895 + 1.3*D (-2741.4). Parts, with Overflick values: stylobate x -2895..-2050, z F..F+50 (limestone). Architrave x X_COL+-0.55D (-2806..-2676), z 7.3..125.4, 1 D tall (limestone). Torus bead 0.13D to z 140.8, 0.12D proud (red ochre). Three cavetto steps, each 0.28D, to z 240.0, fronts at -2836, -2866 and -2895 (limestone). Roof slab x -2676..-2050, z 54.5..125.4 (mudbrick). Whitewashed facade x -2150..-2050, z F+50..54.5 (limestone, in the roof's shadow). The roofline sits at a fixed z of 240 in every layout, so the skyline never moves: screen v 0.077, 4.4 degrees up.",
+     "slot": "3 sections: g0 ceiling limestone (stylobate, architrave, cornice, facade), g0 ramp red ochre 9a3f22 (bead), g1 ceiling mudbrick (roof)",
+     "objects": 2
+    },
+    {
+     "name": "Palm columns, 4 per side",
+     "geometry": "1 mesh per side, 1168 triangles. Axis x = X_COL (-2741.4). y' = 2272, 2756, 3241 and 3725 in Overflick; the spacing is 4.1D (484), close-set in the Egyptian way. The 4th column is placed so its base's far inner edge clears the lion plinth on screen by 0.02 in tangent (about 15 px). The proportions are Sahure's and Unas's measured palm columns, 7.5 D from the base top to the abacus top (886 in Overflick). Base: a 10-sided disk 2.2D across and 0.33D high (260 x 39; the Amarna rule of a little over twice the shaft). Shaft: 8 sides, 1.0D tapering to 0.9D, 4.76D tall (z -878.8..-316.5). Five binding bands of 0.07D with red gaps of 0.035D (to z -258.6). Capital: a nine-lobed star frustum in two stages, 0.26 of the column height (1.95D = 230, to z -28.2), flaring from 0.94D to 1.64D. Abacus: 1.0D square, 0.3D high, top at z 7.3. Each column's parts are kept in construction order for rendering. Wide layouts push the outermost column off screen.",
+     "slot": "3 sections: g0 ceiling limestone (base, abacus), g0 ramp red ochre (shaft and band gaps: red-painted wood), g1 ramp gold d4a02a, full-bright 0.5 (the five bands and the gilded capital)",
+     "objects": 2
+    },
+    {
+     "name": "Palace doors",
+     "geometry": "1 mesh per side, 48 triangles, between the 2nd and 3rd column from the window (y' = 2999 in Overflick), on the facade face (x -2150). Opening 2.2D x 4.7D (260 x 555) from the stylobate top: a dark panel at x -2152..-2150. Red jambs 0.4D wide (47) and a lintel 0.7D high (83), standing 0.15-0.2D proud.",
+     "slot": "2 sections: g0 wall dark umber 2b1d12, full-bright 0.2 (opening); g0 ramp red ochre (jambs, lintel)",
+     "objects": 2
+    },
+    {
+     "name": "Garden palms",
+     "geometry": "1 mesh per side, placed by screen position (u = y/d, v = z/d, d = x+6000). Trunk bases stand at F and are hidden below the roofline. Right side: a date palm at (x -1500, y 4950), crown at z 1935 (u 1.10, v 0.43), and one at (-900, 6681), crown at z 1785 (u 1.31, cut by the screen edge). Left side: a date palm at (-1300, -4982), crown at z 2115, and a forked doum palm at (-1700, -5633), fork at z 387, two branches 430 out, crowns at z 1075 and 1290 (u -1.31, at the edge). Date palm: a 7-sided tapered trunk (radius 55 to 35) with a slight lean, and 12 arching fronds 765-900 long, each a closed flat tube. Doum crown: 12 upright fan leaves of radius 240, double-sided. All crowns sit at |u| 1.0 or more (45 degrees or more), clear of the pyramids and far from the head. 1150 + 1224 triangles.",
+     "slot": "g0 wall dark umber (silhouettes; reused)",
+     "objects": 2
+    },
+    {
+     "name": "Crenellated mudbrick enclosure",
+     "geometry": "1 mesh per side, 587 triangles. Wall at x 500..800, from |y'| 2000 (hidden behind the window in all layouts) to 8600, z -1150..682.5, so its top sits at v 0.105 (6.0 degrees up). Round-topped 'Egyptian merlons' (Medinet Habu): 170 wide, a 45-unit straight part plus a half-disc of radius 85 (top z 812.5, v 0.125, 7.1 degrees), 90-unit gaps (pitch 260), set 60 back from the wall face, 180 deep. Front faces and edges only; the back is never seen.",
+     "slot": "g1 ceiling mudbrick",
+     "objects": 2
+    },
+    {
+     "name": "Pyramid horizon (Memphis, looking west)",
+     "geometry": "1 mesh per side. Axis-aligned 4-face pyramids, since the real ones face the cardinal points, so each shows a lit face and a shaded face, as seen from the southeast. Base z -1150, hidden. Left (Dahshur): Red pyramid, centre (17000, -16560), height 6095, half-base 6491, slope 43.2 degrees, apex 12.1 degrees up at yaw -36. Bent pyramid, centre (21000, -24435), height 6415, 54.5 degrees up to 46.6% of its height then 43.3 degrees, half-base 5767, apex 11.0 degrees up at yaw -42. Right (Giza): Menkaure (23500, 21240), height 6106, half-base 4892, 51.3 degrees, apex 9.5 degrees at yaw +36. Khafre (24500, 25468), height 7708, half-base 5787, 53.1 degrees, apex 12.1 degrees at yaw +40; it looks the tallest, as it does in reality. Khufu (25500, 29925), height 7608, half-base 5987, 51.8 degrees, apex 11.6 degrees at yaw +44. The tips show 2.4-5 degrees above the merlons. The left/right sides and the order match the real bearings from Memphis (Dahshur 213-227, Giza 320-323). The angles are compressed into the side gaps, and the heights are exaggerated about 12-25 times. 16 + 12 triangles.",
+     "slot": "g0 ceiling limestone (the white Tura casing, intact in the New Kingdom)",
+     "objects": 2
+    }
+   ],
+   "palette": "All 8 slots have roughness 0.9 and metallic 0. One repaint; nothing moves.\ng0 wall: PureColor 2b1d12, full-bright 0.2, dark umber. Unchanged: sign, head and lion outlines. The court adds the palm silhouettes and the dark door openings.\ng0 ground: PureColor 1e4c9a, full-bright 0.35, lapis. Unchanged: the headdress. The court does not use it. The first draft had a lapis pool; it was the loudest thing on screen and pulled the eye below the targets.\ng0 ceiling: ConcretePoured eadbb6, full-bright 0.35, limestone. Unchanged: all window stone. The court adds the stylobates, column bases and abaci, architraves, cavetto steps, pool kerb, the whitewashed facade (Malqata and Merenptah palaces were plastered white) and the pyramids (Tura casing).\ng0 ramp: PureColor 9a3f22, full-bright 0.3, red ochre. Unchanged: the bead, bands and lion manes. The court adds the column shafts (Amarna and Malqata shafts were painted red-brown), the gaps between the gold bands, the portico's torus bead and the door jambs and lintels.\ng1 wall: PureColor c8c8c8, full-bright 0.4, backdrop. Unchanged and never reused, so the target panel stays unique.\ng1 ground: PureColor 0f2a4d, full-bright 0.3, navy. Unchanged: signs, lion bodies, outlines. The court adds the pool water: calm, dark Nile water, and floor type, so the pool differs from the pavement in 79 of 149 themes.\ng1 ceiling: REPAINTED from 0f2a4d (the unused DARK_TEXT copy) to PureColor 5a534b, full-bright 0.3, Nile mudbrick. Used for the court pavement, the portico roof and the enclosure wall and merlons. Why: it is the only free slot, since no face in the window look uses it. Mudbrick and mud plaster are the real materials of palace and enclosure walls (Medinet Habu, Malqata). A warm dark grey suits the user's grey/dark-grey preference. It also keeps the pale window and the light backdrop the brightest things on screen and clearly differs from the backdrop. Build note: the window look writes navy into this slot through DARK_TEXT, so the court must set it afterwards.\ng1 ramp: PureColor d4a02a, full-bright 0.5, gold. Unchanged: the pharaoh's face and the strip under the opening. The court adds the gilded palm capitals and the five binding bands (Amarna capitals were gilded).\nRejected: merging the lapis headdress into navy to free g0 ground for a floor-type pavement. It would change the head the user approved.",
+   "objects_total": 19,
+   "theme_notes": "No theme (authentic_view.png): the pale window and grey backdrop are the brightest things on screen. The dark mud court fills the lower 24%. The colonnade reads red and gold against a whitewashed facade in shadow. Palms are near-black silhouettes at the edges, and the pale pyramid tips show above a dark merlon line.\nThemes that paint surface types differently: the pavement, roof and enclosure (ceiling type) take the same paint as the window stone and the limestone trim. So the court looks like one stone with the window, and the window stands out through its navy outlines, depth and shading, as it already does. The pool (floor type) differs from the pavement in 79 of 149 themes. The column shafts and capitals (ramp type) differ from the ceiling-type facade in only 33 themes. The colonnade therefore reads mainly by silhouette against the facade, which sits in the roof's shadow (in my rough sun model the shadow covers nearly all of it). The palms and door openings are wall type and take the theme's backdrop paint. The palms stand against the sky, which themes set separately, so they read wherever the sky differs from the wall paint.\nAll-alike themes (30 of 149, including Bassel 3: MARBLE POLISHED, full-bright 0.76-1, solid grey sky; see authentic_view_alltheme.png): only silhouettes against the sky read. That means the skyline of palms, merlons, pyramid tips and the head, plus the portico's roofline and faint columns. The pool and pavement vanish into one grey plane. This is how thundah's one-material castle reads, so the design leans on its silhouette. Whether Bassel 3's sky grey differs enough from its marble for the skyline to show needs an in-game look.\nTarget visibility: the court never overlaps the target envelope. Everything in front of x = -2918 is the flat floor and the pool with its 40-high kerb. The minimum on-screen gap is 260 units at the wall plane in all 13 layouts. check_scene.py passed on all 13 exported layouts. Everything tall stands behind x = -2895, behind the backdrop's front face, so none of its shadows can land on that face. The head keeps its sky: nothing is behind it in any layout. The lions have nothing in front of them, but their stencil holes now show the portico floor and stylobate instead of sky.",
+   "renders": [
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\authentic_plan.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\authentic_view.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\authentic_view_alltheme.png",
+    "D:\\Projects\\flowfix\\test_out\\courtyard\\authentic_layouts.png"
+   ],
+   "risks": "1. FPS. The court adds 19 objects and 6,284 triangles to the window's 85 objects and 13,496 triangles, and covers about 50% of the screen (pavement 24%, portico 17%). If the theme's 0.49 ms cost scales with objects or triangles, expect about +0.1-0.2 ms (474 to about 430-440 FPS under Bassel 3). If it scales with theme-painted area, it could approach the 400 cap. Build in stages and measure uncapped FPS with no theme and with Bassel 3 at each stage, against 616 and 474: (a) pavement and pool, 7 objects covering the most screen area, which answers the area question; (b) porticoes and doors, 6; (c) enclosure and pyramids, 4; (d) palms, 2 (about 2.4k triangles).\n2. Crash safety. The design repaints g1 ceiling and adds 12 new custom meshes. Build it as a single test scenario that replaces the Window Test (retire the old one) and keep 3 material groups. The mesh export used egypt.py's vertex, winding and normal convention, and check_scene passed, but it has not been loaded in game. The star-shaped capital caps, the closed frond tubes and the double-sided doum fans are new shapes.\n3. Authenticity against composition. At Medinet Habu the portico and palace wall rose above the window. Here the portico is lower (roof at z 240, columns 886 tall with D about 118) so the window stays dominant and the pyramids show. With the eye 968 above the floor (about 1.65 m), the columns come out about 1.5 m tall, a small, doll's-house scale if the player reads human scale. The pyramids are exaggerated 12-25 times and compressed in bearing, and their hidden bases overlap (Giza), which will look odd in the editor. I dropped Saqqara's Step Pyramid, the nearest real landmark, because only its top two tiers clear the wall and it read as a flat building. The Bent pyramid's kink is also hidden below the merlons.\n4. Colour and eye pull. The red and gold columns and the dark doors sit at the targets' height, though at least 34 degrees out, and could draw peripheral attention. The navy pool is a large dark shape low in the centre; it is calm, but it may be worth trying shorter. In-game tones will differ from my flat renderer (ConcretePoured renders darker; shadows are real).\n5. Themes. The colonnade reads by shading in 116 of 149 themes (ramp matches ceiling), and under all-alike themes only the skyline shows.\n6. Per layout. The court is generated from each layout's floor, window width and plinths. In wide layouts (Pacing Drop, Slow Start, Early Braking, Early Click) only 3 columns show per side, and in Early Braking the pool's near kerb falls below the screen. Draw distance for the pyramids (17k-31k) is probably fine, since the base map already draws a brush at -1,024,000; worth confirming.\n7. Not used: the Water gameObject (reflections of black targets and theme behaviour unknown) and props (unknown looks). The pool is a flat navy block.\n8. Files. Reference copies of the generator, renderer and checker are in D:\\Projects\\flowfix\\test_out\\courtyard\\authentic_geo.py, authentic_render.py and authentic_check.py; run them from the project root with PYTHONPATH=.;test_out/courtyard. The throwaway _cy_*.py scripts and the 13 exported check .sce files have been deleted; authentic_check.py regenerates the .sce files into test_out\\courtyard\\authentic_check_sce. Nothing was installed and no project source was edited."
+  }
+ ],
+ "final": {
+  "choice": "A merge built on the lean concept, the \"Court of Appearances\". From lean: the composition (crenellated palace wall, a roofed palm-column portico on each side, battered corner towers cut off by the screen edge), flat grey palm stencils, and the slot plan that puts the palace on the wall type (this needs a retint the user must approve). From authentic: absolute skyline heights, so the skyline sits at the same screen height in all 13 scenarios, plus the narrow navy pool with a 4-block kerb and gold-banded palm capitals. From atmos: nothing kept. Its near colonnades at the screen edges and its near-black palm crowns cost target clarity and add about 8,200 triangles.",
+  "reasoning": "I judged all 13 renders of the three concepts, then built, rendered and checked the merge.\n\n1. Targets stay the clearest thing on screen.\n- Only the floor, pool, kerb, stylobates, columns and portico roofs stand in front of the targets.\n- The nearest of those projects at least 194 wall-plane units outside the target envelope in every layout. check_scene.py passed on all 13 current builds (out/*.sce) with the court exported in as real meshes.\n- Nothing stands behind the head and nothing stands in front of the lions.\n- The palace walls are dark grey, so the light backdrop and the limestone window stay the brightest large area on screen.\n- The palms are mid-grey, not near-black the way atmos and authentic painted them, so no dark target-sized blob sits near the black targets.\n- Every tall element is at least 26 degrees off-centre.\n\n2. It reads at once as an Egyptian royal palace.\n- Red palm columns with gilded capitals.\n- A crenellated palace front with round \"Egyptian merlons\".\n- Two migdol towers (the Medinet Habu gate towers, Egypt's own castle), cut off by the screen edge the way thundah's corner towers are. This is the castle nod the user asked for.\n- A calm axial pool, and the Giza trio and two Dahshur pyramids rising above the merlons.\n- Authentic's porch was more correct but had no castle, and its pyramid tips were small.\n\n3. No religious symbols.\n- Nothing religious is used. The pyramids are plain square solids.\n- I left out atmos's step pyramid and authentic's doors (the doors expose the doll's-house scale).\n\n4. Frame rate.\n- 18 objects (10 blocks, 8 meshes) and 2,182-2,818 triangles (2,530 in Overflick). The window alone is 86 objects and about 13,000 triangles.\n- There are no thin rotated strokes. The only fine geometry is one flat palm of about 500 triangles.\n- Authentic has 19 objects and about 6,300 triangles; atmos has 10 objects and about 8,200.\n\n5. Themes: this criterion decided the slot plan.\n- The user's own theme, Bassel 3 (read from its file), makes floor, ceiling and ramp flat full-bright white. Only the wall type still shades (full-bright 0.76).\n- With the palace, roofs, towers and palms on the wall type, the white columns, window, lions and pyramids still separate from a shaded palace under Bassel 3 (final_view_bassel3.png). The wall type also differs from the ceiling type in 105 of the 149 themes.\n- Authentic's plan puts everything on the ceiling and ramp types, so under Bassel 3 it becomes one flat white band.\n- The skyline reads under every theme, because themes set the sky separately.\n\n6. Buildable.\n- Axis-aligned blocks, plus custom meshes in egypt.py's vertex, winding and MapScale format.\n- Material groups stay at 2 plus None.\n- The export into 13 build copies loaded through build.parse, and check_scene.py passed.\n\nCosts to flag:\n- The retint changes the sign outlines from dark umber to grey when no theme is on. It needs the user's OK; the fallback is in the spec.\n- The lions' stencil holes now show the palace grey instead of the sky. Every concept has this cost.\n- FPS is not measured yet.\n\nNote: test_out/egypt_window_all holds a stale Pathing build (floor -856). The current out/ build has -957.5, so I used out/.",
+  "spec": "FINAL BUILD SPEC: \"Court of Appearances\"\n\nConventions:\n- Units are map units. x runs from the player to the wall; +y is screen right; +z is up.\n- Eye at (-6000, 0, 0). u = y/(x+6000) and v = z/(x+6000). The screen edges are |u| = 1.257 and |v| = 0.707.\n- F is the window's lowest brush in each build (out/*.sce): Overflick -967.8, Pathing -957.5, Early Braking -1129.3; range -957.5 to -1129.3.\n- yc is the window axis (-30.5).\n- \"Stone edge\" and \"plinth outer edge\" come from each build. Overflick: stone L -1376 / R 1315, plinth L -1807 / R 1746.\n- Every piece is named DefaultNoCollision and uses groups 0 and 1 only. materialSets stays at 3 entries.\n- Skyline heights are ABSOLUTE z. The floor, stylobates and column bases follow F.\n- Values below are for Overflick unless a rule is given.\n\nPALETTE (all slots: roughness 0.9, metallic 0)\n- g0 wall: PureColor 5d6066, full-bright 0.25. RETINT from dark umber 2b1d12 / 0.2; needs the user's OK.\n  - Uses: sign outlines, plus palace walls, portico roofs, tower bodies, both palms.\n- g0 ground: PureColor 1e4c9a, 0.35. Unchanged: headdress only.\n- g0 ceiling: ConcretePoured eadbb6, 0.35. Unchanged: window stone.\n  - Adds: pool kerb, stylobates, column bases and abaci, all cavettos and merlons, pyramids.\n- g0 ramp: PureColor 9a3f22, 0.30. Unchanged: bead, bands, manes.\n  - Adds: crown bands, column shafts.\n- g1 wall: PureColor c8c8c8, 0.40. Unchanged. Target backdrop only; nothing new uses it.\n- g1 ground: PureColor 0f2a4d, 0.30. Unchanged: signs, lion bodies, outline band.\n  - Adds: pool water.\n- g1 ceiling: PureColor 77736b, 0.30. The FREE slot; it was the unused DARK_TEXT copy of 0f2a4d.\n  - Court floor only. The builder must write it AFTER DARK_TEXT.\n- g1 ramp: PureColor d4a02a, 0.50. Unchanged: face, sill strip.\n  - Adds: column binding bands and palm capitals.\n- Fallback if the retint is refused:\n  - Keep umber. Put the palace walls, roofs and towers on g1 ceiling with the floor (one grey, 77736b). Palms on umber.\n  - Under Bassel 3 the palace then turns flat white like the columns and lions, which vanish into it.\n  - Under the 105 themes where wall differs from ceiling, the palace takes the window stone's paint.\n\nELEMENTS\n18 objects: 10 blocks and 8 meshes. Stage letters are for the FPS test.\n\n1. Court floor (block, A)\n- x -4900..-2720, y yc±5400, z F-60..F. Slot g1 ceiling.\n- It enters the screen bottom at about x -4630.\n\n2. Pool water (block, A)\n- x -4450..-3450, y yc±330, z F..F+5. Slot g1 ground.\n\n3. Pool kerb (4 blocks, A)\n- All 45 wide, z F..F+30, slot g0 ceiling:\n  - near: x -4495..-4450, y yc±375\n  - far: x -3450..-3405, y yc±375\n  - left: x -4450..-3450, y yc-375..yc-330\n  - right: x -4450..-3450, y yc+330..yc+375\n- The far kerb sits at v -0.37, about 7 degrees below the lowest target.\n\n4. Palace wall (1 block per side, A)\n- x -2820..-2720: its face is 80 behind the backdrop plane, so it can never cover a target.\n- y from the stone edge moved 60 inward (L -1316, R 1255) out to yc±5400.\n- z F..185. Slot g0 wall.\n\n5. Portico roof / architrave (1 block per side, A)\n- x -3160..-2820, z 35..185. Slot g0 wall.\n- Inner end py0 = plinth outer edge ± 170: L -1977, R 1916; ±2332..2393 in the widest layouts.\n- Outer end at the tower, yc±3050.\n\n6. Skyline (1 mesh per side, A)\n- Three sections: g0 wall, g0 ramp, g0 ceiling. 478 triangles per side.\n- Common crown profile (scale s):\n  - red band: 12s proud, z top-30s..top\n  - cavetto step 1: 30s proud, 35s high, over the whole wall top\n  - cavetto step 2: 52s proud, 40s high\n  - merlons on top: 130s wide, pitch 210s, 40s thick, set 12s behind the lip. Each is 55s straight plus a half-round of radius 65s (6 segments). Back faces dropped.\n- (a) Palace-wall crown (s = 1):\n  - On face x -2820, from the stone edge to py0∓20; z 155..380.\n  - Merlons only where visible beside the pilaster: 2 per side.\n- (b) Portico crown (s = 1):\n  - On face x -3160, py0 to the tower, with the band and cavetto wrapping the inner end.\n  - 5 front merlons (x -3200..-3160, z 260..380) plus 1 return merlon along the inner end.\n- (c) Corner tower (migdol):\n  - Battered solid. Front face runs from x -3230 at z F to -3160 at z 780; inner face from |y| 3050 at F to 3120 at 780. Back at x -2900; extends to |y| 5400.\n  - Crown at s = 1.25: band z 742.5..780; cavetto 780..873.75; merlons 162.5 wide at pitch 262.5, z 873.75..1023.75.\n  - 3 front merlons (culled to the screen) plus 1 return merlon.\n\n7. Colonnade (1 mesh per side, B)\n- Stylobate: x -3220..-2820, |y| from py0∓40 to the tower, z F..F+40. Slot g0 ceiling.\n- Columns at x -3085, pitch 330, centred in the portico span.\n  - N = clamp(floor((span - 316)/330) + 1, 2, 4).\n  - 3 columns in Overflick, Hesitation and Lingering; 4 in Speed Build; 2 in the other 9 layouts.\n  - Overflick column y: L -2859, -2529, -2199; R 2138, 2468, 2798.\n- Column height H = 35 - (F + 40): 963 in Overflick, 952-1124 across layouts. Profile, bottom to top:\n  - base disk: r 118→112, 10 sides, to 0.031H. Slot g0 ceiling.\n  - shaft: r 62→57, 10 sides, to 0.72H. Slot g0 ramp.\n  - band: r 65, 0.026H. Slot g1 ramp.\n  - palm capital: 8-lobed star flaring r 57→108, to 0.953H. Slot g1 ramp.\n  - abacus: 170 x 170, to H. Slot g0 ceiling.\n- About 114 triangles per column; 354 per side with 3 columns.\n\n8. Pyramids (1 mesh per side, C)\n- Plain square pyramids, axis-aligned, 4 side triangles each (no base). Base at z -1200, hidden by the palace. Slot g0 ceiling.\n- Placement from the apex's screen position (u, v), distance d and slope:\n  - centre = (-6000 + d, u·d)\n  - apex z = v·d\n  - half-base = (v·d + 1200) / tan(slope)\n- Left (12 triangles):\n  - Khafre-like: u -0.775, v 0.222, d 30000, 53.1°. Centre (24000, -23250), apex z 6660, half-base 5901.\n  - Khufu-like: u -0.88, v 0.212, d 34000, 51.8°. Centre (28000, -29920), apex z 7208, half-base 6616.\n  - Menkaure-like: u -0.955, v 0.176, d 28000, 51.3°. Centre (22000, -26740), apex z 4928, half-base 4909.\n- Right (8 triangles):\n  - Red-like: u 0.80, v 0.205, d 30000, 43.4°. Centre (24000, 24000), apex z 6150, half-base 7772.\n  - Second: u 0.935, v 0.19, d 34000, 52°. Centre (28000, 31790), apex z 6460, half-base 5985.\n- The apexes are absolute, so they are identical on screen in every layout.\n\n9. Date palm, left (mesh, C, g0 wall, 498 triangles)\n- A flat, one-sided stencil facing the player at x -1500 (d 4500).\n- Placement: uL = -max(0.60, stone_u + 0.10), where stone_u = |stone edge| / 2980. This gives -0.60 in Overflick and -0.66..-0.68 in the wide layouts.\n- Trunk: from (uL·4500 + 25, F), curving to the crown centre (uL·4500 - 20, 1215); half-width 34→22. Its base is hidden behind the palace wall.\n- Crown: 15 feather fronds, 450-700 long, drooping 8-100°. Each frond is 8 rachis segments with sawtooth leaflets (32 triangles).\n- Crown top at about v 0.39.\n\n10. Doum palm, right (mesh, C, g0 wall, 228 triangles)\n- Same plane. uR = max(0.60, stone_u + 0.10).\n- Trunk: from (uR·4500, F), forking at z 742.\n- Branches end in crowns at ((uR - 0.04)·4500, 1179) and ((uR + 0.052)·4500, 1287).\n- Each crown: 9 fan leaves, r 280 or 238, 70° spread, 5 split teeth, on 55-long stalks.\n\nSCREEN HEIGHTS (v)\n- palace merlons 0.121; portico merlons 0.136\n- pyramids 0.176-0.222; tower merlons 0.367; palms up to about 0.39\n- window cornice 0.349; head 0.443 (stays the tallest)\n- The sky above the cornice stays empty within |u| < 0.49.\n\nCOVERAGE (Overflick)\n- Court 52% of the screen: floor 23.3, skylines 12.0, palace walls 6.8, colonnades 3.9, pool and kerb 3.1, palms 1.1, pyramids 1.1, roofs 1.0.\n- By surface type: ceiling 29.3, wall 17.1, ramp 3.6, floor 2.1.\n- Sky left: 29.9%. Window: 17.9%.\n\nCHECKS DONE\n- check_scene.py passes on all 13 current builds with the court exported in (test_out/courtyard/final_check.py regenerates them into final_check_sce/).\n- Per-polygon clearance to the target envelope: 194 (Early Braking, Early Click) to 203. The floor is the nearest object.\n- Nothing behind the head (±150); nothing in front of the lions.\n\nFPS TEST PLAN\n- Build a single test scenario that replaces the Window Test.\n- Add the court in stages: A (12 objects), then A+B (14), then all 18.\n- At each stage the user reads uncapped FPS with no theme and with Bassel 3, in the same session as the Window Test (616 / 474), compared in ms.\n- Estimate: under 0.15 ms; unmeasured.\n- Levers if it is short:\n  - drop the return merlons\n  - 12 fronds per palm\n  - merge the pool kerb into one mesh\n  - drop Menkaure and the second right pyramid\n\nRISKS AND OPEN ITEMS\n1. The g0 wall retint needs the user's yes.\n2. The lions' stencil now shows palace grey instead of the sky: moderate contrast without a theme, faint under Bassel 3.\n3. Crash-loop rule: a map-structure change must go through a test scenario first.\n4. Real shadows:\n   - The portico interior shadow in the render assumes a sun at (-0.55, -0.35, 0.75).\n   - The tall parts are at least 1,900 units from the opening, so they are unlikely to shade the backdrop.\n5. Draw distance at 22-34k is untested. The base map already draws a brush at x -1,024,000.\n6. Scale: the eye is 968 above the floor. That is why there are no doors.\n7. The renders are flat-shaded approximations; the Bassel 3 view has no marble texture.\n8. Not integrated into build.py/egypt.py yet. It needs a look switch that writes g1 ceiling after DARK_TEXT.\n9. test_out/egypt_window_all/Flow Fix Pathing.sce is stale; out/ is current.\n\nFILES (test_out/courtyard)\n- final_geo.py: geometry. Needs authentic_geo.py and layouts.json.\n- final_render.py: renders (view, sheet, plan).\n- final_check.py: export and checks.\n- Run from D:\\Projects\\flowfix with PYTHONPATH=.;test_out/courtyard.\n- No project source, installed file or game file was edited. No _cy_ scripts were created.",
+  "renders": [
+   "D:\\Projects\\flowfix\\test_out\\courtyard\\final_view.png",
+   "D:\\Projects\\flowfix\\test_out\\courtyard\\final_plan.png",
+   "D:\\Projects\\flowfix\\test_out\\courtyard\\final_view_bassel3.png",
+   "D:\\Projects\\flowfix\\test_out\\courtyard\\final_layouts.png"
+  ]
+ }
+}
