@@ -5,6 +5,8 @@ starting that kind of task and follow it. Each file starts with a `name` and a `
 applies. They follow the open Agent Skills format, so tools that support it (GitHub Copilot, and others that read
 `.agents/skills/`) find them here automatically.
 
+Each skill's instructions are in `.agents/skills/<name>/SKILL.md` (paths from the project root).
+
 | Skill | Use it when |
 | --- | --- |
 | [kovaaks-scenario-design](kovaaks-scenario-design/SKILL.md) | Designing or changing a drill: its demand, mechanics, scoring, spawn areas, map geometry, looks and themes. Its `references/` hold the confirmed mechanics (`mechanics.md`) and the decoration record (`decoration.md`). |
