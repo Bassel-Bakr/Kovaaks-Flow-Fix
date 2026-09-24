@@ -9,7 +9,7 @@ A scenario is a measuring instrument for one demand. Design it so the named weak
 nothing else is noisy, and the score pays for the right behaviour. Before building, write one sentence
 saying what the scenario should be hard at.
 
-## Workflow
+## Steps
 
 1. **Name the demand.** Map it to a node of the flowchart
    (`D:\Projects\aim\docs\articles\weakness-targeted-static-flowchart.md`). Respect the user's position:

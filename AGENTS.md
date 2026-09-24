@@ -28,7 +28,7 @@ this folder.
 | `egypt_test.py` | Builds four look tests into `test_out/`. `Flow Fix Egypt Test` is the full room. `Mesh Test` makes each sign one custom mesh. `Window Test` is the current look: the window with the stencil head and lions, the mirrored welcome line and the courtyard. `Egypt Test FLAT` uses flat colours, for an FPS comparison. It also builds all 13 layouts in each look into `test_out/egypt_all`, `egypt_mesh_all` and `egypt_window_all`, so `check_scene.py` can check them. |
 | `window_mockups.py` | Builds the head placement options and renders them side by side into `test_out/window mockups.png`. Installs nothing. |
 | `backing_sampler.py`, `backing_test.py` | Backing experiments (retired): a numbered row of candidate props, and one prop (Sandstorm by default) behind the head and lions, as an always-dark backing that themes cannot repaint. The user stopped at the stencil without a backing. |
-| `skills/` | The agent-neutral skills (`SKILL.md` plus references). `.claude/skills/` holds Claude Code adapters that point here. |
+| `skills/` | The agent-neutral skills, indexed in `skills/README.md` (`SKILL.md` plus references). `.claude/skills/` holds Claude Code adapters that point here. |
 | `make_screenshots.py` | Renders each scenario's picture for KovaaK's scenario list into `test_out/screenshots/` (854 x 480 JPG, the player's view of the window and courtyard, no targets). Copy them to `SaveGames/Scenarios/Screenshots/<scenario name>.jpg`; never overwrite a screenshot the user took in game. |
 | `.gitignore` | Keeps generated files (`out/`, `specs.json`, `test_out/`), local state (`installed.json`) and the `retired/` archive out of git. |
 | `docs/` | Human-facing docs: `scenarios.md` (every scenario's design, evidence and verdict), `look.md` (the shared look), `future.md` (suggestions), `README.md` (index and the loop). Keep them current with every change. |
@@ -69,6 +69,9 @@ so edit only the files in `skills/`.
 - **kovaaks-run-analysis:** "played X, check the stats". Judges the scenario from the user's runs.
 
 ## Working with this user
+
+- **Commits.** Use Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `chore:`, with an optional scope such
+  as `docs(skills):`). Commit only when the user asks, on a branch rather than `main`.
 
 - **Ask before changing.** Say what you will change and wait for a yes. Answer questions and audits
   directly.

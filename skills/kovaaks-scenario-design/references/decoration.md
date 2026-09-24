@@ -436,7 +436,7 @@ The user asked for the whole map around the window, something fitting for ancien
 thundah's scenarios (not installed locally, so its layout could not be copied). The user picked a palace courtyard
 and allowed pyramids as distant landmarks.
 
-- **How it was designed.** A workflow (wf_226017ea-0d1) researched real palace courts (Medinet Habu's palace behind
+- **How it was designed.** A multi-agent design run researched real palace courts (Medinet Habu's palace behind
   its Window of Appearances, the Amarna palaces, Malqata) and how detailed KovaaK's maps build their surroundings.
   Three designers drew concepts with plans and player-view renders: lean (15 objects), atmosphere (10) and
   authentic (19). A judge compared the renders and merged lean with authentic's skyline heights and pool. The renders
@@ -483,7 +483,7 @@ Two texts from the room version are now retired:
   "life, stability, dominion", a common temple formula. These signs now break the rule against religious symbols.
 - **iri.n.** The user asked for one column per side with the text "Made by Bassel Bakr". The right column then held
   𓁹𓈖 (iri.n, D4 N35) above "Bassel Bakr" in a cartouche. Egyptians wrote this formula before a craftsman's name.
-  the assistant chose iri.n, because the user's own maker line does not mark which signs mean "made by". The window look
+  the agent chose iri.n, because the user's own maker line does not mark which signs mean "made by". The window look
   drops iri.n and puts the user's full maker line on the left pilaster instead.
 
 ## History of the look
@@ -529,7 +529,7 @@ Two texts from the room version are now retired:
 - **Final choice that day:** the stencil head and lions, with no prop behind them, became the Window Test. The
   Stencil Test, Backing Sampler and Backing Test were retired to `retired/tests/`.
 
-## Art research (workflow wf_0f16b962-aa8, 2026-09-24)
+## Art research (multi-agent research run, 2026-09-24)
 
 Religious elements (left out) are marked R.
 
