@@ -1,0 +1,122 @@
+Findings: several target types in one KovaaK's scenario
+
+None of the six files you named mixes target types. Each one repeats a single bot. voxTS Static Click rAim and voxTS Voltaic use Quaker Bot Long Strafes.bot four and five times. VT Multiclick 180 uses test_verysmall.bot six times, 1wall6targets microadjust pokeball uses target.bot six times, FuglaaXYZ Voltaic uses test.bot once, and 1w6ts_trustechain uses one .rot six times.
+
+I checked all 376 files. 59 of them mix bot names in AddedBots. The files below show per-type spawn restriction on static targets.
+
+Folder: C:/Program Files (x86)/Steam/steamapps/common/FPSAimTrainer/FPSAimTrainer/Saved/SaveGames/Scenarios/
+
+=== (1) How the names chain together ===
+
+Each AddedBots entry is "<name>.bot" or "<name>.rot":
+- "X.bot" points to the [Bot Profile] section with Name=X.
+- "X.rot" points to the [Bot Rotation Profile] section with Name=X. Its ProfileNames lists bot-profile names that the slot cycles through.
+- Each Bot Profile has CharacterProfile=Y, which points to the [Character Profile] section with Name=Y. Size, health, respawn delay and health regen all live in the character profile.
+- In the embedded map JSON, the "PermittedCharacterProfiles" value on a spawn object is matched against the character-profile name Y, not the bot name. An empty string "" means any profile may spawn there.
+- The bots-only spawn objects use "TeamMask": 2 and the player spawn uses 1. This holds whether BotTeams is 0 (your sixshot dense) or 2 (ClickTrack 3t).
+
+Worked example: ClickTrack 3t.sce, which is tagged AimSubTypeTag=Static. The bot name and the character name differ here, which proves the restriction matches the character name.
+
+  BotCharacters=target.bot;targettwo.bot;targetthree.bot;staticRot.rot
+  AddedBots=target.bot;targettwo.bot;targetthree.bot;staticRot.rot
+  BotMaxLives=1;1;1;0
+  BotTeams=2;2;2;2
+  ScorePerKill=1.0  ScoreMultAccuracy=true  MultSqrtAcc=true  MapName=cube_1wall_dense.json  MapScale=4.0
+
+  [Bot Profile]
+  Name=target
+  DodgeProfileNames=Mimic
+  CharacterProfile=target1
+  SpawnGroup=0
+  (targettwo -> CharacterProfile=target2, targetthree -> CharacterProfile=target3)
+
+  [Bot Rotation Profile]
+  Name=staticRot
+  ProfileNames=target;targettwo;targetthree;target;targetthree;targettwo
+  ProfileWeights=1.0;1.0;1.0;1.0;1.0;1.0
+  Randomized=false
+  AllowRepeatEntries=true
+
+  [Character Profile]
+  Name=target1
+  MaxHealth=1.0 ... MainBBType=Spheroid  MainBBHeight=120.0  MainBBRadius=60.0
+  (target2 and target3 are identical in this file, only the name differs)
+
+  [Map Data] objects:
+  { "location": "1000.000000, 0.000000, 70.000000", "name": "SpawnPoint", "properties": [
+      {"name":"Name","value":"SpawnPoint0"}, {"name":"TeamMask","value":2}, {"name":"Path","value":""},
+      {"name":"LoopingPath","value":false}, {"name":"PermittedCharacterProfiles","value":"target1"},
+      {"name":"Weight","value":1.0} ] ... "type": "gameObject" }
+  "1000, -150, -80" -> "target2";  "1000, 150, -80" -> "target3";  player point "-960,0,0" TeamMask 1, "".
+
+Other files with per-profile restriction:
+- VT 1w4ts Novice S5 Diagonal.sce: AddedBots=Clockwise.rot, with ProfileNames=Target Right;Target Down;Target Left;Target Up. Those wear the character profiles Dot Right/Down/Left/Up, radius 21.45 and 1 HP each. There are four SpawnPoints, each permitting one profile: "Dot Left" at (512,-192,0), "Dot Right" at (512,192,0), "Dot Up" at (512,0,192) and "Dot Down" at (512,0,-192). This file has ScorePerKill=0.0 and ScorePerHit=0.0, even though its description promises 10 points per target.
+- shimcluster.sce: four target types, target3sph to target6sph, plus TIMER 1 to 4. Each is restricted to its own SpawnPoint. The TIMER characters have MaxHealth=9000 and their bot profiles set DisableScoring=true, so they act as scenery. These bot profiles also set SpawnGroup=4/5/6/8/1, but the map's spawn objects do not reference those numbers. The PermittedCharacterProfiles restriction does the separation.
+- 1w2ts flick pressure.sce: AddedBots=Dumbbell.bot;Wstatic.bot;Wstatic.bot.
+  - Dumbbell -> CharacterProfile "Press F to pay respect": MaxHealth 0.01, radius 22, MaxSpeed 3000, DisableScoring=true. It spawns on one SpawnPoint permitting only that profile.
+  - Wstatic -> "target": radius 20, MaxHealth 0.01. It spawns on 8 SpawnPoints permitting "target".
+- Bassel - 1w2ts.sce, your own file: 81 SpawnPoints permit "target" and 1 permits "Quaker".
+- rx Multiclick Small Pokeball.sce mixes four sizes, but with no restriction:
+  - AddedBots=target;target;targetb;targetb;targetc;targetc;targetd;targetd.
+  - Radii are 16.5, 15, 13.5 and 12.75. All have MaxHealth 10 and HealthRegenPerSec 15.
+  - All four SpawnVolumes have PermittedCharacterProfiles "", so all sizes mix in the same volumes.
+
+Limits of what the files show:
+- No file uses SpawnVolumes with different PermittedCharacterProfiles values. I parsed every JSON map. The only JSON map with more than one value on its SpawnVolumes is cA sixshot dense: 41 volumes say "target" (TeamMask 2) and the player volume says "" (TeamMask 1).
+- SpawnVolume objects have exactly the same property list as SpawnPoints: Name, TeamMask, Path, LoopingPath, PermittedCharacterProfiles, Weight. So retargeting a subset of your 41 wall volumes means changing their "value" from "target" to a second character-profile name. No real file demonstrates this on volumes; it is inferred from the SpawnPoint examples.
+- 186 of the 376 files use old reflex-format maps ("reflex map version 8"). Those have no PermittedCharacterProfiles at all.
+- No value anywhere contains ";", "," or "|". There is no evidence that one spawn can list several profiles.
+
+The file set has no "lifetime" field. Two substitutes exist:
+- Timed targets use negative health regen. VT 1w3ts Intermediate S5 Pressure.sce, tagged Static, has character "dot" with MaxHealth=1.0 and HealthRegenPerSec=-0.5, so each dot expires after about 2 s. It has no ScoreLossPerDeath and no miss penalty. 33 files use negative regen, mostly VT Air/Ground/Aether with values from -90 to -117.
+- Zones without map restriction use SpawnOffset. 1w6ts_trustechain Raspberry.sce uses a reflex map. It cycles trustechain_raspberry.rot through 10 character profiles (target to targetj), all radius 60 and 1 HP. Each profile has its own SpawnOffsetMin/Max Z band, for example target: Z=100 to -300, targetb: Z=-700 to -1100, targetj: Z=-6300 to -6700. That is a second way to put each target type in its own region.
+
+=== (2) One entry per AddedBots entry? ===
+
+Yes. In all 375 files that have AddedBots, the count of ";"-separated entries in AddedBots, BotMaxLives and BotTeams is equal. There are zero mismatches. The lists are per-slot:
+- ClickTrack 3t: BotMaxLives=1;1;1;0 gives the three fixed bots one life each and the rotation slot unlimited lives (0 = infinite).
+- 1w6ts_trustechain: BotTeams=0;0;0;2;2;2.
+
+BotCharacters is a different field. It is the de-duplicated set of files in use, and 164 files have it differing from AddedBots. Example: BotCharacters=Dumbbell.bot;Wstatic.bot versus AddedBots=Dumbbell.bot;Wstatic.bot;Wstatic.bot.
+
+=== (3) MBS ===
+
+11 files have MBSEnable=true: Close FS Easy Dodge, Close Mid Strafes Dodge High/Low Ground, Quake LG 1v1, VT AirStrafe Advanced, VT AngleStrafe Advanced, VT ArcStrafe Advanced, lgc3 Reborn, lgc3 Reborn Easy, lgc3 Reborn Varied Easy Meso, and patTargetClick Dodge. None is a static clicker.
+
+MBS rewards player movement, specifically direction changes. VT AirStrafe Advanced.sce describes it this way: a bar fills as you move, and changing direction while the bar is green gives maximum movement score. Moving while the bar is full scores nothing, and the total is capped. The lgc3 descriptions say "Boost your score by moving around."
+
+Typical values:
+- lgc3 Reborn: MBSTime1=0.01, MBSTime2=0.08, MBSTime3=1.3, MBSTime1Mult=0.1, MBSTime2Mult=40.0, MBSTime3Mult=100.0, MBSFBInstead=false, MBSRequireEnemyAlive=false, MaxMBSScore=10000.0, alongside ScorePerDamage=3.0.
+- VT AngleStrafe Advanced: 0.01 / 0.08 / 2.5 with multipliers 0.01 / 1.0 / 4.2, MaxMBSScore=200.0, ScorePerKill=10.
+- patTargetClick Dodge: 0.2 / 0.3 / 1.0 with multipliers 0.1 / 60 / 100, MaxMBSScore=5000.
+
+It does not fit a static drill where the player stands still.
+
+=== (4) Dynamic difficulty in static clicking ===
+
+No file uses it:
+- 151 files have the fields, and every one reads IsTargetSizeActive=false and IsTimeDilationActive=false. The other 224 files predate the fields.
+- The inactive defaults, as in your sixshot dense, are: PerformanceMetricType=KillsPerSecond (121 files use Accuracy), TimeDilationType=TargetDilation, MaxTargetSizeMultiplier=4.0 (86 files use 2.0), MinTargetSizeMultiplier=0.1, Max/MinTargetSpeedMultiplier=5.0/0.1, PerformanceTarget=0.5, PerformanceThreshold=0.01, TimeDilationBaseMultiplier=1.0, TargetSizeBaseMultiplier=1.0, AdjustmentRate=0.05, AdjustmentInterval=1.5.
+- Only Vertical Smoothing 60/120 Altered change the adapt tuning: AdjustmentRate=0.017, AdjustmentInterval=3.0, Max/Min size 1.001/0.4. Both still have the adapt flags off.
+
+The base multipliers are used as fixed knobs with the adapt flags off:
+- 1w2ts flick pressure and its "10% faster" copy: TimeDilationBaseMultiplier=1.1 in both.
+- 1w3ts flick pressure: 1.25.
+- VT Controlsphere 90%/95%: 0.9/0.95.
+- TargetSizeBaseMultiplier: Practice TSK COMP #4 VSTP Soft Big 1.35, TSK DVD Tracking Big 1.3, Hewchy VAI MASSIVE 2.0, ritual air angelic 0.6 (with time 0.75), Emotional Damage 1.5 (with time 1.5).
+
+None of these is a static-wall scenario.
+
+=== (5) Miss penalties and the accuracy multiplier in static clicking ===
+
+Files with a non-zero ScoreLossPerMiss, static or clicking:
+- 1w4t_vbr Raspberry.sce (Static): ScorePerKill=1.0, ScoreLossPerMiss=0.25, TimeRefilledByKill=0.125, ScoreMultAccuracy=false. The gun has MagazineMax=4 and a 3.0 s reload. The description says kills add 0.125 s to the timer and misses subtract 0.25, so four misses cost a reload and one kill. It also says "There is no accuracy penalty." The targets vibrate slightly, so a near miss really misses.
+- 1w2ts NeverMiss.sce (Static): ScorePerKill=1.0, ScoreLossPerMiss=1000.0, ScoreLossPerDeath=1000.0. Description: "1w2ts but if u miss u ded".
+- shimPressure EASY/HARD (Static): ScorePerKill=1.0, ScoreLossPerMiss=0.5, MultSqrtAcc=true but ScoreMultAccuracy=false. The descriptions say they copy VT Pulseshot from Aim Lab.
+- remClick - S / XS (Target Switching, Fast): ScorePerKill=10.0, ScoreLossPerMiss=1.0. Description: "kill = 10 points, miss = -1 point".
+- KovaaKs Sandbox Intro Scenario: ScorePerKill=100, ScoreLossPerMiss=4.0.
+
+Static scenarios with ScoreMultAccuracy=true and no miss loss:
+- MultSqrtAcc=true (accuracy enters as a square root, a softer penalty): VT 1w1ts Advanced, VT 1w2ts Advanced S5, VT 1w3ts Intermediate S5 and its Pressure variant, VT 1w4ts Novice S5 and Level 1, all with ScorePerKill=10. Also ClickTrack 3t (ScorePerKill=1), 1wall 5targets small Raspberry (1), and 1w1t/1w2t Race (10).
+- MultSqrtAcc=false (plain accuracy): 1wall 6targets small and its 10–50% larger / 10% smaller copies (ScorePerKill=10), 1w6ts_trustechain Raspberry and its 30% smaller copy (1), 1wall6targets microadjust (1), AAA 1wall6targets TE (1), Reflex - Test (10).
+- For comparison, your cA sixshot dense has ScorePerKill=1.0, ScoreMultAccuracy=false, MultSqrtAcc=true and ScoreLossPerMiss=0.0. The MultSqrtAcc line has no effect there because the accuracy multiplier is off. The same is true in shimPressure.
