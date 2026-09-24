@@ -4,6 +4,7 @@ Usage: python build.py specs.json outdir
 """
 import copy
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -22,6 +23,97 @@ BASE = SCEN / "cA sixshot dense.sce"
 SECTION_ORDER = ["Aim Profile", "Ability Profile", "Bot Profile", "Bot Rotation Profile", "Character Profile", "Dodge Profile", "Weapon Profile"]
 WALL_X = -2949.999756
 HEADER = re.compile(r"^\[(.+)\]$")
+
+
+# COMPACT_MESHES (2026-09-25): custom-mesh data written one vertex per line and many indices per line, instead of
+# one number per line as the game itself writes it. The window look's meshes made the scenario file 12 MB, and the
+# sculpted statues 39 MB, mostly indentation; the user saw a hitch on every restart. The game reads it the same
+# (the Sand Test loaded, 2026-09-25), so it is on for all.
+COMPACT_MESHES = True
+
+
+def dump_map(m):
+    """The map as JSON text: indented like the game writes it, with compact mesh data under COMPACT_MESHES."""
+    if not COMPACT_MESHES:
+        return json.dumps(m, indent=4)
+    meshes = {}
+    for o in m["objects"]:
+        if o.get("procedural"):
+            key = f"@@mesh{len(meshes)}@@"
+            meshes[key], o["procedural"] = o["procedural"], key
+    try:
+        text = json.dumps(m, indent=4)
+    finally:
+        for o in m["objects"]:
+            if isinstance(o.get("procedural"), str):
+                o["procedural"] = meshes[o["procedural"]]
+    c = lambda v: json.dumps(v, separators=(",", ":"))
+    NL = "\n"
+    for key, secs in meshes.items():
+        parts = []
+        for sec in secs:
+            idx = sec["indices"]
+            rows = [",".join(str(i) for i in idx[k:k + 60]) for k in range(0, len(idx), 60)]
+            parts.append('{"indices":[' + NL + (',' + NL).join(rows) + NL + '],"vertices":[' + NL
+                         + (',' + NL).join(c(v) for v in sec["vertices"]) + NL + ']}')
+        text = text.replace(f'"{key}"', '[' + NL + (',' + NL).join(parts) + NL + ']', 1)
+    return text
+
+
+# SLIM_MESHES (2026-09-25, tested in the Sand Test, on for all): the player never moves (speed 0, no jump, no gravity), so a
+# custom-mesh face that points away from the eye can never be seen. slim_meshes() leaves those faces out, drops the
+# vertices only they used, and writes mesh numbers with MESH_DECIMALS decimals instead of 6 (0.0001 x MapScale is
+# still 0.0003 units). Measured on the Sand Test: 44% fewer triangles, 33% fewer vertices, half the mesh text.
+SLIM_MESHES = True
+MESH_DECIMALS = 4
+EYE_MARGIN = 20.0          # keep a face seen from anywhere within this distance of the eye (map units)
+
+
+def slim_meshes(m, map_scale):
+    """Leave out the custom-mesh faces the fixed eye can never see, and shorten the mesh numbers (see SLIM_MESHES).
+    Faces follow the installed winding: (B - A) x (C - A) points into the mesh."""
+    sp = next(o for o in m["objects"] if o.get("name") == "SpawnPoint")
+    eye = [float(t) for t in sp["location"].split(",")]
+
+    def nums(s):
+        parts = [t.strip() for t in s.split(",")]
+        return ", ".join(t if t in ("true", "false") else f"{float(t):.{MESH_DECIMALS}f}" for t in parts)
+    keep_objects = []
+    for o in m["objects"]:
+        if not o.get("procedural"):
+            keep_objects.append(o)
+            continue
+        loc = [float(t) for t in o["location"].split(",")]
+        plain = (o.get("rotation", "0, 0, 0").replace(" ", "") in ("0,0,0", "0.000000,0.000000,0.000000")
+                 and o.get("scale", "1, 1, 1").replace(" ", "") in ("1,1,1", "1.000000,1.000000,1.000000"))
+        secs, mats = [], []
+        for sec, mat in zip(o["procedural"], o["materialSets"]):
+            P = [[loc[i] + float(t) * map_scale for i, t in enumerate(v["location"].split(","))]
+                 for v in sec["vertices"]]
+            idx = sec["indices"]
+            kept = []
+            for k in range(0, len(idx), 3):
+                a, b, c = (P[i] for i in idx[k:k + 3])
+                ab, ac = [b[j] - a[j] for j in range(3)], [c[j] - a[j] for j in range(3)]
+                n = (ab[1] * ac[2] - ab[2] * ac[1], ab[2] * ac[0] - ab[0] * ac[2], ab[0] * ac[1] - ab[1] * ac[0])
+                ln = math.sqrt(sum(t * t for t in n))
+                if plain and ln > 0:
+                    cen = [(a[j] + b[j] + c[j]) / 3 for j in range(3)]
+                    # the eye's signed distance in front of the face (its outward normal is -n)
+                    if sum((eye[j] - cen[j]) * -n[j] for j in range(3)) / ln < -EYE_MARGIN:
+                        continue
+                kept += idx[k:k + 3]
+            if not kept:
+                continue
+            used = sorted(set(kept))
+            new = {i: k for k, i in enumerate(used)}
+            secs.append({"indices": [new[i] for i in kept],
+                         "vertices": [{key: nums(val) for key, val in sec["vertices"][i].items()} for i in used]})
+            mats.append(mat)
+        if secs:
+            o["procedural"], o["materialSets"] = secs, mats
+            keep_objects.append(o)
+    m["objects"] = keep_objects
 
 
 def parse(path):
@@ -226,7 +318,9 @@ def build(spec, outdir):
             egypt.add_egypt(m, spec["spawn_volumes"], max(radii))
         else:
             arena.add_arena(m, spec["spawn_volumes"], max(radii))
-    map_text = json.dumps(m, indent=4)
+    if SLIM_MESHES:
+        slim_meshes(m, float(next(l.split("=", 1)[1] for l in top if l.startswith("MapScale="))))
+    map_text = dump_map(m)
 
     ordered = sorted(sections, key=lambda s: SECTION_ORDER.index(s["type"]) if s["type"] in SECTION_ORDER else 99)
     out = list(top)
