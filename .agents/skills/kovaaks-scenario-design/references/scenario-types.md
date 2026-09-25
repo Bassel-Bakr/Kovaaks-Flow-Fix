@@ -343,28 +343,41 @@ made with `patch_scenario.py`:
 
 ## Case: the Startled redesign of Lingering (2026-09-25, in test)
 
-The user wants Lingering to fix lingering rather than practise it, so its targets take two hits and dash away on
-the first one. Findings from the test copies:
+The user wants Lingering to fix lingering rather than practise it. Each target takes two hits and dashes away on
+the first one. The user's wishes:
+- two targets;
+- a head that takes hits but no damage (`HeadshotMultiplier` 0 on the weapon), pointing where the dash will go;
+- no movement before the first hit, and no change of direction during the dash;
+- a short dash: 1350 units/s for 0.35 s, about 470 units;
+- no knockback (weapon `KnockbackFactor` and `KnockbackFactorAir` 0).
+
+Findings from the test copies:
 - **Flying bots clamp to their flight speed.** A flyer (`IsFlyer`) bobbed up and down from spawn, because its dodge
   profile toggles up and down at the default `FlightVelocityUp`/`Down` of 800. With those set to 0, its dash
   vanished too: the dash is clamped to the flight speed.
-- **The head sits on top only.** `MainBBHeadOffset` moves it along the body's up axis. A negative offset (-144) hid
-  the head completely. Bots stay upright, so the head cannot be turned to the sides.
-- **The damage-triggered dash ability never fired** on non-flying floating targets. The design that copied
-  Reactive Flick (5 direction types, `AIDamageReaction`, `UpVelocity`) left them standing still after the hit.
-- **Now on trial: a dash from the dodge profile.** `StandStillUntilHurt` (movement starting on the first hit worked
-  in the first test) with one strafe of 0.35 s left or right and up or down, then a 30 s pause
-  (`StrafeSwapMin/MaxPause`, `UpDownSwapPauseMin/MaxTime`): one straight diagonal dash, then it stays put. The
-  spawn volumes are rolled by multiples of 45° (`build.py` takes a `roll` per volume), to see whether the bot, its
-  head and its dash turn with the volume.
+- **`MainBBHeadOffset` moves the head along the body's up axis.** A negative offset (-144) hid the head completely.
+- **A rolled spawn volume turns its bots (confirmed).** The volume's `rotation` is roll, pitch, yaw. A roll turns
+  each bot it spawns about the player's line of sight, and the head turns with the body. So the head can point
+  any way along the wall. `build.py` takes a `roll` per spawn volume.
+- **A rolled volume turns its box too.** Wide volumes rolled by 90° or 45° spawned targets outside the window.
+  Keep each rolled box inside the spawn area: swap the sides at 90°, and use diamonds (squares at 45°) inside
+  small cells for the diagonals. `build.volume_extent`, the Clip box and `check_scene.py` take the roll into account.
+- **Movement stays on the world axes.** The roll does not turn the dash:
+  - A dodge strafe goes left or right, and a flyer's dodge goes up or down, whatever the roll.
+  - The dash ability's `UpVelocity` pushes straight up the screen. A negative value pushes down.
+- **The damage-triggered dash ability fires once ability use is allowed.** An earlier copy set the bot's
+  `UseAbilityFrequency` to 0 and the dash never fired. With 1.0, as in DomiSphere, it fires on the first hit (with
+  `NoAiming` true, top speed 0, gravity 0, not flying). `EndVelocityFactor` 0 stops it dead at the end.
+- **One bot type per direction.** Since movement ignores the roll, each head direction needs its own type (8 types,
+  45° apart). Each type has spawn volumes rolled to match and `PermittedCharacterProfiles` set to it. Its volumes
+  cover the whole spawn area. Two slots draw types from a random Bot Rotation Profile. Each type builds its dash
+  from the world axes: a dodge strafe for the sideways part and `UpVelocity` for the up or down part.
+- **Open: the sideways part.** A dodge strafe on a floating non-flyer (gravity 0) did not move it. The next copy
+  tried two fixes, one on each side: the same bot with `MaxAirSpeed` raised from 0, and a flyer with
+  `IsFlyUpOnJumpAndCrouch` true, so its dodge could not fly it up or down. The user reported that it did not
+  work. Next session: find which part failed.
 - **Knockback is no help here:** a hit pushes the target along the shot's direction, which is into the wall. Only
-  the flat vertical knockback could vary.
-- **Earlier design** (like the installed Reactive Flick):
-  - **Movement.** Non-flying targets with gravity 0, so they float, and top speed 0, so they never walk.
-  - **The dash.** One damage-triggered dash (`AIDamageReaction`, no delay, one charge), which ends with
-    `EndVelocityFactor` 0.
-  - **Directions.** 5 target types, drawn by a random rotation. Each has a fixed up or down part (`UpVelocity`)
-    and a random left or right part from the dodge profile, so 8 directions.
+  the flat vertical knockback could vary, and it is set on the weapon, so it is the same for every bot.
 
 ## Unknowns to test in game (probe scenarios)
 

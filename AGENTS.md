@@ -193,8 +193,13 @@ Still open:
 
   Earlier builds are in `retired/`, one folder per look: `plain look (installed until 2026-09-24)`,
   `window look without courtyard (installed until 2026-09-24)` and `window look with stencil art (installed until
-  2026-09-25)`. The Sand Test and its earlier versions are in `retired/tests/`. No test scenario is installed.
+  2026-09-25)`. The Sand Test and its earlier versions are in `retired/tests/`.
   Ask for an in-play FPS reading and whether the restart hitch is gone.
+- The Startled redesign of Lingering is in test (2026-09-25): `Flow Fix Lingering Test` is installed, built by the
+  scratch script `_lingering_test.py` (ignored by git). Targets dash once, toward their head, on the first hit. The
+  heads turn with rolled spawn volumes, and up and down dashes work. The sideways part of the dash does not move
+  the bot yet. Findings and next steps are in `references/scenario-types.md` ("Case: the Startled redesign"). The
+  earlier copies are in `retired/tests/`. The installed Flow Fix Lingering is unchanged.
 - Calibration on 2026-09-24 (details in `docs/scenarios.md`): Check validated (the small target at
   1.5 keeps points-per-second parity on the new layout), Pathing validated after the four-cluster change,
   Early Braking works after the spacing change, Speed Build works, Recovery is clean at 3 s but weak on its own

@@ -29,7 +29,9 @@ def spec_volumes(m):
             continue
         _, y, z = (float(t) for t in o["location"].split(","))
         _, sy, sz = (float(t) for t in o["scale"].split(","))
-        vols.append({"y": y, "z": z, "size_y": sy, "size_z": sz})
+        roll = float(o.get("rotation", "0, 0, 0").split(",")[0])
+        hy, hz = build.volume_extent({"size_y": sy, "size_z": sz, "roll": roll})   # a rolled volume turns its box
+        vols.append({"y": y, "z": z, "size_y": hy / 100, "size_z": hz / 100})
     return vols
 
 

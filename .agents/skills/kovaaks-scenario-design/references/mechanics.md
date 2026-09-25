@@ -34,6 +34,7 @@ installed scenarios but not tested here.
 | **Time bank** | `TimeRefilledByKill` adds seconds per kill. Break-even rate = 1/refill kills per second. Run length = Timelimit / (1 − refill × kill rate), so the score grows faster than the kill rate | Confirmed (Speed Build, 2026-09-23: 143 kills, run 58.3 s against 20 + 143 × 0.27 = 58.6) |
 | **Respawn delay** | `MinRespawnDelay` / `MaxRespawnDelay` on the target | Unconfirmed in game |
 | **MBS** | Rewards player movement | Not for static drills |
+| **Turned bots** | SpawnVolume `rotation` first value (roll) turns each bot it spawns, head included, and turns the volume's box too. Movement (dodge, dash ability `UpVelocity`) stays on the world axes | Confirmed 2026-09-25 |
 
 - **Wall-bounce bots (confirmed 2026-09-25).** A dodge profile's `BlockedMovementPercent` is the share of the bot's
   top speed below which it counts as blocked. After `BlockedMovementReactionMin/Max` it turns. The speed includes

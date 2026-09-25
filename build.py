@@ -116,15 +116,24 @@ def slim_meshes(m, map_scale):
     m["objects"] = keep_objects
 
 
+def volume_extent(v):
+    """A spawn volume's half-extents across and up the wall, in map units. A rolled volume turns its box too, so
+    it spawns over its turned box (2026-09-25: a wide volume rolled 90 deg spawned targets outside the window)."""
+    hy, hz = v["size_y"] * 100, v["size_z"] * 100
+    c, s = abs(math.cos(math.radians(v.get("roll", 0.0)))), abs(math.sin(math.radians(v.get("roll", 0.0))))
+    return c * hy + s * hz, s * hy + c * hz
+
+
 def clip_box(volumes, radius, thickness=20.0):
     """Six invisible Clip slabs round the spawn volumes (plus a target's radius, in map units), so moving targets
     stay where they can spawn: on screen and on the wall plane. Clip blocks bots but not shots (2026-09-25: the
     Pasu Track copy and the race seeker). A spec sets "clip_box": true to get it."""
     x0, x1 = WALL_X - 16 - radius, WALL_X + 16 + radius      # the volumes are 32 deep round WALL_X
-    y0 = min(v["y"] - v["size_y"] * 100 for v in volumes) - radius
-    y1 = max(v["y"] + v["size_y"] * 100 for v in volumes) + radius
-    z0 = min(v["z"] - v["size_z"] * 100 for v in volumes) - radius
-    z1 = max(v["z"] + v["size_z"] * 100 for v in volumes) + radius
+    ext = [(v, *volume_extent(v)) for v in volumes]
+    y0 = min(v["y"] - hy for v, hy, hz in ext) - radius
+    y1 = max(v["y"] + hy for v, hy, hz in ext) + radius
+    z0 = min(v["z"] - hz for v, hy, hz in ext) - radius
+    z1 = max(v["z"] + hz for v, hy, hz in ext) + radius
     t = thickness
     slabs = [(x0 - t, x0, y0 - t, y1 + t, z0 - t, z1 + t), (x1, x1 + t, y0 - t, y1 + t, z0 - t, z1 + t),
              (x0, x1, y0 - t, y0, z0 - t, z1 + t), (x0, x1, y1, y1 + t, z0 - t, z1 + t),
@@ -311,7 +320,7 @@ def build(spec, outdir):
         o.pop("group", None)
         o["location"] = f"{WALL_X:.6f}, {v['y']:.6f}, {v['z']:.6f}"
         o["scale"] = f"0.160000, {v['size_y']:.6f}, {v['size_z']:.6f}"
-        if "roll" in v:        # turn the volume (and so, perhaps, the bots it spawns) as the player sees it
+        if "roll" in v:        # turn the volume, its box and the bots it spawns, as the player sees it
             r = o.get("rotation", "0, 0, 0").split(",")
             o["rotation"] = ", ".join([f"{v['roll']:.6f}"] + [t.strip() for t in r[1:]])
         for p in o["properties"]:
