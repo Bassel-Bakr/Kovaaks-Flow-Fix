@@ -78,7 +78,8 @@ GitHub Copilot and other agents that support the format discover them there; any
 ## Working with this user
 
 - **Commits.** Use Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `chore:`, with an optional scope such
-  as `docs(skills):`). Commit only when the user asks, on a branch rather than `main`.
+  as `docs(skills):`). Commit only when the user asks, on the branch that is checked out. Never create a branch
+  unless the user asks for one (user, 2026-09-25).
 
 - **Ask before changing.** Say what you will change and wait for a yes. Answer questions and audits
   directly.
