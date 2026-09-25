@@ -35,6 +35,15 @@ installed scenarios but not tested here.
 | **Respawn delay** | `MinRespawnDelay` / `MaxRespawnDelay` on the target | Unconfirmed in game |
 | **MBS** | Rewards player movement | Not for static drills |
 
+- **Wall-bounce bots (confirmed 2026-09-25).** A dodge profile's `BlockedMovementPercent` is the share of the bot's
+  top speed below which it counts as blocked. After `BlockedMovementReactionMin/Max` it turns. The speed includes
+  vertical speed. So a bot that jumps faster than that share of its top speed can slide along a wall mid-jump
+  without turning. Pasu Track Extrasmooth TE (0.95, jump 1200 against a top speed of 1000) did. Jumping at 900
+  with gravity 0.197 for the same height fixed it. A lower value (0.1) made it ride more. A strafe timer equal to
+  the room-crossing time also fixed it with the original jumps: the strafe timer restarts at every turn, wall
+  turns included. Details are in
+  scenario-types.md.
+
 ## Geometry (base room, MapScale 3.15)
 
 - **Positions:** player at x = −6000 map units, spawn plane at x = −2950, wall front face at x = −2900.

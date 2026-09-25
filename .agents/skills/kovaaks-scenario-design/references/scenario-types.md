@@ -17,7 +17,7 @@ confirmed. Treat the "Unknowns" list as things to test in game before relying on
 
   Flow Fix is left out of the clicking numbers below. The top-level flags `AimTypeFlicking` (34 scenarios),
   `AimTypePlayerMovement` (5) and `AimTypeProjectile` (3) add detail to the tags. `DifficultyTag` holds a number.
-- **Two map formats.** 200 scenarios hold a JSON map, like ours. 186 hold an older text format that starts with
+- **Two map formats.** 201 scenarios hold a JSON map, like ours. 185 hold an older text format that starts with
   "reflex map version 8": the map format of the game Reflex Arena. It stores brushes as vertex lists, with Y up,
   and entities by type: PlayerSpawn, WorldSpawn, CameraPath, Target and Effect. A PlayerSpawn marks its team with
   `Bool8 teamA 0` or `Bool8 teamB 0`, meaning "not for team A" or "not for team B".
@@ -296,6 +296,51 @@ seem to steer the real target by pushing it; that is still to be tested.
 - **Static clicking** keeps working as Flow Fix does now. Installed scenarios rely on accuracy multipliers far more
   than on miss penalties, and none uses a fire delay; Flow Fix's delay drills are unusual.
 
+## Case: the user's race scenario (1w1t Race WIP, 2026-09-25)
+
+A "Seeker" bot on the player's team (team 1, `Untargetable`, weapon hidden) flies to the targets on the wall and
+takes them with a short-range gun (`MaxHitscanRange` 100), racing the player. Fixes and findings, from test copies
+made with `patch_scenario.py`:
+- **The seeker drifted toward the player** whenever the player took its target first, for the 0.45 s until the next
+  target respawned: with no target it kept flying "forward". An invisible `Clip` brush across the room just in
+  front of the seeker's plane fixed it (confirmed). Clip blocks bots but not shots.
+- **It moved very slowly.** `ForwardSpeedBias` 0.1 (with `StrafeSpeedMult` 0, so it only moves forward) and
+  `TerminalVelocity` 100 held it far below its `MaxSpeed` of 1800. Setting them to 1.0 and 0 made it fast
+  (confirmed).
+- **Its paths curved.** The bot moves along its view, and its aim turned slowly toward each new target. The Aim
+  Profile limited it: `MaxTurnAngleFromPadCenter` 75 (targets sit up to about 85° off the seeker's facing, since it
+  flies just in front of the wall), `FlickFov` 30, aim errors of 15 to 40, and slow turn speeds. With 360, 360,
+  errors 0 and speeds 20, plus finite acceleration (12000) and braking (24000, `BrakingFrictionFactor` 0), it
+  still curved and overshot its targets: the bot carries momentum, so it drifts when it changes direction and does
+  not stop in time. Now on trial: the original instant start and stop (100000) with the aim speeds at 1000, for
+  straight constant-speed lines.
+- **A "second crosshair" instead of a flying body** (`1w1t Race WIP Eye`):
+  - **The setup.** The seeker stands still, hidden, at the player's exact spawn point, with the player's body size
+    and spawn offset. Its laser is on (`ShowLaser`, `LaserAlpha` 1), its gun reaches the whole wall, and its
+    tracers are off.
+  - **Confirmed:** a laser that starts at the player's eye shows as a clean dot on the wall.
+  - **The catch with aim assist.** With its gun's aim assist on (`AAMode` 2), the bot never turned: the laser stayed
+    fixed at the centre, and targets died almost at once. Aim assist lands the bot's hits without it aiming.
+  - **Aim assist off (`AAMode` 0): the bot does aim.** Its laser pointed at a target. But while the two bodies
+    overlapped, nothing got through: the player's shots killed nothing, the seeker took no targets, and its laser
+    started above and to the side of the player's eye (probably pushed out of the overlap at spawn). A laser that
+    starts off the eye shows as a long line, not a dot.
+  - **Dropped:** the user wants the seeker on the wall with the targets, flying to them, not beside the player.
+- **Back to the flying seeker** (on trial): the original instant start and stop, the Clip wall, full speed, an aim
+  that snaps to the next target with no reaction delay (`MinReactionTime`/`MaxReactionTime` 0.0001, turn speeds
+  1000, no aim error). The seeker stops 90 units from its target (`MinTargetDistance` 90, inside the gun's 100),
+  waits its 0.3 to 0.6 s shoot delay and moves on. The reaction delay had kept it flying for 0.3 to 0.4 s after
+  each change of target at full speed, which is likely what overshot.
+- **Measured from the user's replay** (120 fps, the seeker tracked by its colour):
+  - **Movement:** mostly straight segments at a steady 40 to 50°/s on screen, after a start ramp of about 0.1 s.
+  - **Arrival:** a small hook and 0.1 to 0.2 s of jitter between 0 and 30°/s. Near the target, the direction to it
+    swings fast, and the 90-unit stop zone switches on and off.
+  - **Stop:** no clean pause before moving on.
+  - **A resampling trap:** resampling the 120 fps video to 60 fps made the speed look like it pulsed every 3 frames.
+    At the native rate it is smooth.
+- **Limit:** KovaaK's bots have no "move straight to a point and stop" command. They move along their view and brake
+  only when they have no input, so an easing start and stop and a perfectly straight path pull against each other.
+
 ## Unknowns to test in game (probe scenarios)
 
 - The units and feel of `MaxSpeed`, `Acceleration`, `Friction` and `BrakingDeceleration`, and how they combine at
@@ -306,5 +351,39 @@ seem to steer the real target by pushing it; that is still to be tested.
   player moves.
 - The exact meaning of `WaypointLogic` values and `WaypointTurnRate`, and how `BotPauseTime` works on a path.
 - The role of the Controlsphere helper bots and the "Wall Repellent" map.
-- `LOSReact*`, `BlockedMovement*` and `DamageReaction*` details.
+- `LOSReact*` and `DamageReaction*` details.
+- **`BlockedMovementPercent` and `BlockedMovementReactionMin/Max`** (confirmed 2026-09-25). Wall-bounce bots use strafes
+  that never time out (`MinLRTimeChange` 1000) and turn back only when a wall blocks them.
+  - **Tested in game: a higher value reacts sooner.** Pasu Track Extrasmooth TE uses 0.95 with a 0.01 to 0.02 s
+    reaction, and the user saw its bot ride the side walls sometimes. A copy set to 0.1 (with a 0.15 to 0.2 s
+    reaction) rode the walls even more.
+  - **The reading that fits:** the bot counts as blocked when it moves slower than this share of its top speed;
+    0.95 means below 95%. The speed seems to include vertical speed. That bot jumps at 1200 against a top speed of
+    1000, so while it rises or falls fast along a wall it still moves faster than 95% and never counts as blocked.
+  - **Confirmed by the fix:** `Pasu Track Extrasmooth TE Wall Fix` (made with `patch_scenario.py`) keeps 0.95 and
+    the fast reaction. It jumps at 900 with gravity 0.197 instead of 1200 and 0.35: the same height, but it never
+    moves faster than 95% of its top speed vertically. It also drops the author's random 0 to 0.25 s pause at each
+    turn (`StrafeSwapMaxPause`). The user saw no more wall riding (2026-09-25).
+  - **Rule for wall-bounce bots:** keep the jump speed below `BlockedMovementPercent` × `MaxSpeed`. Raise the jump
+    height with lower gravity, not with a faster jump: the height is jump speed² / (2 × 980 × `Gravity`).
+  - **Physical bounce.** The Character Profile's `BounceOffWalls` true makes the bot bounce off walls. ClockTrack
+    and TSK DVD Tracking use it with the same movement as Pasu (top speed 1000, acceleration 15000, air control 1,
+    strafes that never time out). ClockTrack keeps `BlockedMovementPercent` 0.95; DVD sets it to 0 and relies on
+    the bounce alone. Pasu Track Extrasmooth TE has it off. `Pasu Track Extrasmooth TE Bounce Fix` turns it on and
+    keeps the original jumps (1200, gravity 0.35), to test whether that stops the riding without slowing the
+    jumps. The user saw it "float on the floor" instead: with gravity 0.35 it keeps landing, and the bounce seems
+    to apply to the floor too. ClockTrack and DVD use gravity 0.1, so their bots rarely touch it. Retired.
+  - **Why the original speeds conflict.** If the blocked test uses the bot's total speed, a bot that runs at 1000
+    and jumps at 1200 cannot be caught at a wall mid-jump by any threshold. Catching 1200 at a wall would also
+    catch 1000 in normal running, and the bot would turn all the time.
+  - **Timer backup (confirmed 2026-09-25).** `Pasu Track Extrasmooth TE Timer Fix` keeps the original speeds and
+    jumps and sets the strafe time to 3.05 s, about the time the bot takes to cross the room (2,973 units at 1000).
+    A slide along a wall then ends within a moment by the timer. The user saw no riding and no mid-room turns, so
+    the strafe timer restarts at every turn, wall turns included.
+  - **Which fix for which map.** The slower jump (jump speed under 95% of top speed) works in any room with no
+    tuning. The timer keeps the original jumps, but its time must match the room: the strafe time is (the inner
+    width minus the bot's diameter) / top speed, plus about 0.07 s for the turn. It must be recomputed for every
+    width or speed change, and anything that slows the bot's crossing (forward-back drift, other bots) makes it
+    turn early.
+  - **Installed default:** 0.5 with 0.125 to 0.2 s (248 dodge profiles).
 - Whether `SpawnVolume` and `BlockedSpawnRadius` behave for moving bots as they do for static targets.
