@@ -292,6 +292,9 @@ def build(spec, outdir):
         o.pop("group", None)
         o["location"] = f"{WALL_X:.6f}, {v['y']:.6f}, {v['z']:.6f}"
         o["scale"] = f"0.160000, {v['size_y']:.6f}, {v['size_z']:.6f}"
+        if "roll" in v:        # turn the volume (and so, perhaps, the bots it spawns) as the player sees it
+            r = o.get("rotation", "0, 0, 0").split(",")
+            o["rotation"] = ", ".join([f"{v['roll']:.6f}"] + [t.strip() for t in r[1:]])
         for p in o["properties"]:
             if p["name"] == "PermittedCharacterProfiles":
                 p["value"] = v["permitted_profile"]

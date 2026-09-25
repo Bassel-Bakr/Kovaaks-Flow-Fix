@@ -341,6 +341,31 @@ made with `patch_scenario.py`:
 - **Limit:** KovaaK's bots have no "move straight to a point and stop" command. They move along their view and brake
   only when they have no input, so an easing start and stop and a perfectly straight path pull against each other.
 
+## Case: the Startled redesign of Lingering (2026-09-25, in test)
+
+The user wants Lingering to fix lingering rather than practise it, so its targets take two hits and dash away on
+the first one. Findings from the test copies:
+- **Flying bots clamp to their flight speed.** A flyer (`IsFlyer`) bobbed up and down from spawn, because its dodge
+  profile toggles up and down at the default `FlightVelocityUp`/`Down` of 800. With those set to 0, its dash
+  vanished too: the dash is clamped to the flight speed.
+- **The head sits on top only.** `MainBBHeadOffset` moves it along the body's up axis. A negative offset (-144) hid
+  the head completely. Bots stay upright, so the head cannot be turned to the sides.
+- **The damage-triggered dash ability never fired** on non-flying floating targets. The design that copied
+  Reactive Flick (5 direction types, `AIDamageReaction`, `UpVelocity`) left them standing still after the hit.
+- **Now on trial: a dash from the dodge profile.** `StandStillUntilHurt` (movement starting on the first hit worked
+  in the first test) with one strafe of 0.35 s left or right and up or down, then a 30 s pause
+  (`StrafeSwapMin/MaxPause`, `UpDownSwapPauseMin/MaxTime`): one straight diagonal dash, then it stays put. The
+  spawn volumes are rolled by multiples of 45° (`build.py` takes a `roll` per volume), to see whether the bot, its
+  head and its dash turn with the volume.
+- **Knockback is no help here:** a hit pushes the target along the shot's direction, which is into the wall. Only
+  the flat vertical knockback could vary.
+- **Earlier design** (like the installed Reactive Flick):
+  - **Movement.** Non-flying targets with gravity 0, so they float, and top speed 0, so they never walk.
+  - **The dash.** One damage-triggered dash (`AIDamageReaction`, no delay, one charge), which ends with
+    `EndVelocityFactor` 0.
+  - **Directions.** 5 target types, drawn by a random rotation. Each has a fixed up or down part (`UpVelocity`)
+    and a random left or right part from the dodge profile, so 8 directions.
+
 ## Unknowns to test in game (probe scenarios)
 
 - The units and feel of `MaxSpeed`, `Acceleration`, `Friction` and `BrakingDeceleration`, and how they combine at
