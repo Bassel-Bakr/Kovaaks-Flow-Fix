@@ -15,7 +15,9 @@ saying what the scenario should be hard at.
    (`D:\Projects\aim\docs\articles\weakness-targeted-static-flowchart.md`). Respect the user's position:
    a too-loose arm drags into the flick; it does not overflick.
 2. **Pick mechanics** from `references/mechanics.md`. Use only mechanics marked confirmed, or flag the
-   unconfirmed ones to the user as a test item.
+   unconfirmed ones to the user as a test item. For any type of drill, check
+   `references/scenario-types.md`: how the installed scenarios build each type, their typical numbers, and what
+   the stats can and cannot show.
 3. **Hunt the shortcut before the player finds it.**
    - **Nearest-target cherry-picking** with 3 or more targets turns wide flicks into short ones. Use fewer
      targets or spawn blocking.

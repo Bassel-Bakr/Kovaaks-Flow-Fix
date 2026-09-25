@@ -36,6 +36,7 @@ this folder.
 | `.gitignore` | Keeps generated files (`out/`, `specs.json`, `test_out/`), local state (`installed.json`) and the `retired/` archive out of git. |
 | `docs/` | Human-facing docs: `scenarios.md` (every scenario's design, evidence and verdict), `look.md` (the shared look), `future.md` (suggestions), `README.md` (index and the loop). Keep them current with every change. |
 | `prop_test.py`, `prop_sampler.py`, `frame_test.py` | Retired prop tests for a frame that themes cannot repaint. Prop Test checks whether themes repaint props. Prop Sampler shows every candidate prop so the user can pick the opaque ones. Frame Test builds the arena frame from Container props. |
+| `survey_scenarios.py` | Read-only survey of every scenario installed in KovaaK's into `test_out/survey.json`: top-level keys, profile sections and map facts (both map formats). The basis of `references/scenario-types.md`. |
 | `stats_basic.py`, `stats_varying_sizes.py`, `stats_all_in_one.py`, `stats_recovery.py`, `stats_slow_start.py` | Read-only analysis of the user's runs. |
 | `Flow Fix guide.md` | Player-facing guide, installed next to the scenarios. Keep it in sync with every change. |
 | `retired/`, `test_out/` | `retired/` holds old installed files, and `retired/tests/` holds superseded test scenarios. `test_out/` holds the current test builds and the folders with all 13 scenarios in each look (`egypt_all`, `egypt_mesh_all`, `egypt_window_all`). |
@@ -67,7 +68,9 @@ GitHub Copilot and other agents that support the format discover them there; any
 
 - **kovaaks-scenario-design:** designing or changing a drill. Confirmed mechanics are in
   `references/mechanics.md`; decoration (materials, themes, props, meshes, rotations, the Egypt look, art
-  research) in `references/decoration.md`. The user wants all of it kept for a wiki: record every finding there.
+  research) in `references/decoration.md`; every scenario type (how installed scenarios build static and dynamic
+  clicking, tracking and switching, typical numbers, what the stats record) in `references/scenario-types.md`. The user wants all of it kept for a wiki: record
+  every finding there.
 - **flowfix-change:** the edit, build, check, install and document loop, plus the arena test path.
 - **kovaaks-run-analysis:** "played X, check the stats". Judges the scenario from the user's runs.
 
