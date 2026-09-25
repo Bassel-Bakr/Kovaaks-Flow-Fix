@@ -36,6 +36,7 @@ this folder.
 | `.gitignore` | Keeps generated files (`out/`, `specs.json`, `test_out/`), local state (`installed.json`) and the `retired/` archive out of git. |
 | `docs/` | Human-facing docs: `scenarios.md` (every scenario's design, evidence and verdict), `look.md` (the shared look), `future.md` (suggestions), `README.md` (index and the loop). Keep them current with every change. |
 | `prop_test.py`, `prop_sampler.py`, `frame_test.py` | Retired prop tests for a frame that themes cannot repaint. Prop Test checks whether themes repaint props. Prop Sampler shows every candidate prop so the user can pick the opaque ones. Frame Test builds the arena frame from Container props. |
+| `patch_scenario.py` | Copies an installed scenario under a new name into `test_out/`, with chosen settings changed, map objects added or moved (for example an invisible Clip wall), and a note added to its description. For fixing other authors' scenarios, and the user's own, without touching the original. |
 | `survey_scenarios.py` | Read-only survey of every scenario installed in KovaaK's into `test_out/survey.json`: top-level keys, profile sections and map facts (both map formats). The basis of `references/scenario-types.md`. |
 | `stats_basic.py`, `stats_varying_sizes.py`, `stats_all_in_one.py`, `stats_recovery.py`, `stats_slow_start.py` | Read-only analysis of the user's runs. |
 | `Flow Fix guide.md` | Player-facing guide, installed next to the scenarios. Keep it in sync with every change. |
