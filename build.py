@@ -116,6 +116,25 @@ def slim_meshes(m, map_scale):
     m["objects"] = keep_objects
 
 
+def clip_box(volumes, radius, thickness=20.0):
+    """Six invisible Clip slabs round the spawn volumes (plus a target's radius, in map units), so moving targets
+    stay where they can spawn: on screen and on the wall plane. Clip blocks bots but not shots (2026-09-25: the
+    Pasu Track copy and the race seeker). A spec sets "clip_box": true to get it."""
+    x0, x1 = WALL_X - 16 - radius, WALL_X + 16 + radius      # the volumes are 32 deep round WALL_X
+    y0 = min(v["y"] - v["size_y"] * 100 for v in volumes) - radius
+    y1 = max(v["y"] + v["size_y"] * 100 for v in volumes) + radius
+    z0 = min(v["z"] - v["size_z"] * 100 for v in volumes) - radius
+    z1 = max(v["z"] + v["size_z"] * 100 for v in volumes) + radius
+    t = thickness
+    slabs = [(x0 - t, x0, y0 - t, y1 + t, z0 - t, z1 + t), (x1, x1 + t, y0 - t, y1 + t, z0 - t, z1 + t),
+             (x0, x1, y0 - t, y0, z0 - t, z1 + t), (x0, x1, y1, y1 + t, z0 - t, z1 + t),
+             (x0, x1, y0, y1, z0 - t, z0), (x0, x1, y0, y1, z1, z1 + t)]
+    return [{"location": f"{a:.6f}, {c:.6f}, {e:.6f}", "mesh": "Cube", "name": "Clip",
+             "rotation": "0.000000, 0.000000, 0.000000",
+             "scale": f"{(b - a) / 100:.6f}, {(d - c) / 100:.6f}, {(f - e) / 100:.6f}", "type": "brush"}
+            for a, b, c, d, e, f in slabs]
+
+
 def parse(path):
     text = Path(path).read_text(encoding="utf-8", errors="strict")
     lines = text.splitlines()
@@ -321,6 +340,11 @@ def build(spec, outdir):
             egypt.add_egypt(m, spec["spawn_volumes"], max(radii))
         else:
             arena.add_arena(m, spec["spawn_volumes"], max(radii))
+    if spec.get("clip_box"):
+        map_scale = float(next(l.split("=", 1)[1] for l in top if l.startswith("MapScale=")))
+        radius = max(float(get_key(s["lines"], "MainBBRadius")) for s in sections
+                     if s["type"] == "Character Profile" and s["name"] in used_chars)
+        m["objects"] += clip_box(spec["spawn_volumes"], radius / map_scale)
     if SLIM_MESHES:
         slim_meshes(m, float(next(l.split("=", 1)[1] for l in top if l.startswith("MapScale="))))
     map_text = dump_map(m)
