@@ -66,6 +66,8 @@ for path in sorted(glob.glob(f"{folder}/*.sce")):
                                     (z + min(v[2] for v in tri) * sz, z + max(v[2] for v in tri) * sz)))
             continue
         elif o.get("type") == "brush":
+            if o.get("name") == "Clip":            # invisible, and shots pass through it
+                continue
             x, y, z = (float(t) for t in o["location"].split(","))
             sx, sy, sz = (float(t) * 100 for t in o["scale"].split(","))
             ra, rb, rc = (float(t) for t in o.get("rotation", "0, 0, 0").split(","))
