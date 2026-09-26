@@ -146,6 +146,12 @@ GitHub Copilot and other agents that support the format discover them there; any
 - **Judge with data.** Whether a scenario does its job comes from the user's stats. The design intent
   alone doesn't settle it.
 
+- **A normal click only (2026-09-25 review).** No fire delays and no hold-fire weapons: a learned delay leaves
+  aftereffects once removed, and hold-fire got played as a spray. Flow Fix 2 follows this; see `docs/scenarios.md`.
+- **Price misses in time.** A one-round gun (a miss forces a reload) beats small point costs: cheap misses lowered
+  accuracy in Slow Start and Recovery.
+- **Judge by transfer.** A cA sixshot run before and after a session tells more than the drill's own score.
+
 ## Safety
 
 - **Crash loop.** KovaaK's reopens the last played scenario at startup. A crashing scenario therefore makes
@@ -157,6 +163,9 @@ GitHub Copilot and other agents that support the format discover them there; any
   only on groups 0 and 1.
 - **Player spawn.** Always a SpawnPoint. A player SpawnVolume (as in the cA sixshot base map) spawns at
   a random point in its box, so the view shifts on every reload; `build.py` swaps it (`FIXED_SPAWN_DEFAULT`).
+- **Targets stand on their spawn point.** A target's centre sits SpawnOffset Z plus its full MainBBHeight
+  above the volume (world units); `build.py` lowers every volume to compensate (2026-09-26; first read as half the
+  height). The 21 installed scenarios were built with the half-height rule and still sit 0.2-0.4 deg high.
 - **Geometry.** A SpawnVolume's half-extent is scale times 100, so tile with scale = step / 200. A brush's
   location is its minimum corner, and brush scale 1 spans 100 units. Player themes replace materials by
   surface type (wall, floor, ceiling, ramp).
@@ -195,11 +204,19 @@ Still open:
   `window look without courtyard (installed until 2026-09-24)` and `window look with stencil art (installed until
   2026-09-25)`. The Sand Test and its earlier versions are in `retired/tests/`.
   Ask for an in-play FPS reading and whether the restart hitch is gone.
-- The Startled redesign of Lingering is in test (2026-09-25): `Flow Fix Lingering Test` is installed, built by the
-  scratch script `_lingering_test.py` (ignored by git). Targets dash once, toward their head, on the first hit. The
-  heads turn with rolled spawn volumes, and up and down dashes work. The sideways part of the dash does not move
-  the bot yet. Findings and next steps are in `references/scenario-types.md` ("Case: the Startled redesign"). The
-  earlier copies are in `retired/tests/`. The installed Flow Fix Lingering is unchanged.
+- The Startled redesign of Lingering is parked (2026-09-26): the sideways part of its dash never moved the bot, and
+  Flow Fix 2 Return replaced it. Its test and script (`_lingering_test.py`, ignored by git) are in `retired/tests/`
+  and the project folder. Findings are in `references/scenario-types.md` ("Case: the Startled redesign").
+- **Overflick ring (Blast Test, 2026-09-26, parked in `retired/tests/`):** a hold-fire stream traces the crosshair,
+  and penalty bots round each target blast the player (-1 point) when the stream stays on them. It worked as a disc
+  and then as a ring of 8 spheres on 4 depths; the last versions (2 targets, corners only) were not confirmed.
+  Script `_blast_test.py`; record in `references/scenario-types.md` ("Case: the Overflick ring").
+- **Phases (Phase Test, 2026-09-26, installed, works):** 5 s clicking, a teleporter, 5 s tracking with a beam on the
+  ability key. Script `_phase_test.py`; record in `references/scenario-types.md` ("Case: phases in one run"). The
+  user has not decided phase lengths, styles or the score balance yet.
+- **Flow Fix 2** (2026-09-26, the user's go): 8 scenarios in their own playlist, in the frame look
+  (`egypt.FRAME_LOOK`: the window frame and text, no courtyard, bust or lions). Specs are the `series="Flow Fix 2"`
+  block at the end of `gen_specs.py`; `playlist.py` writes one playlist per series. No runs yet. Flow Fix is unchanged.
 - Calibration on 2026-09-24 (details in `docs/scenarios.md`): Check validated (the small target at
   1.5 keeps points-per-second parity on the new layout), Pathing validated after the four-cluster change,
   Early Braking works after the spacing change, Speed Build works, Recovery is clean at 3 s but weak on its own

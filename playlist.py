@@ -9,7 +9,8 @@ from pathlib import Path
 specs = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
 name, updated = sys.argv[3], int(sys.argv[4])
 # Individual drills 01-11 first; the all-in-one is id 12 so it sorts last.
-names = [s["scenario_name"] for s in sorted(specs, key=lambda s: s["id"])]
+# One playlist per series (2026-09-26): "Flow Fix" and "Flow Fix 2" (the spec's "series", "Flow Fix" by default).
+names = [s["scenario_name"] for s in sorted(specs, key=lambda s: s["id"]) if s.get("series", "Flow Fix") == name]
 playlist = {
     "playlistName": name,
     "playlistId": 0,

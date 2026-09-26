@@ -80,3 +80,10 @@ Lessons:
 - `make_screenshots.py` renders each scenario's picture for the scenario list.
 - Try any change to map structure as a single test scenario first (`egypt_test.py`, `courtyard_test.py`): a scenario
   that crashes the game makes it crash on every launch until the file is replaced.
+
+## The frame look (Flow Fix 2, 2026-09-26)
+
+Flow Fix 2 uses the window frame and its text alone: no courtyard, no pharaoh's bust and no lions (user, 2026-09-26).
+In code it is `egypt.FRAME_LOOK`, the window look with `WINDOW_HEAD` None, `WINDOW_LIONS` and `COURTYARD` off, chosen
+by the spec's `"arena": "frame"`. The palette is the window look's without the courtyard's colours. A Flow Fix 2 map
+is about 140 objects, 40 of them meshes, 11,700 triangles and 2.5 MB.

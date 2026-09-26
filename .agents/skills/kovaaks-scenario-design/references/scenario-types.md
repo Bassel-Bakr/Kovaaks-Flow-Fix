@@ -425,3 +425,48 @@ Findings from the test copies:
     turn early.
   - **Installed default:** 0.5 with 0.125 to 0.2 s (248 dodge profiles).
 - Whether `SpawnVolume` and `BlockedSpawnRadius` behave for moving bots as they do for static targets.
+
+## Case: the Overflick ring (Blast Test, 2026-09-26)
+
+The user wanted an Overflick drill where overflicking is impossible or not worth it. A normal click cannot show the
+game an overflick that is corrected before the click, so the drill uses a held stream (the Poke-Drill) and penalty
+bots round each target. The stream traces the crosshair's path; when it stays on a penalty bot, that bot blasts the
+player and costs a point. Mechanics are in `mechanics.md` ("Blast penalty", "Overflick disc").
+- **Scoring:** a target kill is worth 2 (`ScorePerKill`, 80 ms of contact), a blast costs 1
+  (`ScoreLossPerDamageTaken` 0.1, 10 damage), misses are free, and a blast needs about 5 bullets in a row (the
+  penalty bot's 100 HP, 5/s regen and `AIMaxSelfHealth` 99), so a fast pass on the way in is free and an overflick's
+  turn is not. Each penalty bot blasts at most once per 0.5 s (user: one mistake, one point).
+- **What failed on the way:**
+  - blasts with nobody shooting (the normal-use switches on);
+  - no blast at all (damage reaction only);
+  - chain reactions (team 0);
+  - flat and tall Cuboids (drawn wrong);
+  - rings of small bots with gaps (bots need about 4 radii between centres);
+  - `DisableCharacterCollision` (stopped the targets spawning);
+  - a crosshair-blocked random spot (the spawn waits).
+- **What worked:** one big sphere behind each target (a disc), placed by perspective and the full-height rule. The
+  user then wanted a gap between target and penalty zone, and a target visible under forced colours. That gave a
+  ring of 8 spheres, spread over 4 depths 130 units apart so no two are within 4 radii, with the target in front of
+  them all. The build checks every pair.
+- **Still open:** nothing makes holding the button necessary. A player can let go during the flick and press on
+  arrival, so an overflick with the button up costs only time. No spin-up exists (`DelayBeforeShot` on a full-auto
+  gun gives one shot per press). The last versions (2 targets at once, corners only) were not confirmed in game.
+
+## Case: phases in one run (Phase Test, 2026-09-26)
+
+The user asked for a 10 s scenario: 5 s clicking, then 5 s tracking, each with its own weapon.
+- **Phases:** a Teleporter under the player's spawn (`Target` = a Waypoint's name, `TeleportDelay` 5) moves the
+  player to a second room at 5 s. The player kept facing the same way. shimcluster uses the same object (15 s, 4
+  rooms).
+- **Second weapon:** nothing swaps the player's weapon by itself. Taking damage, ability triggers, running out of
+  ammo and bot weapon randomising were all checked. What works: the tracking beam is a Weapon Ability
+  (`AbilityProfileNames` `Track.abilwep;;;`), fired by holding the Ability 1 key, while mouse 1 stays the clicking
+  gun.
+- **Keeping each gun to its phase:** `BlockAbilityOnStartDuration`, a spawn without charges and the beam's
+  `DelayAfterSpawn` all failed to lock the beam in room 1. Two things worked:
+  - **Range:** the beam's `MaxHitscanRange` 6000 cannot reach room 1's targets (9,608 away); the tracking bot stands
+    closer (3,780), scaled down in size and speed to look the same.
+  - **Score:** the clicking gun does 0.001 damage, so it scores nothing on the tracking bot. Clicks score by kill,
+    tracking by damage.
+- **Tracking bot:** a flyer strafes only with `AirControl` above 0 (the base has 0).
+- **First scores:** 5-10 points clicking and 2-6 tracking in the user's runs. The balance is not decided.

@@ -62,3 +62,25 @@ changes should wait for data (3 runs of the current build) rather than intent.
 - **Version control.** The project became a git repository on 2026-09-24 (built outputs, test builds and `retired/`
   are ignored; see `.gitignore`). Commit each approved change with its docs.
 - **The wiki.** `decoration.md`, `mechanics.md` and `docs/` are written to be moved into a wiki as they are.
+
+## Flow Fix 2 ideas not built (2026-09-26)
+
+From the two research reports of 2026-09-25, not approved yet:
+- **Head Check:** a big body with a small head, `HeadshotOnly` true (seen in e1se Braking Reflex Flick EASY), heads
+  turned four ways by rolled spawn volumes. Untested whether a body hit shows in the stats.
+- **Micro Chain:** one small target that spawns within 8 deg of the crosshair, if the Player profile's
+  `InvertBlockedSpawn` true forces spawns inside `BlockSpawnFOV` (VT ww5t Intermediate S5 uses it). Untested.
+- **SAT Pair:** the same layout twice (big targets and free misses, small targets and a reload), to tell a change in
+  skill from a change in strategy.
+- **Metronome blocks** ending in an unpaced run, and **priority under expiry** (shoot the target about to vanish).
+- **Rejected:** Settle Tap (two hits within 0.25 s): a double tap changes the click.
+
+## Tests parked on 2026-09-26
+
+- **Overflick ring** (`_blast_test.py`, the last build in `retired/tests/`): a held stream and blasting penalty
+  spheres round each target. Works as a disc and as a ring on 4 depths; needs a decision on the unforced hold and a
+  confirmed run of the 2-target corner version before it can replace Flow Fix 2 Overflick.
+- **Phase scenario** (`_phase_test.py`, installed as Flow Fix 2 Phase Test): 5 s clicking, 5 s tracking. Needs the
+  user's choice of phase lengths, the clicking and tracking styles and the score balance.
+- **Height rebuild:** the 21 installed scenarios sit 0.2-0.4 deg high (built with the half-height rule). Rebuilding
+  fixes it and changes every hash.

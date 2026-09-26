@@ -179,3 +179,71 @@ another. The baseline for every comparison is the user's last ~30 runs of plain 
 - **Big targets compress kill times:** a change in flick lengths may not show in the time spread (Early Braking).
 - **Judge with data,** from at least 3 runs of one build. Runs are grouped by the scenario hash in each stats file;
   keyboard-key and mouse-button runs of delayed-shot scenarios are not comparable.
+
+## Flow Fix 2 (2026-09-26)
+
+A second batch of 8 scenarios, installed next to Flow Fix with its own playlist, "Flow Fix 2". It follows the review
+of 2026-09-25: the tester's feedback and runs, the user's worry that some drills build bad habits, and two research
+reports. Flow Fix itself is unchanged.
+
+**Rules.**
+- **A normal click only:** an instant shot on a single click. After practice with a delay, performance drops once
+  the delay is removed ([Cunningham et al. 2001](https://doi.org/10.1111/1467-9280.d01-17)), and the aftereffect does
+  not fade on its own ([Kennedy et al. 2009](https://pubmed.ncbi.nlm.nih.gov/18609410/)). The tester scored 0 kills
+  from 84 shots in Hesitation, and both players held fire through the flick in Lingering (2-6% clean landings).
+- **Misses cost time, not points.** The gun holds one round: a kill refills it, and a miss forces a 0.35 s reload.
+  People set their aim and speed by the payoff ([Trommershäuser et al. 2003](https://pubmed.ncbi.nlm.nih.gov/12868646/),
+  [Dean et al. 2007](https://pubmed.ncbi.nlm.nih.gov/18217850/)), and cheap misses cost accuracy here: the tester's
+  Slow Start 77% against 90.5% in cA sixshot, the user's Recovery 85% against 91%. Voltaic uses reloads on its speed
+  scenarios.
+- **Gentle deadlines only:** imposed timing costs accuracy ([Zhang et al. 2010](https://pubmed.ncbi.nlm.nih.gov/20884550/)).
+- **Several distances where one would do:** one exact condition becomes a skill of its own
+  ([Keetch et al. 2005](https://pubmed.ncbi.nlm.nih.gov/16262492/)).
+- **Judge by transfer:** a cA sixshot run before and after a session, not the drill's own score
+  ([Soderstrom & Bjork 2015](https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/11/soderstorm_ra_learningvsperformance.pdf)).
+- **The frame look:** the window frame and its text alone, without the courtyard, the bust or the lions
+  (`egypt.FRAME_LOOK`, arena "frame"). Return is 143 map objects, 40 of them meshes, about 11,700 triangles and
+  2.5 MB, against 193 objects, 30,400 triangles and 5.1 MB for Check.
+
+| Scenario | Replaces | Setup | Score |
+| --- | --- | --- | --- |
+| Overflick | Overflick's 50 ms fire delay | 6 targets, radius 72, as Overflick | kills |
+| Return | Lingering's hold-fire pokeball | One slot: a sphere (radius 60, worth 1) 8, 10 or 12 deg out, then a cube (half-width 53) at the centre, worth 2 and draining to 0 in 0.7 s | remaining HP |
+| Slow Start | Slow Start's 0.1 miss cost | As Slow Start | remaining HP |
+| Cold Start | Hesitation's 300 ms fire delay | 1 target, radius 72, never within 6 deg of the crosshair, worth 2 and draining to 0 over 1.5 s | remaining HP |
+| Ladder | Early Braking | One slot in a fixed cycle: cube, near, cube, mid, cube, far. Spheres of radius 60 at 5, 10 and 18 deg (18 only within 35 deg of the horizontal). Each leg is its own bot type | kills |
+| Early Click | Early Click's whole-kill miss cost | As Early Click; double taps count as misses | kills |
+| Anchor | Micro Adjust | One slot, 12 pairs in a fixed, scrambled order: a big cube (half-width 80) at one of 6 spots, then a small sphere (radius 32) 2.5-3.5 deg from it, on a random side | kills |
+| Recovery | Recovery's free misses | As Recovery | kills |
+
+**How to read the stats.** Each kill row names its bot type.
+- Return: the gap before each `home` kill is the transition plus a known return.
+- Ladder: the `home` rows after `near`, `mid` and `far` are planned flicks of 5, 10 and 18 deg. If the far legs cost
+  more than their distance explains (time against log2(2D/W)), the braking is early.
+- Anchor: the `s1`-`s6` rows time the correction apart from the flick to the cube.
+- Cold Start: the value at the kill gives the hit time, 1.5 x (1 - value/2), in 0.1 s steps.
+- All: accuracy against cA sixshot, and a cA sixshot run after the session.
+
+**Status.** Installed 2026-09-26, no runs yet. Untested in game: the one-round reload (its keys come from 1w2ts
+reload smallflicks) and a fixed rotation with repeated entries (Anchor).
+
+**First runs (user, 2026-09-26, 3-4 runs each; no cA sixshot runs around them yet).**
+- Overflick: 142-150 kills at 92.8% accuracy, the same as plain cA sixshot. Nothing forces the stop: an overflick
+  corrected before the click costs only a little time. Redesign pending.
+- Slow Start: 91.0% accuracy (Flow Fix Slow Start 88.3%) with more kills (133-141 against 124-133). Recovery: 90.9%
+  (was 84.7%) with 119-132 kills. The one-round gun brought accuracy back to cA sixshot's level without costing kills.
+- Return: the return to the cube takes 0.48 s at the median, worth 0.86 of 2; 3 cubes expired in 3 runs.
+- Ladder: planned returns take 0.479, 0.511 and 0.534 s after 5, 10 and 18 deg flicks, a straight line against
+  log2(2D/W) (about 30 ms per bit). The far flicks cost no more than their distance explains, so the user shows no
+  early braking here.
+- Anchor: the fixed order works (a1, s1, a4, s4, ...). Correction legs take 0.62 s at the median, 0.09 misses per kill.
+- Cold Start: 90-93 kills, value 1.2 of 2 at the median (hit 0.6 s after the target appears), 97.6% accuracy.
+- Early Click: 132-143 kills at 95.4%. Frame look: 933-972 FPS against the user's 1000 limit.
+- Changed the same day: Ladder's and Return's cube now sits centred on the crosshair, with a square marking the centre.
+
+**Height fix (2026-09-26, all 21 scenarios, user: "fix layout").** A target stands on its spawn point, so every layout
+sat 0.4-0.6 deg above where the spec put it (half the target's height plus 8 world units). `build.py` now lowers each
+volume by that, and targets are centred where the spec says. Sizes, spacing and scoring are unchanged, but every
+scenario's hash changed, so compare runs across the date. Pacing Drop's volumes take every size, so they use the
+mean of the three (the residue is about 0.2 deg). The builds before the fix are in
+`retired/layout before the height fix (installed until 2026-09-26)/`.

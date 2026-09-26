@@ -4,7 +4,9 @@ Sizes and distances are relative to cA sixshot dense: target radius 65, grid abo
 1185 x 1050 map units, MapScale 3.15. Its grid is centred on (y=-30, z=-80), 0.6 deg left of and 1.5 deg below the
 crosshair; every Flow Fix spawn area is centred on the crosshair instead (user, 2026-09-24).
 """
+import copy
 import json
+import math
 from pathlib import Path
 
 SCEN = "C:/Program Files (x86)/Steam/steamapps/common/FPSAimTrainer/FPSAimTrainer/Saved/SaveGames/Scenarios"
@@ -97,6 +99,7 @@ specs = []
 
 
 def add(**s):
+    s.setdefault("series", "Flow Fix")   # the playlist it belongs to: "Flow Fix" or "Flow Fix 2"
     s.setdefault("drop_sections", [])
     s.setdefault("sections", [])
     s.setdefault("scenario_overrides", [])
@@ -325,6 +328,152 @@ add(id="13", scenario_name="Flow Fix Check",
     spawn_volumes=tiles(400, 300, 200, "cluster")
     + tiles(900, 700, 200, "pressure", hole=(500, 400))
     + tiles(1300, 700, 200, "far", hole=(900, 700)))
+
+# ---- Flow Fix 2 ---------------------------------------------------------------------------------------------------
+# A second batch (user, 2026-09-26: "create the new batch of scenarios ... Flow Fix 2 [NAME]"), from the 2026-09-25
+# review of bad habits (docs/scenarios.md, "Flow Fix 2"). Rules: a normal click only (no fire delay, no hold-fire);
+# misses cost time, not points (the gun holds one round, a kill refills it, a miss forces a 0.35 s reload); gentle
+# deadlines; several distances where one would do. Look: the window frame alone (arena "frame").
+COMMON2 = dict(SearchTags="Flow Fix 2, Flow Fix, flowfix, Static, Clicking, Bassel, Bakr, Egypt",
+               ScenarioVersion="Initial")
+RELOAD = {"section_type": "Weapon Profile", "copy_from_file": BASE, "copy_section_name": "BB Gun",
+          "new_name": "BB Gun", "overrides": kv(MagazineMax="1", AmmoReloadedOnKill="1", ReloadTimeFromEmpty="0.35",
+                                                  ReloadTimeFromPartial="0.35", CancelReloadOnKill="true")}
+HP_SCORE = dict(ScorePerKill="0.0", ScorePerDamage="1.0", EnableOverDamage="false")
+EYE = 3050.0   # map units from the eye to the spawn plane: an offset of EYE * tan(a) sits a degrees off centre
+DROP_TARGET = ["Bot Profile|target", "Character Profile|target"]
+
+
+def ring(deg, n, profile, size=0.3, max_elev=90.0, center=(0.0, 0.0)):
+    """n small volumes (half-size size * 100) evenly on a circle deg degrees from the centre, or from center (dy, dz)
+    in map units. max_elev keeps only the directions within that many degrees of the horizontal."""
+    r, out = EYE * math.tan(math.radians(deg)), []
+    for k in range(n):
+        t = 2 * math.pi * (k + 0.5) / n
+        if abs(math.sin(t)) > math.sin(math.radians(max_elev)) + 1e-9:
+            continue
+        out.append({"y": round(CY + center[0] + r * math.cos(t), 3), "z": round(CZ + center[1] + r * math.sin(t), 3),
+                    "size_y": size, "size_z": size, "permitted_profile": profile})
+    return out
+
+
+def point(profile, dy=0.0, dz=0.0):
+    """One tiny volume, so the target always appears at the same spot."""
+    return {"y": CY + dy, "z": CZ + dz, "size_y": 0.05, "size_z": 0.05, "permitted_profile": profile}
+
+
+def v2(src, id_, name, description):
+    """A Flow Fix 2 copy of a Flow Fix scenario: the plain gun holding one round, and misses cost no points."""
+    s = copy.deepcopy(next(x for x in specs if x["scenario_name"] == f"Flow Fix {src}"))
+    keep = [o for o in s["scenario_overrides"] if o["key"] not in ("ScoreLossPerMiss", "SearchTags", "ScenarioVersion")]
+    sections = []
+    for sec in s["sections"]:
+        if sec["section_type"] == "Weapon Profile":    # the fire-delay guns go
+            continue
+        if sec["section_type"] == "Character Profile" and sec["new_name"] == "Player":
+            sec = dict(sec, overrides=[o for o in sec["overrides"] if o["key"] != "WeaponProfileNames"])
+        sections.append(sec)
+    s.update(id=id_, scenario_name=f"Flow Fix 2 {name}", description=description, series="Flow Fix 2",
+             arena="frame", sections=[RELOAD] + sections,
+             scenario_overrides=keep + kv(ScoreLossPerMiss="0.0", **COMMON2))
+    specs.append(s)
+
+
+ONE_ROUND = "Your gun holds one round: a hit refills it at once, a miss costs a 0.35 s reload."
+
+v2("Overflick", "21", "Overflick",
+   'Chinese weakness-targeted static flowchart: overflick / too much force (decelerating too late).[nl]Trains stopping '
+   'on the target instead of flying past it.[nl]Six targets. ' + ONE_ROUND + '[nl]Stop on the target, then click. '
+   'A click while sweeping past costs you time.')
+
+# Replaces Lingering's hold-fire pokeball: both players held fire through the flick (2-6% clean landings).
+add(id="22", scenario_name="Flow Fix 2 Return", series="Flow Fix 2", arena="frame",
+    nodes=["sc-crosshair-lingers", "sc-fluid-transition", "sc-preemptive-confirmation", "sc-faster-transitions"],
+    description=('Chinese weakness-targeted static flowchart: crosshair lingers after the flick / fluid '
+                 'transitions.[nl]Trains leaving the target on the click instead of resting on it.[nl]One target at a '
+                 'time. A sphere appears 8 to 12 degrees out and is worth 1. Kill it and a cube appears at the '
+                 'centre, worth 2 and draining to 0 in 0.7 s.[nl]You know where the cube will be: leave on the click. '
+                 + ONE_ROUND),
+    scenario_overrides=kv(ScoreLossPerMiss="0.0", **HP_SCORE, **COMMON2),
+    added_bots=["return.rot"], drop_sections=DROP_TARGET,
+    # The cube drains from the kill before it, so resting on the sphere costs about 0.3 points per 0.1 s.
+    sections=[RELOAD,
+              char("home", 53, MaxHealth="2.0", HealthRegenPerSec="-2.857", HealthRegenDelay="0.0",
+                   EnemyBodyColor=AMBER, **CUBE),
+              char("out", 60, MaxHealth="1.0"),
+              bot("home", "home"), bot("out", "out"),
+              rotation("return", ["out", "home"], [1, 1], "false")],
+    # The cube's centre on the crosshair and a square marking it on the wall (user, 2026-09-26).
+    center_mark=26.0,
+    spawn_volumes=[point("home")] + ring(8, 16, "out") + ring(10, 20, "out") + ring(12, 24, "out"))
+
+v2("Slow Start", "23", "Slow Start",
+   'Chinese weakness-targeted static flowchart: dragging initial flick / arm too relaxed.[nl]Trains starting every '
+   'flick fast instead of easing into it.[nl]Two big targets, never near your crosshair. Each is worth 2 when it '
+   'appears and drains to 0 over 1 second; you score what is left when you hit it. ' + ONE_ROUND +
+   '[nl]Get going fast, but land before you click.')
+
+# Replaces Hesitation's 300 ms fire delay (the tester scored 0 of 84; a learned delay leaves aftereffects).
+add(id="24", scenario_name="Flow Fix 2 Cold Start", series="Flow Fix 2", arena="frame",
+    nodes=["sc-dragging-initial-flick", "sc-push-flick-speed", "sc-faster-starts"],
+    description=('Chinese weakness-targeted static flowchart: dragging initial flick / pre-emptive hit '
+                 'confirmation.[nl]Trains a fast start on a target you have just seen.[nl]One target at a time, never '
+                 'near your crosshair. It is worth 2 when it appears and drains to 0 over 1.5 s; you score what is '
+                 'left when you hit it.[nl]See it, go. ' + ONE_ROUND),
+    scenario_overrides=kv(ScoreLossPerMiss="0.0", **HP_SCORE, **COMMON2),
+    added_bots=["target"],
+    sections=[RELOAD, player(BlockSpawnFOV="12.0", BlockSpawnDistance=FAR),
+              char("target", 72, BlockedSpawnRadius="900.0", MaxHealth="2.0", HealthRegenPerSec="-1.333",
+                   HealthRegenDelay="0.0")],
+    spawn_volumes=tiles(900, 600, 150, "target"))
+
+# Replaces Early Braking's two big targets: known distances in a fixed cycle, each leg its own bot type, so the stats
+# time every distance on its own (a return to the cube has no reaction time in it).
+add(id="25", scenario_name="Flow Fix 2 Ladder", series="Flow Fix 2", arena="frame",
+    nodes=["sc-decelerating-too-early", "sc-scen-wide-varying", "sc-shortens-deceleration"],
+    description=('Chinese weakness-targeted static flowchart: decelerating too early (long deceleration).[nl]Trains '
+                 'keeping your speed late in the flick, on flicks of known length.[nl]One target at a time, in a fixed '
+                 'cycle: the cube at the centre, then a sphere 5, 10 or 18 degrees out, back to the cube, and so '
+                 'on.[nl]Every return to the cube is a flick you can plan: keep the speed and stop at the end. '
+                 + ONE_ROUND),
+    scenario_overrides=kv(ScoreLossPerMiss="0.0", **COMMON2),
+    added_bots=["ladder.rot"], drop_sections=DROP_TARGET,
+    sections=[RELOAD, char("home", 53, EnemyBodyColor=AMBER, **CUBE),
+              char("near", 60), char("mid", 60), char("far", 60),
+              bot("home", "home"), bot("near", "near"), bot("mid", "mid"), bot("far", "far"),
+              rotation("ladder", ["home", "near", "home", "mid", "home", "far"], [1] * 6, "false")],
+    center_mark=26.0,
+    spawn_volumes=[point("home")] + ring(5, 12, "near") + ring(10, 20, "mid") + ring(18, 24, "far", max_elev=35))
+
+v2("Early Click", "26", "Early Click",
+   'Chinese weakness-targeted static flowchart: clicking too fast / inconsistent hit confirmation.[nl]Trains '
+   'clicking only once you have landed, with the same rhythm every time.[nl]Three large targets far apart, so every '
+   'flick is long. ' + ONE_ROUND + ' Double taps count as misses.[nl]Land, then click.')
+
+# Replaces Micro Adjust's long flick to a small target (the tester: "trains the overall flick A LOT"): a big cube,
+# then a small sphere 2.5-3.5 deg from it. The cubes follow a fixed, scrambled order; the sphere's side is random.
+ANCHORS = [(-640.0, -270.0), (0.0, -270.0), (640.0, -270.0), (-640.0, 270.0), (0.0, 270.0), (640.0, 270.0)]
+ANCHOR_ORDER = [1, 4, 2, 6, 3, 5, 2, 5, 1, 3, 6, 4]
+add(id="27", scenario_name="Flow Fix 2 Anchor", series="Flow Fix 2", arena="frame",
+    nodes=["sc-no-micro-adjustments", "sc-scen-wide-small", "sc-proper-flicking-motion"],
+    description=('Chinese weakness-targeted static flowchart: not doing micro adjustments.[nl]Trains the small '
+                 'correction onto a small target.[nl]A big cube, then a small sphere 2.5 to 3.5 degrees from it, then '
+                 'the next cube, and so on.[nl]The cube is the flick; the sphere is the correction. ' + ONE_ROUND),
+    scenario_overrides=kv(ScoreLossPerMiss="0.0", **COMMON2),
+    added_bots=["anchor.rot"], drop_sections=DROP_TARGET,
+    sections=[RELOAD]
+    + [char(f"a{i}", 80, EnemyBodyColor=AMBER, **CUBE) for i in range(1, 7)]
+    + [char(f"s{i}", 32) for i in range(1, 7)]
+    + [bot(f"{t}{i}", f"{t}{i}") for t in "as" for i in range(1, 7)]
+    + [rotation("anchor", [n for i in ANCHOR_ORDER for n in (f"a{i}", f"s{i}")], [1] * 2 * len(ANCHOR_ORDER),
+                "false")],
+    spawn_volumes=[point(f"a{i}", dy, dz) for i, (dy, dz) in enumerate(ANCHORS, 1)]
+    + [v for i, c in enumerate(ANCHORS, 1) for v in ring(3, 8, f"s{i}", size=0.25, center=c)])
+
+v2("Recovery", "28", "Recovery",
+   'Chinese weakness-targeted static flowchart: disrupted pacing / hard pressure.[nl]Trains getting your rhythm back '
+   'right after a miss instead of slowing down.[nl]Five targets, each gone 3 s after it appears. ' + ONE_ROUND +
+   '[nl]After a miss, pick the pace straight back up.')
 
 Path("specs.json").write_text(json.dumps(specs, indent=1), encoding="utf-8")
 print(len(specs), "specs;", [f"{s['id']}:{len(s['spawn_volumes'])}v" for s in specs])

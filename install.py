@@ -53,8 +53,9 @@ installed_before = set(json.loads(MANIFEST.read_text(encoding="utf-8"))) if MANI
 
 changed = sum(copy(ROOT / "out" / n, GAME / "Scenarios" / n) for n in built)
 changed += copy(ROOT / "Flow Fix guide.md", GAME / "Scenarios" / "Flow Fix guide.md")
-if (ROOT / "out" / "Flow Fix.json").exists():
-    changed += copy(ROOT / "out" / "Flow Fix.json", GAME / "Playlists" / "Flow Fix.json")
+for playlist in ("Flow Fix.json", "Flow Fix 2.json"):
+    if (ROOT / "out" / playlist).exists():
+        changed += copy(ROOT / "out" / playlist, GAME / "Playlists" / playlist)
 
 RETIRED.mkdir(exist_ok=True)
 for name in sorted(installed_before - set(built)):

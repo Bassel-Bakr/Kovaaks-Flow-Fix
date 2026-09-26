@@ -124,6 +124,18 @@ def volume_extent(v):
     return c * hy + s * hz, s * hy + c * hz
 
 
+def center_mark(half, bar=4.0, depth=6.0):
+    """A square outline on the wall round the crosshair (user, 2026-09-26: "something to mark the center"), for
+    scenarios whose home target sits there. half is the inner half-size in map units; the bars stand out of the wall
+    face by depth, behind the targets, in the text's colour (group 1 floor slot)."""
+    x0, x1, o = -2899.999512 - depth, -2899.999512, half + bar
+    bars = [(-o, o, half, o), (-o, o, -o, -half), (-o, -half, -half, half), (half, o, -half, half)]
+    return [{"location": f"{x0:.6f}, {y0:.6f}, {z0:.6f}", "materialSets": [{"group": 1, "surface": "ground"}] * 6,
+             "mesh": "Cube", "name": "Default", "rotation": "0.000000, 0.000000, 0.000000",
+             "scale": f"{(x1 - x0) / 100:.6f}, {(y1 - y0) / 100:.6f}, {(z1 - z0) / 100:.6f}", "type": "brush"}
+            for y0, y1, z0, z1 in bars]
+
+
 def clip_box(volumes, radius, thickness=20.0):
     """Six invisible Clip slabs round the spawn volumes (plus a target's radius, in map units), so moving targets
     stay where they can spawn: on screen and on the wall plane. Clip blocks bots but not shots (2026-09-25: the
@@ -293,7 +305,7 @@ def build(spec, outdir):
         # ClickTrack 3t pattern: every .bot used (directly or via a rotation), then the .rot files.
         "BotCharacters": ";".join([f"{n}.bot" for n in distinct] + [b for b in distinct_files if b.endswith(".rot")]),
         "BotMaxLives": ";".join("0" for _ in bots),
-        "BotTeams": ";".join("0" for _ in bots),
+        "BotTeams": ";".join(str(spec.get("bot_team", 0)) for _ in bots),   # 0 = no team (bots hurt each other)
         "MapName": spec.get("map_name") or f"{slug}.json",
     }
     for kv in spec["scenario_overrides"]:
@@ -311,6 +323,23 @@ def build(spec, outdir):
     kept = [o for o in m["objects"] if not (o.get("name") == "SpawnVolume"
             and any(p["name"] == "TeamMask" and p["value"] == 2 for p in o["properties"]))]
     vols = []
+    # A target stands on its spawn point: its centre sits SpawnOffset Z plus half its MainBBHeight above it, in world
+    # units (user, 2026-09-26: the crosshair started just below Ladder's centre cube, as this predicts). Every volume
+    # is lowered by that, so targets are centred where the spec puts them. The window and the Clip box still use the
+    # spec's positions, which are now the targets' real ones.
+    map_scale = float(next(l.split("=", 1)[1] for l in top if l.startswith("MapScale=")))
+
+    def lift(profile):
+        if not profile:          # a volume open to every type (Pacing Drop's sizes): their mean
+            return sum(lift(c) for c in used_chars) / len(used_chars) if used_chars else 0.0
+        s = find_section({"sections": sections}, "Character Profile", profile)
+        if s is None:
+            return 0.0
+        oz = float(re.search(r"Z=([-\d.]+)", get_key(s["lines"], "SpawnOffsetMin") or "Z=0").group(1))
+        # Centre = spawn point + SpawnOffset Z + the full MainBBHeight (2026-09-26, Blast Test: a target of height
+        # 120 and a disc of height 436 both sat ~H/2 above the half-height rule, as did the tall bars).
+        return (oz + float(get_key(s["lines"], "MainBBHeight"))) / map_scale
+
     for v in spec["spawn_volumes"]:
         if not (-2400 <= v["y"] <= 2400 and -1200 <= v["z"] <= 1200):
             errors.append(f"volume out of wall area: {v}")
@@ -318,7 +347,12 @@ def build(spec, outdir):
             errors.append(f"volume profile '{v['permitted_profile']}' not used by any added bot")
         o = copy.deepcopy(tmpl)
         o.pop("group", None)
-        o["location"] = f"{WALL_X:.6f}, {v['y']:.6f}, {v['z']:.6f}"
+        # "x": a volume nearer the eye (a wide Cuboid is as deep as it is wide, and one reaching into the wall behind
+        # did not spawn, 2026-09-26).
+        # "drop": an extra lowering for the map object only, measured in game (2026-09-26, Blast Test), while the
+        # spec keeps the intended position for the window and the checks.
+        o["location"] = (f"{v.get('x', WALL_X):.6f}, {v['y']:.6f}, "
+                         f"{v['z'] - lift(v['permitted_profile']) - v.get('drop', 0.0):.6f}")
         o["scale"] = f"0.160000, {v['size_y']:.6f}, {v['size_z']:.6f}"
         if "roll" in v:        # turn the volume, its box and the bots it spawns, as the player sees it
             r = o.get("rotation", "0, 0, 0").split(",")
@@ -345,6 +379,8 @@ def build(spec, outdir):
                  if s["type"] == "Character Profile" and s["name"] in used_chars]
         if look == "window":
             egypt.add_window(m, spec["spawn_volumes"], max(radii))
+        elif look == "frame":                  # Flow Fix 2: the window frame without the court, bust or lions
+            egypt.add_window(m, spec["spawn_volumes"], max(radii), egypt.FRAME_LOOK)
         elif look == "egypt":
             egypt.add_egypt(m, spec["spawn_volumes"], max(radii))
         else:
@@ -354,6 +390,8 @@ def build(spec, outdir):
         radius = max(float(get_key(s["lines"], "MainBBRadius")) for s in sections
                      if s["type"] == "Character Profile" and s["name"] in used_chars)
         m["objects"] += clip_box(spec["spawn_volumes"], radius / map_scale)
+    if spec.get("center_mark"):
+        m["objects"] += center_mark(spec["center_mark"])
     if SLIM_MESHES:
         slim_meshes(m, float(next(l.split("=", 1)[1] for l in top if l.startswith("MapScale="))))
     map_text = dump_map(m)

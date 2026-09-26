@@ -549,10 +549,16 @@ WINDOW_LOOK = dict(MESH_SIGNS=True, DARK_TEXT=True, WINDOW_ONLY=True, WINDOW_HEA
                    ROUND_STROKES=True)
 
 
-def add_window(m, spawn_volumes, max_target_radius):
-    """add_egypt with the window look's settings, restoring the module's settings afterwards."""
-    saved = {k: globals()[k] for k in WINDOW_LOOK}
-    globals().update(WINDOW_LOOK)
+# FRAME_LOOK (user, 2026-09-26, for Flow Fix 2): the window frame alone, with its text, but without the palace
+# courtyard, the pharaoh's bust or the lions.
+FRAME_LOOK = dict(WINDOW_LOOK, WINDOW_HEAD=None, WINDOW_LIONS=False, COURTYARD=False)
+
+
+def add_window(m, spawn_volumes, max_target_radius, look=None):
+    """add_egypt with the window look's settings (or another look's), restoring the module's settings afterwards."""
+    look = look or WINDOW_LOOK
+    saved = {k: globals()[k] for k in look}
+    globals().update(look)
     try:
         return add_egypt(m, spawn_volumes, max_target_radius)
     finally:

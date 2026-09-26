@@ -348,3 +348,76 @@ file with a safe build. Test any map-structure change in a separate test scenari
   showed "Reallocating scene render targets". About 0.3 seconds after the material lines, the rendering
   thread crashed. The log showed "Rendering thread exception" and "EXCEPTION_ACCESS_VIOLATION reading
   address 0x0000000000000018". That build had extra material groups (see Map materials and themes).
+
+- **One-round gun (Flow Fix 2, 2026-09-26, unconfirmed).** Weapon `MagazineMax` 1, `AmmoReloadedOnKill` 1,
+  `ReloadTimeFromEmpty` 0.35 and `CancelReloadOnKill` true: a kill refills the round, and a miss empties the gun and
+  forces the reload, so a miss costs time instead of points. The keys come from 1w2ts reload smallflicks (3 rounds,
+  3 back on a kill). Check in the first runs that a hit never triggers a reload.
+- **Forced spawns near the crosshair (untested).** The KovaaK's wiki says the Player profile's `InvertBlockedSpawn`
+  can force bots to spawn inside `BlockSpawnFOV` instead of outside it. VT ww5t Intermediate S5 uses it at 40.
+
+- **A target stands on its spawn point (2026-09-26; corrected the same day).** Its centre sits SpawnOffset Z (8 in the
+  base) plus its full `MainBBHeight` above the volume position (first read as half the height; the Blast Test's
+  target, discs and bars all sat half a height higher than that). A negative SpawnOffset Z of minus the height puts
+  the centre on the point, and the bot then spawns where it stands, which kept a ring of spheres from colliding on
+  spawn. `build.py` lowers every spawn volume by the offset plus the full height. The 21 scenarios installed on
+  2026-09-26 were built with half the height, so they still sit half a target height (0.2-0.4 deg) high until rebuilt.
+- **The one-round gun works (confirmed 2026-09-26).** In all 26 Flow Fix 2 runs the stats' `Reloads` equalled
+  `Miss Count` exactly: every miss forced the reload, and no hit did.
+
+- **Blast penalty (Flow Fix 2 Blast Test, 2026-09-26, confirmed by the user).** A bot can punish the player for hitting
+  it. It carries a Movement Ability with no velocity, `Hurtbox` true, `HurtboxRadius` 15000 (the player is ~9,600 world
+  units away), `HurtboxDamage` 10 and knockback 0. The player has `InvinciblePlayer` false (top and profile), a huge
+  `MaxHealth` and regen and `DamageKnockbackFactor` 0 (the view never moved), and the top's `ScoreLossPerDamageTaken`
+  0.1 makes each blast cost 1 point.
+  - **Trigger:** the damage reaction alone never fired it (both `AIUseInCombat` and `AIUseOutOfCombat` false). With
+    either on, the bots blasted with nobody shooting, since they see the player. What works: both on, gated by the
+    bot's own health (`AIMaxSelfHealth` 99.9, 100 HP healing 5/s), so it may blast only just after a hit.
+  - **Teams:** with every bot on team 0 each blast hurt the other bots, which blasted in turn (a chain reaction).
+    Team 0 seems to be "no team". Team 2 (`bot_team` in the spec) plus `BlockTeamDamage` true stopped it.
+- **No spin-up (2026-09-26).** `DelayBeforeShot` on a full-auto gun (the Poke-Drill at 0.15) does not delay just the
+  first bullet: holding the button fires one shot, not a stream (user). The only charge settings (`IsChargeWeapon`,
+  `ChargeTimeToCap`) are hold-to-charge projectile shots, so no setting found makes letting go of the button cost time.
+- **A Cuboid is as deep as it is wide.** `MainBBHeight` sets its height apart from the half-width, but depth follows
+  the half-width, so a wide flat bar is also deep. One that reached into the wall behind never spawned. Moved clear
+  of the wall, flat bars (height 33, half-width 218 world) still showed only as small squares, and tall bars (height
+  437, half-width 17) sat about 1 deg higher than the half-height rule predicts (user's screenshot). So keep Cuboids
+  true cubes (height = 2 x half-width); a closed ring is many small cubes.
+- **DisableCharacterCollision can stop other bots spawning (2026-09-26).** With it true on 36-80 ring cubes, the
+  target spheres in their middle never spawned or stopped after a few. With the cubes removed, or with it false (the
+  cubes half a map unit apart so none overlap), the spheres spawned normally. The user saw no bot limit: other
+  scenarios run 100+ bots.
+- **A crosshair-blocked spawn waits (2026-09-26).** One target profile on 3 spots with the Player's `BlockSpawnFOV` 10:
+  when the random pick was the spot under the crosshair, the target did not try another spot but waited until the
+  crosshair moved away. A fixed rotation, one profile per spot, that never repeats a spot avoids it.
+- **Overflick disc (Blast Test v17, works, user 2026-09-26).** A hold-fire stream (Poke-Drill) traces the crosshair's
+  path, so a penalty object can see an overflick. Recipe:
+  - The target (pokeball sphere, 80 ms of contact, worth 2 via `ScorePerKill`) stands 150 map units in front of the
+    wall plane, and one big sphere (radius 1.3 deg) stands 25 units in front of the wall behind it, so shots on the
+    target hit it first and shots around it hit the disc.
+  - The disc blasts (the blast penalty above, -1 point, at most once per 0.5 s) only after about 5 bullets in a row:
+    100 HP healing 5/s, blast allowed below 99% (`AIMaxSelfHealth` 99). The stream crossing it on the way in lasts a
+    few ms and is free; an overflick turning on it lasts tens of ms and costs a point.
+  - One disc per spot, one target profile per spot in a fixed cycle that never repeats a spot, every bot on team 2
+    with `BlockTeamDamage`.
+  - Rings of small bots failed: bots with collision cannot stand side by side (29 map units apart failed, 59 worked),
+    and with `DisableCharacterCollision` the targets stopped spawning. Non-cube Cuboids misbehave (see above).
+  - Open: nothing makes holding the button necessary; an overflick with the button up costs only time.
+- **Phases and a second weapon (Flow Fix 2 Phase Test, 2026-09-26, confirmed by the user).**
+  - **Phases:** a `Teleporter` gameObject under the player's spawn, with `Target` naming a `Waypoint` and
+    `TeleportDelay` 5, moved the player to a second room after 5 s (shimcluster uses 15 s for 4 rooms). Room 2 is
+    a wall 20,000 units to the side with its own bots; the build only allows volumes in the wall area, so the test
+    script adds room 2 to the built map afterwards (`_phase_test.py`).
+  - **Weapon swap:** no setting swaps the player's weapon by itself. Bot weapon randomising (`WeaponsProfileNames`,
+    `WeaponProfileWeights`, `WeaponSwitchTime`) is a Bot Profile setting, and damage reactions are AI-only.
+  - **A second gun on a key works:** the player's `AbilityProfileNames` = `Track.abilwep;;;` names a Weapon Ability
+    Profile whose `WeaponProfile` is the tracking beam (LG). Holding the Ability 1 key fires it while mouse 1 stays
+    the clicking gun.
+  - **Locking the second gun during phase 1 (in test).** `BlockAbilityOnStartDuration` 5 on the player did not stop
+    the weapon ability. `ChargesOnSpawn` 0 with `ChargeTimer` 5 killed it for the whole run. The beam weapon's own
+    `DelayAfterSpawn` 5 did not either. What works (confirmed 2026-09-26): lock it by range. The beam's
+    `MaxHitscanRange` 6000 (world units) cannot reach the clicking targets 9,608 away, and the tracking bot stands
+    3,780 away (1,200 map units from the eye), scaled down in size and speed to look the same.
+  - **Scoring both phases:** each gun can hit both kinds of target, so score clicks by kill (`ScorePerKill` 1, the BB
+    Gun doing 0.001 damage) and tracking by damage. At 1000 damage per shot, BB Gun hits on the tracking bot scored
+    1000 each.

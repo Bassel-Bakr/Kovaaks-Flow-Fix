@@ -116,3 +116,24 @@ Some of the mechanics come from how other scenarios use them, not from documenta
 Already confirmed in game: delayed shots use the aim at the moment they fire (Overflick,
 Hesitation), the pokeball dwell (Lingering), skipped small targets waiting in the rotation (Pacing
 Drop, Check), timed targets scoring nothing when they expire, and spawn zones per target type.
+
+## Flow Fix 2
+
+A second set in its own playlist, "Flow Fix 2". Same room and gun, with three changes:
+- Every shot is a normal click. There is no fire delay and no holding fire.
+- Your gun holds one round. A hit refills it at once, and a miss costs a 0.35 s reload. Misses cost time, not points.
+- Only the window frame is left: no courtyard, no bust and no lions.
+
+| What your crosshair does | Play |
+| --- | --- |
+| Flies past the target and snaps back. | Flow Fix 2 Overflick |
+| Rests on the target after the shot. | Flow Fix 2 Return |
+| Starts slow and drags to the target. | Flow Fix 2 Slow Start |
+| Waits before starting on a new target. | Flow Fix 2 Cold Start |
+| Starts fast, then crawls the last part of the way. | Flow Fix 2 Ladder |
+| Clicks before it has stopped. | Flow Fix 2 Early Click |
+| Lands "close enough" and clicks without a final small correction. | Flow Fix 2 Anchor |
+| One miss wrecks the next several shots. | Flow Fix 2 Recovery |
+
+Play one run of cA sixshot before a session and one after it. How that run changes is the real test, more than the
+drill's own score.
