@@ -606,37 +606,11 @@ def lecture_hall(s, bw, bh):
     s.box(FACE_X - 900, FACE_X - 400, -700, 700, floor_z, floor_z + 280, WOOD)          # the lecturer's desk
 
 
-def build_track(shapes, name, description="", out="out", *, speed=5.0, efficiency=0.91, r_bot=0.4, box=(41.0, 20.0),
-                turn_r=0.25, clear=0.3, line_w=12.0, name_w=7.0, dash=0.5, tags="Tracking, Smooth, Bassel, Bakr",
-                top=None, drop=(), prepared=False, max_hop=INF, preview="test_out", log=print):
-    """Build the scenario; returns its path. shapes are Shape objects in board degrees (x across, y up, the board
-    spanning +-box). prepared=True skips resampling and easing (the shapes already meet STEP and turn_r). max_hop caps
-    a straight hop between shapes (deg); a smaller cap makes the tour search faster."""
-    shapes = [s if prepared else prepare(s, turn_r) for s in shapes]
-    for s in shapes:
-        tight, close = check(s.points, clear, s.closed)
-        if close < clear:
-            log(f"WARNING {s.name}: two parts of the line only {close:.2f} deg apart (the bot may cut across)")
-    for a in range(len(shapes)):
-        for b in range(a + 1, len(shapes)):
-            g = min(math.dist(p, q) for p in shapes[a].points[::4] for q in shapes[b].points[::4])
-            if g < clear:
-                log(f"WARNING {shapes[a].name} and {shapes[b].name} only {g:.2f} deg apart")
-    for c in (clear, clear / 2, 0.0):                 # hops keep clear of the lines; relaxed only if nothing else works
-        tour = plan_tour(shapes, c, max_hop, log)
-        if tour:
-            break
-        log(f"WARNING no tour whose hops keep {c:.2f} deg clear of the lines; trying less")
-    if not tour:
-        sys.exit("no tour found")
-    order, pe = tour
-    path, routes, tour_names = lay_path(shapes, order, pe, log)
-    total = sum(math.dist(a, b) for a, b in zip(path, path[1:] + path[:1]))
-    run_s = total / (speed * efficiency)
-    log(f"path {total:.0f} deg: {run_s:.1f} s at {speed} deg/s ({efficiency:.0%} of it)")
-    r_min, i_min = min((radius3(path[i - 5], path[i], path[(i + 5) % len(path)]), i) for i in range(len(path)))
-    log(f"tightest turn on the whole path: radius {r_min:.2f} deg at {path[i_min][0]:.1f}, {path[i_min][1]:.1f}")
-
+def base_scenario(name, description, run_s, out, *, speed=5.0, r_bot=0.4, tags="Tracking, Smooth, Bassel, Bakr",
+                  top=None, drop=()):
+    """The scenario without its room, lines and path: every profile (the tracer bot, its dodge profile, the LG beam),
+    the base map with the frame look's blocks removed and the materials tinted. Returns (path, head, map, the bot's
+    spawn volumes, a template block, the bot's radius in world units, how far it rides above its waypoints)."""
     v = math.radians(speed) * D_BOT * SCALE
     acc = v * 12.0
     r_w = D_BOT * SCALE * math.tan(math.radians(r_bot))
@@ -645,7 +619,7 @@ def build_track(shapes, name, description="", out="out", *, speed=5.0, efficienc
             "size_z": G.EYE * math.tan(math.radians(18.6)) / 100}
     spec = dict(
         id="40", scenario_name=name, series="test", arena="frame", nodes=["sc-flick"],
-        description=description.replace("{tour}", ", ".join(tour_names)),
+        description=description,
         scenario_overrides=G.kv(Timelimit=f"{math.ceil(run_s) + 1:.1f}", ScorePerKill="0.0", ScorePerDamage="1.0",
                                 ScoreLossPerMiss="0.0", **dict(G.COMMON2, SearchTags=tags, **(top or {}))),
         added_bots=["tracer"], bot_team=2,
@@ -688,6 +662,43 @@ def build_track(shapes, name, description="", out="out", *, speed=5.0, efficienc
                     and -3400 <= float(o["location"].split(",")[0]) <= -2800)]    # the frame look's blocks go
     for (grp, slot), tint in TINTS.items():
         m["materialSets"][grp][slot]["properties"][0]["value"] = tint
+    return path_out, head, m, vols, template, r_w, ride
+
+
+def build_track(shapes, name, description="", out="out", *, speed=5.0, efficiency=0.91, r_bot=0.4, box=(41.0, 20.0),
+                turn_r=0.25, clear=0.3, line_w=12.0, name_w=7.0, dash=0.5, tags="Tracking, Smooth, Bassel, Bakr",
+                top=None, drop=(), prepared=False, max_hop=INF, preview="test_out", log=print):
+    """Build the scenario; returns its path. shapes are Shape objects in board degrees (x across, y up, the board
+    spanning +-box). prepared=True skips resampling and easing (the shapes already meet STEP and turn_r). max_hop caps
+    a straight hop between shapes (deg); a smaller cap makes the tour search faster."""
+    shapes = [s if prepared else prepare(s, turn_r) for s in shapes]
+    for s in shapes:
+        tight, close = check(s.points, clear, s.closed)
+        if close < clear:
+            log(f"WARNING {s.name}: two parts of the line only {close:.2f} deg apart (the bot may cut across)")
+    for a in range(len(shapes)):
+        for b in range(a + 1, len(shapes)):
+            g = min(math.dist(p, q) for p in shapes[a].points[::4] for q in shapes[b].points[::4])
+            if g < clear:
+                log(f"WARNING {shapes[a].name} and {shapes[b].name} only {g:.2f} deg apart")
+    for c in (clear, clear / 2, 0.0):                 # hops keep clear of the lines; relaxed only if nothing else works
+        tour = plan_tour(shapes, c, max_hop, log)
+        if tour:
+            break
+        log(f"WARNING no tour whose hops keep {c:.2f} deg clear of the lines; trying less")
+    if not tour:
+        sys.exit("no tour found")
+    order, pe = tour
+    path, routes, tour_names = lay_path(shapes, order, pe, log)
+    total = sum(math.dist(a, b) for a, b in zip(path, path[1:] + path[:1]))
+    run_s = total / (speed * efficiency)
+    log(f"path {total:.0f} deg: {run_s:.1f} s at {speed} deg/s ({efficiency:.0%} of it)")
+    r_min, i_min = min((radius3(path[i - 5], path[i], path[(i + 5) % len(path)]), i) for i in range(len(path)))
+    log(f"tightest turn on the whole path: radius {r_min:.2f} deg at {path[i_min][0]:.1f}, {path[i_min][1]:.1f}")
+
+    path_out, head, m, vols, template, r_w, ride = base_scenario(
+        name, description.replace("{tour}", ", ".join(tour_names)), run_s, out, speed=speed, r_bot=r_bot, tags=tags,
+        top=top, drop=drop)
     wall_pt = lambda p: (D_WALL * math.tan(math.radians(p[0])), D_WALL * math.tan(math.radians(p[1])))
     bw, bh = D_WALL * math.tan(math.radians(box[0])), D_WALL * math.tan(math.radians(box[1]))
 

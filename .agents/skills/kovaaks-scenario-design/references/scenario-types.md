@@ -627,6 +627,10 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
   (every command, arcs included), polylines, polygons, lines, rectangles, circles and ellipses with their transforms,
   fits them to the board, drops lines shorter than 1 deg, and warns where a line nearly touches itself or another.
   `world_map.py` rebuilds World Map through it byte for byte.
+- **In the browser (2026-09-27).** For the user's wiki, `web/` ports the builder to TypeScript, bundled into one script
+  with no dependencies. The browser's own SVG engine samples the drawing (`getPointAtLength` and each element's
+  transform), so every SVG feature works. On World Map's coasts it lays the same tour as the Python builder, to the
+  last waypoint (`web/check.mjs`). Labels are Python-only for now.
 - **The conventional tracking score (v9).** The user asked for the usual 6,000 points per 60 s of tracking. The LG
   now ticks every 0.01 s (100 a second, as in Leisphere Easy) for 1 point, so a perfect 135 s run scores 13,500.
   v8's 21.7 ticks a second at 1 point each made a perfect run 2,934; its 64.5% equals about 8,700 on the new scale.
