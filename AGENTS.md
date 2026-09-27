@@ -38,6 +38,8 @@ this folder.
 | `prop_test.py`, `prop_sampler.py`, `frame_test.py` | Retired prop tests for a frame that themes cannot repaint. Prop Test checks whether themes repaint props. Prop Sampler shows every candidate prop so the user can pick the opaque ones. Frame Test builds the arena frame from Container props. |
 | `patch_scenario.py` | Copies an installed scenario under a new name into `test_out/`, with chosen settings changed, map objects added or moved (for example an invisible Clip wall), and a note added to its description. For fixing other authors' scenarios, and the user's own, without touching the original. |
 | `obs_capture.mjs` | Grabs frames from OBS's KovaaK's capture (obs-websocket 5, settings from KovOBS's config): `node obs_capture.mjs info`, `shot`, `fast <dir> <seconds>` (about 100 JPEG frames a second), and `onstart <dir> <seconds> [scenario]`, which waits for KovaaK's log to record the scenario's start (the kovaaks-events method) before capturing. For measuring bots in game: start `onstart`, then tell the user "go" (their way, 2026-09-27). |
+| `trace_track.py` | The generic builder for tracking along a drawn path: vector shapes (closed or open, with optional labels) carved in chalk on a lecture hall's board, a flying bot tracing them (the shortest tour, repeating only the shorter stretch of each closed shape), waypoints 0.125 s apart lowered onto the line, and the scenario written. `python trace_track.py drawing.svg "Name"` builds one from any SVG into `out/`. |
+| `world_map.py` | Builds World Map with `trace_track.py`: Natural Earth's countries (`data/ne_110m_admin_0_countries.geojson`, public domain) merged into continent coasts. Writes `out/World Map.sce`; install it by hand. |
 | `survey_scenarios.py` | Read-only survey of every scenario installed in KovaaK's into `test_out/survey.json`: top-level keys, profile sections and map facts (both map formats). `python survey_scenarios.py workshop` does the same for the 1,422 Steam Workshop items into `test_out/survey_workshop.json`. The basis of `references/scenario-types.md`. |
 | `stats_basic.py`, `stats_varying_sizes.py`, `stats_all_in_one.py`, `stats_recovery.py`, `stats_slow_start.py` | Read-only analysis of the user's runs. |
 | `Flow Fix guide.md` | Player-facing guide, installed next to the scenarios. Keep it in sync with every change. |
@@ -208,10 +210,12 @@ Still open:
   Questions" probe and "Score Time Left" for what the first set left open (also retired).
 - **Tracking along a drawn path (2026-09-27):** the Lecture Hall Track Test is installed as `World Map` (the user's name, no prefix, with
   tracking tags, 2026-09-27; v8: names centred inside the outlines, chalk lines as shared-vertex ribbons, 3,240 mesh vertices,
-  1.37 MB; v9 scores 100 a second on the bot, 13,500 for a perfect run; one run of v8): the
+  1.37 MB; v9 scores 100 a second on the bot, 13,500 for a perfect run; v10 puts the bot on the chalk line and keeps
+  the user's own tags and description; v11 thins the hall (slab tiers, the outer desk column gone) and lightens the
+  board; one run of v8; an FPS check of v10's hall against v11's is waiting): the
   world map from Natural Earth carved on a chalkboard, the bot lapping each continent once (v5 traced a fifth of its
-  path twice; the user liked v5's look). Built by the scratch script
-  `_lecture_hall_test.py` from `test_out/ne/`; findings in `references/mechanics.md` ("Flying bots, waypoint paths")
+  path twice; the user liked v5's look). Built by `world_map.py` with the
+  generic builder `trace_track.py` (since 2026-09-27; the scratch script before it is in `retired/tests/`); findings in `references/mechanics.md` ("Flying bots, waypoint paths")
   and `references/scenario-types.md` ("Case: tracking along a drawn path"). Earlier versions and the Wobble Probes
   are in `retired/tests/`.
 - The window look is in all 13 scenarios since 2026-09-24, at the user's request (`ARENA_DEFAULT = "window"`,

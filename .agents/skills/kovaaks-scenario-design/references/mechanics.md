@@ -479,6 +479,9 @@ file with a safe build. Test any map-structure change in a separate test scenari
     - **Waypoint bots ride above their line.** Every clean lane sat 0.21 to 0.23 deg (about 0.45 of the bot's
       radius) above its waypoints; the still bot sat on its design height (0.07 deg low). A carved path shows the
       bot about 0.2 deg high unless its waypoints are lowered by that much.
+      Applied to World Map (v10, 2026-09-27): waypoints lowered by 0.45 of the bot's radius (9.27 map units, 0.18 deg).
+      Measured through OBS over 25 s (`test_out/wm_offset.py`), the bot ran 0.058 deg above the projected line and the
+      chalk itself 0.029 deg above it, so the bot now rides within about 0.03 deg of the chalk.
     - The capture's view was turned 5.9 deg right and 2.8 deg down (the mouse had moved); `test_out/calib_view.py`
       fits the turn from the base wall's corners (0.67 px) and `test_out/waypoint_probe.py` undoes it.
 - **The Movement probe (2026-09-27, OBS).** Eight flyers facing the player (an aim profile with no error) strafed left

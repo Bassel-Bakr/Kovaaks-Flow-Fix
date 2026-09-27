@@ -585,7 +585,7 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
 - **Phases:** one continent per panel, then per classroom, with teleport chains (mechanics.md). Too slow to switch
   and the next bot off the crosshair. **The Lecture Hall Track Test** (installed as `World Map`, the user's name, no prefix) puts the whole map on one wide
   chalkboard in one room: the bot laps each continent and flies a dashed route to the next. Antarctica is a strip
-  along the bottom, as on the user's reference map. Script `_lecture_hall_test.py` (ignored by git).
+  along the bottom, as on the user's reference map. Built by `world_map.py` with `trace_track.py`.
 - **Tracing each coast once.** v5 entered each continent at its point nearest the last one, went all the way round,
   then on round to its point nearest the next one, so it traced 160 of its 713 deg twice (the user: "we're tracing
   the same spots twice"). A coast traced in full from an entry to a different exit must repeat the stretch between
@@ -611,6 +611,22 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
   map ran at the 1000 FPS cap (0.96 ms), and adding the 1,089 waypoints or the chalk mesh left it there; the hall's 83
   blocks took it to 1.21 ms, the whole scenario to 1.22 ms. The room is the whole cost. Play read 757 FPS (1.32 ms)
   with the beam and the moving bot on top.
+- **v10 (2026-09-27).** The waypoints sit 0.18 deg lower, so the bot's centre runs on the chalk (within about 0.03 deg,
+  measured; it rode about 0.2 deg above it before, as the Waypoints probe predicted). The build script now carries the
+  user's own tags (AimTypeTag Tracking, AimSubTypeTag Smoothness, DifficultyTag 4, SearchTags "World, Map, Tracking,
+  Smooth, Bassel, Bakr") and description, which they set in the game's editor, and drops the base's unused BB Gun and
+  Mimic dodge profile as the editor did.
+- **v11 (2026-09-27, user: "thin it a bit", "maybe use brighter board").** Each floor tier is a slab instead of a block
+  down to the floor (the eye only sees tier tops), the outermost desk column on each side is gone (83 hall blocks to
+  71), and the board is lighter (3d6f50 instead of 24402e). FPS probes of v10's hall against v11's are waiting.
+- **The generic builder (2026-09-27).** The user asked for the builder in the repository and "more generic, for svg or
+  vector graphics in general". `trace_track.py` takes any shapes, closed or open, with optional labels; the tour
+  search handles open lines (traced end to end, their two ends the only ports), keeps trying orders until ten work,
+  uses a nearest-neighbour order improved by 2-opt beyond seven shapes, and relaxes the hops' clearance only when no
+  tour works. A route whose curve comes within 0.15 deg of a line is straightened step by step. It reads SVG paths
+  (every command, arcs included), polylines, polygons, lines, rectangles, circles and ellipses with their transforms,
+  fits them to the board, drops lines shorter than 1 deg, and warns where a line nearly touches itself or another.
+  `world_map.py` rebuilds World Map through it byte for byte.
 - **The conventional tracking score (v9).** The user asked for the usual 6,000 points per 60 s of tracking. The LG
   now ticks every 0.01 s (100 a second, as in Leisphere Easy) for 1 point, so a perfect 135 s run scores 13,500.
   v8's 21.7 ticks a second at 1 point each made a perfect run 2,934; its 64.5% equals about 8,700 on the new scale.

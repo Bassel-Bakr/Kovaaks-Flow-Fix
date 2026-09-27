@@ -299,8 +299,8 @@ treats a brush that uses the second or third value as a sphere around its box.
   At the user's request ("combine triangles so that their coordinates aren't repeated", as in the pharaoh's bust)
   this cut the map's mesh from 31,590 vertices and 28,730 triangles to 3,240 and 2,860, and the file from 6.68 MB
   to 1.37 MB. The old strokes stood 14 units proud; at the board's edges their side walls showed, so the lines
-  looked thicker there. Flat chalk keeps one width. The code is `ribbon()` in the scratch script
-  `_lecture_hall_test.py`; the Egyptian text still uses round strokes.
+  looked thicker there. Flat chalk keeps one width. The code is `ribbon()` in
+  `trace_track.py`; the Egyptian text still uses round strokes.
 
 ## The grey arena (2026-09-23, retired)
 
