@@ -525,3 +525,31 @@ Found by listing every setting whose value is rare (2-25 of 1,422 Workshop scena
   (a dodge costs the bot health, Reactive Clicking Hard); player survival settings (`PlayerMaxLives` 1,
   `HealthRegainedonkill`, `LifeStealPercent`); `ScorePerTime`; movement scoring (`MBS*`, `DistanceScoreCondition`
   LooseMirror and LooseAntiMirror).
+
+## Case: tracking along a drawn path (2026-09-27)
+
+The user asked for tracking that really punishes overcorrection and prediction, "similar in philosophy" to Aether
+Bot 2 and Silo "but better", then for the path to be carved on the wall behind the bot ("in-game hints").
+- **React Track** (a dodge bot, beam scoring +1 a tick and -1.5 a miss): v1 was "easy and learnable" (mostly side
+  to side); v2 changed direction too fast and never moved up and down. The user's aim: hard, but 100% possible when
+  fully focused. A player reacts about 0.15 s late at best, so a bot that changes speed at `a` deg/s^2 pulls
+  `a * 0.15^2 / 2` away: 80 deg/s^2 keeps that under 1 deg. Up and down needs jump and crouch (mechanics.md).
+- **Split Track** (the user's idea): a big bot in front hides a small one on the same path; they part and meet
+  again, and the small one scores 3 times as much (all head). Waypoint paths with both detours the same length kept
+  them together exactly. The user found mirrored loops "tripy more than hard", and tracked the small bot only about
+  1.3 s of the 11-13 s it was apart.
+- **Drawn paths.** مستحيل ("impossible", Arabic Typesetting, kashida): a thinned letter line wobbles at pixel scale,
+  the teeth force reversals, and smoothing them away cost legibility. One-line art (a fish, two Vecteezy world
+  maps): the line touches itself, so the route doubles back. A generated island coast (a simple closed loop) worked
+  "perfectly".
+- **Continents from Natural Earth** (public domain, 1:110m countries,
+  `github.com/nvkelso/natural-earth-vector`, file `geojson/ne_110m_admin_0_countries.geojson`): each continent's
+  countries filled on a grid, the largest island kept, lakes filled (channels cut first at the Bosporus, the Danish
+  straits and Hormuz keep those seas open), a light blur, the coast traced as one loop, and only its sharp spots
+  eased. Sinai is cut at Suez and Panama at the Darien, so no two continents touch.
+- **Phases:** one continent per panel, then per classroom, with teleport chains (mechanics.md). Too slow to switch
+  and the next bot off the crosshair. **The Lecture Hall Track Test** (installed, v5) puts the whole map on one wide
+  chalkboard in one room: the bot laps each continent, entering at its point nearest the last one and leaving at
+  its point nearest the next, and flies a dashed route between them (North America, South America, Africa,
+  Antarctica, Australia, Eurasia; 157 s at 5 deg/s, waypoints 0.125 s apart). Antarctica is a strip along the
+  bottom, as on the user's reference map. Script `_lecture_hall_test.py` (ignored by git).

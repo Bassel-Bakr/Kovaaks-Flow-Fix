@@ -426,3 +426,50 @@ file with a safe build. Test any map-structure change in a separate test scenari
   on or off. `BlockCheats` only gates the cheat keys, and the controls list no trigger-bot key: only the Aimbot (X),
   which aims for you. The trigger-bot settings seen on 26 player weapons in installed and Workshop scenarios are
   most likely leftovers; on bots' weapons they work.
+
+## Flying bots, waypoint paths and measuring through OBS (2026-09-27)
+
+- **Up and down for a flying dodge bot.** A flyer's dodge moves it up by jumping and down by crouching:
+  `JumpFrequency` above 0 with `AlterateJumpCrouchInput` true, as in Aether Bot 2 and Silo. With `JumpFrequency` 0
+  the `ToggleUpDown` timers did nothing (React Track v2: no vertical movement at all). With `CanCrouch` false the
+  bot flew up and stayed at the top (v3). Aether and Silo set `CanCrouch` true, with `MaxCrouchSpeed` and
+  `CrouchingAcceleration` equal to the normal speed and acceleration (React Track v4 copies this; not played yet).
+- **Long waypoint paths load and run.** A SpawnPoint `Path` of 1,034 names (6,879 characters) and a map with 2,257
+  waypoints worked (Split Track v2). The longest seen elsewhere is 288 characters and 46 waypoints. A path may list
+  the same waypoint more than once.
+- **How a bot flies waypoints** (the Wobble Probe, six rounds, measured through OBS). With `WaypointLogic`
+  `FollowAimAtWaypoint` and `FlightObeysPitch` true, the bot aims at the next waypoint and flies where it aims.
+  - **Each waypoint costs about 0.09 s.** The bot overshoots it a little, steps back, then moves on. With waypoints
+    0.4 deg apart at 20 deg/s the bots made only 1-4 deg/s, stepping back about every 0.09 s (the user: "wobbling
+    back and forth").
+  - **Smooth:** waypoints about 0.125 s of travel apart (2.5 deg at 20 deg/s), acceleration 12 x speed, the Default
+    aim profile and VAI 1 Grandmaster TE's dodge profile. Measured: 18.2 of 20 deg/s (91%), speed steady within the
+    measurement noise, 0.44 deg spread from a 3.5 deg circle. The spacing is a time: a slower bot keeps the same
+    smoothness with waypoints proportionally closer.
+  - **The aim profile shows in the path.** The Default aim profile aims with errors (`TrackError` 3.5, `FlickError`
+    15, `MaxError` 40, reactions 0.3-0.4 s); with dense waypoints this showed as wobble. An aim profile with every
+    error and delay at 0 helped with dense waypoints but jittered with sparse ones. `BlockedMovementPercent` 0 made
+    no difference, and `WaypointTurnRate` 1500 made it worse.
+  - **No reversals.** Where a path doubles back, the bot overshoots and loops. A drawn path must never cross or touch
+    itself; the calligraphy and one-line art tests failed on this, a generated island coast worked "perfectly".
+- **The player's starting view.** The player SpawnPoint's `rotation` ("roll, pitch, yaw", degrees) sets where the
+  player looks at the start (confirmed through OBS). VAI 1 Grandmaster TE uses a pitch of 1.75 there.
+- **Teleport chains.** A pad fires when the player moves into it. With player gravity 0 only the pad under the spawn
+  fires: a player teleported into the next pad floats inside it and nothing happens (Continents v1 played two of
+  five phases). shimcluster's way works: player `Gravity` 10, the landing Waypoint a few units above a thin pad, a
+  floor under it, so the player drops into the pad. The player's collision is tiny (the eye ends about 1 unit above
+  what it stands on), so the floor must be tiny (1 x 1, its top 1 below the design eye height), the pad 2 x 2 just
+  under the eye, and the drop about 3 units; a 300-unit floor filled half the view. A teleport keeps the view
+  direction. Chained teleports and bots that wait (a Waypoint pause) drift apart by fractions of a second per phase;
+  the user found it too slow and the bot off the crosshair, and one room (the Lecture Hall) replaced them.
+- **.sce files are ASCII.** A description with Arabic letters stopped the build (`build.py` writes ASCII). Carved
+  text is geometry and can be in any script.
+- **Headshot scoring on an all-head bot.** A bot whose head is as big as its body and centred on it
+  (`MainBBHasHead` true, head radius 1.03 x body, `MainBBHeadOffset` minus the height, as in the Pokeball scenarios)
+  takes the weapon's `HeadshotMultiplier` on every hit: in Split Track the damage beat the hit count by 2 per hit
+  on the small bot.
+- **Measuring in game through OBS.** `obs_capture.mjs` connects to OBS (obs-websocket 5, settings from KovOBS's
+  config, the password never printed) and grabs the KovaaK's game capture; `fast <dir> <seconds>` saves about 100
+  JPEG frames a second. Tell the user before capturing, and ask for a still view when positions matter. Small
+  scripts then find the bots (the darkest blobs) and the carved lines (darker than the wall around them) in each
+  frame. This found the 0.09 s waypoint cost and the World Map bot's hairpin loops.

@@ -37,6 +37,7 @@ this folder.
 | `docs/` | Human-facing docs: `scenarios.md` (every scenario's design, evidence and verdict), `look.md` (the shared look), `future.md` (suggestions), `README.md` (index and the loop). Keep them current with every change. |
 | `prop_test.py`, `prop_sampler.py`, `frame_test.py` | Retired prop tests for a frame that themes cannot repaint. Prop Test checks whether themes repaint props. Prop Sampler shows every candidate prop so the user can pick the opaque ones. Frame Test builds the arena frame from Container props. |
 | `patch_scenario.py` | Copies an installed scenario under a new name into `test_out/`, with chosen settings changed, map objects added or moved (for example an invisible Clip wall), and a note added to its description. For fixing other authors' scenarios, and the user's own, without touching the original. |
+| `obs_capture.mjs` | Grabs frames from OBS's KovaaK's capture (obs-websocket 5, settings from KovOBS's config): `node obs_capture.mjs info`, `shot`, `fast <dir> <seconds>` (about 100 JPEG frames a second). For measuring bots in game; tell the user before capturing. |
 | `survey_scenarios.py` | Read-only survey of every scenario installed in KovaaK's into `test_out/survey.json`: top-level keys, profile sections and map facts (both map formats). `python survey_scenarios.py workshop` does the same for the 1,422 Steam Workshop items into `test_out/survey_workshop.json`. The basis of `references/scenario-types.md`. |
 | `stats_basic.py`, `stats_varying_sizes.py`, `stats_all_in_one.py`, `stats_recovery.py`, `stats_slow_start.py` | Read-only analysis of the user's runs. |
 | `Flow Fix guide.md` | Player-facing guide, installed next to the scenarios. Keep it in sync with every change. |
@@ -82,7 +83,8 @@ GitHub Copilot and other agents that support the format discover them there; any
   unless the user asks for one (user, 2026-09-25).
 
 - **Ask before changing.** Say what you will change and wait for a yes. Answer questions and audits
-  directly.
+  directly. For test scenarios the user now wants the recommended option done without asking ("do recommended and
+  don't ask me", 2026-09-27): say what you did, and still ask before anything irreversible.
 - **Test the scenario, not the player.** When the user says "played X, check the stats", report what the data
   says about the scenario: does it force its demand, does the score pay for the right thing, is there
   luck or a shortcut. No coaching unless asked.
@@ -189,6 +191,11 @@ target spawns on its frame. Themes that paint every surface type the same hide i
 map setting can prevent this. The Egyptian window look replaced it. The Arena, Prop and Frame tests are in `retired/tests/`.
 
 Still open:
+- **Tracking along a drawn path (2026-09-27):** the Lecture Hall Track Test is installed (v5, not yet played): the
+  world map from Natural Earth carved on a chalkboard, the bot lapping each continent. Built by the scratch script
+  `_lecture_hall_test.py` from `test_out/ne/`; findings in `references/mechanics.md` ("Flying bots, waypoint paths")
+  and `references/scenario-types.md` ("Case: tracking along a drawn path"). Earlier versions and the Wobble Probes
+  are in `retired/tests/`.
 - The window look is in all 13 scenarios since 2026-09-24, at the user's request (`ARENA_DEFAULT = "window"`,
   `egypt.WINDOW_LOOK`), with the palace courtyard since later that day (`egypt.COURTYARD`, the user's pick from
   the design workflow). On 2026-09-25, after the Sand Test, the look changed in all 13:
