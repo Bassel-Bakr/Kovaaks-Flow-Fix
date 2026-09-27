@@ -560,3 +560,8 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
   tour is North America, South America, Antarctica, Australia, Africa, Eurasia: 82 deg of routes, 16 deg repeated,
   607 deg in all (133 s at 5 deg/s). One port per continent (no repeats at all) had no clear tour: a continent's two
   neighbours lie on opposite sides, so both routes would have to hug its coast.
+- **Names inside the outlines (v7).** v6 put each name at the average of its coast points, so South America's ran over
+  its coast. v7 puts each name as close as it can to its continent's centre of area (Europe and Asia within 3 deg of
+  a set point, as they share one outline), at the widest clearance from every coast that fits there: 0.9 deg, else
+  0.75, 0.6, 0.45 or 0.3. Lines stay 0.9 deg tall; a two-word name may take two lines. Result: every name 0.9 deg
+  clear except Europe and Antarctica (0.6); South America on two lines.
