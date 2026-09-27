@@ -26,6 +26,17 @@ the scenarios improved first.
   `Damage Done:`. Also `Hash:` (changes whenever the scenario file changes, so it identifies the build),
   `Avg FPS:` and `Max FPS (config):` (the in-play frame rate and the user's limit, 1000 since 2026-09-24).
 - **`TTK` is 0** for one-shot kills. Use the time between kills (from `Challenge Start:` for the first) instead.
+- **No file without a score (2026-09-27).** Only challenge runs write a stats file, and only when they score: 16
+  challenge runs of the FPS probes that scored 0 wrote none (the log still records "Challenge completed", and a
+  small `performances/*.perf` file is written, but it holds no frame data). A probe that must be read from the stats
+  needs a score, for example `ScorePerTime` or a target to hold fire on. Freeplay writes no stats file.
+- **`OverShots` is the shots fired in the scenario's `OvershotProtectionTimer` (0.25 s in cA sixshot dense) after a kill** (the Overshots and Hitbox probes, 2026-09-27). With a beam
+  ticking every 0.01 s it tops out at 25 however long the player keeps firing (bots that never respawned read 25 too),
+  and a player who lets go 0.04 s after the kill gets 4. So it measures stopping fire after a kill, not overshooting
+  the target; a weapon firing faster or with more pellets per shot reads higher (the survey saw up to 250).
+  `Total Overshots` is its sum. `Fight Time` is the sum of the kill times.
+- **Kill rows count since the previous kill.** A kill row's `Shots` and `Hits` include every shot since the previous
+  kill, on any bot (the Hitbox probe).
 
 ## Tools in the project
 

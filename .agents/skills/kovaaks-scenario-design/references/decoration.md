@@ -153,8 +153,12 @@ in `mechanics.md`; this page links to them rather than repeating them.
   2026-09-23 the user asked to "reduce the number of used props overall". The Egypt room was then built from
   blocks, so the request meant fewer blocks. When the user asks about props, check the screenshot or ask which
   pieces they mean before you act.
-- **Native size and pivot are unknown**; roughly 600 map units per unit of scale was estimated from a screenshot.
-  Use the scales installed maps use as a starting point.
+- **Size and pivot (the Shapes probe, 2026-09-27).** A prop stands on its location: the location is at the bottom of
+  the model, about centred side to side. Six props at scale 0.25, measured in a full-size capture and given here at
+  scale 1 in map units (width x depth x height, about +-15%, since the capture also shows their top faces):
+  Container about 1,500 x 1,800 x 600, Crate about 260 x 260 x 210, Barrel about 115 x 115 x 100-160, Column about
+  90 x 100 x 470-510, TimmyContainer about 350 x 560 x 220, Tree (a small plant) about 90 x 115 x 210. So there is no
+  single size per unit of scale; the earlier "roughly 600 map units per unit of scale" held only for one prop.
 - **Rotation and scale.** Props take any rotation and a non-uniform scale. One installed map (Cata IC Pizz Plz)
   turns a Fence 180 degrees about z, and a Doorway and a Window about 48 degrees about z. Installed maps stretch a
   Banner into a long strip (11.46 x 0.23 x 0.15) and a Column into a thin post (0.0625 x 0.0625 x 0.51). They

@@ -131,9 +131,13 @@ installed scenarios but not tested here.
     on the wall, around the orange corner. Bar 3 looked unchanged, because it turned about its own length.
     The right end of bar 4 swung toward the player, and its shadow showed this. Later, the stroke-built
     signs looked right in game, which confirmed the first value.
-  - **Combined values are untested.** We tested one value at a time, so we do not know how the game
-    combines two or three values. For this reason, check_scene.py uses the exact box only for brushes that
-    use the first value alone. It treats any brush with a second or third value as a sphere around the box.
+  - **Combined values (the Shapes probe, 2026-09-27).** The game applies the first value first, then the second,
+    then the third, each about the fixed world axes (Unreal's roll, pitch, yaw order), turning about the anchor
+    corner. A positive second value tips the bar's far end (+x, away from the player) up. Eight bars turned 0,
+    (30,0,0), (0,30,0), (0,0,30), (30,30,0), (30,0,30), (0,30,30) and (30,30,30) all matched this model within 1.0 to
+    1.3 px in a full-size capture, with the part of (30,30,0) that turns into the wall hidden; every other order
+    missed that bar by 13 px. `test_out/shapes_rot.py` holds the fit. check_scene.py still treats a brush with a
+    second or third value as a sphere round its box; it could now use the exact box.
 - **View:** at 103° horizontal FOV on 16:9, the screen shows ±51.5° horizontally and ±35.3° vertically
   around the crosshair.
 - **Parallax:** targets float about 50 units in front of the wall, so on the wall plane they appear
@@ -353,8 +357,13 @@ file with a safe build. Test any map-structure change in a separate test scenari
   `ReloadTimeFromEmpty` 0.35 and `CancelReloadOnKill` true: a kill refills the round, and a miss empties the gun and
   forces the reload, so a miss costs time instead of points. The keys come from 1w2ts reload smallflicks (3 rounds,
   3 back on a kill). Check in the first runs that a hit never triggers a reload.
-- **Forced spawns near the crosshair (untested).** The KovaaK's wiki says the Player profile's `InvertBlockedSpawn`
-  can force bots to spawn inside `BlockSpawnFOV` instead of outside it. VT ww5t Intermediate S5 uses it at 40.
+- **Forced spawns near the crosshair (the Spawns probe, 2026-09-27, OBS).** The KovaaK's wiki says the Player
+  profile's `InvertBlockedSpawn` can force bots to spawn inside `BlockSpawnFOV` instead of outside it; VT ww5t
+  Intermediate S5 uses it at 40 with `BlockSpawnDistance` 9999. The probe set it to true with FOV 10 on the player,
+  and gave three bots that live 1 s one spawn volume 80 x 40 deg. All 48 spawns in 15 s landed near the crosshair,
+  but only up and to the right of it: bot centres 0 to 4.9 deg right and 0 to 7.1 deg up (the centre stands 1.6 deg,
+  one bot height, above its spawn point), never left of or below the crosshair. So it works, but lopsided: it cannot
+  spread targets evenly round the crosshair. The FOV reads as the full angle (5 deg to each side).
 
 - **A target stands on its spawn point (2026-09-26; corrected the same day).** Its centre sits SpawnOffset Z (8 in the
   base) plus its full `MainBBHeight` above the volume position (first read as half the height; the Blast Test's
@@ -452,6 +461,107 @@ file with a safe build. Test any map-structure change in a separate test scenari
     no difference, and `WaypointTurnRate` 1500 made it worse.
   - **No reversals.** Where a path doubles back, the bot overshoots and loops. A drawn path must never cross or touch
     itself; the calligraphy and one-line art tests failed on this, a generated island coast worked "perfectly".
+  - **The Waypoints probe (2026-09-27, measured through OBS at 116 frames a second).** Nine flyers with the World
+    Map's settings (Default aim, acceleration 12 x speed, `FollowAimAtWaypoint`, turn rate 100,000) flew straight
+    24-deg lines at 20 deg/s, one setting changed each:
+    - Waypoints 2.5 deg apart (0.125 s of travel) and 6 deg apart: straight and clean, 19.5 and 19.9 deg/s in the
+      middle of the line, no back steps.
+    - 1 deg apart (0.05 s): half speed (10 deg/s), with a small loop at each waypoint. 0.5 deg apart (0.025 s): the
+      bot never gets past, circling one spot in a small loop every 0.4 s. So a waypoint that comes up sooner than
+      about 0.1 s after the last one gets overshot and circled back to: that is the "0.09 s per waypoint".
+    - Only the two ends (24 deg, 1.2 s apart): the bot strays up to 5 deg off the line and loops, so waypoints can
+      also be too far apart. Keep them 0.125 to 0.3 s of travel apart.
+    - `WaypointTurnRate` 200 (the common value): loops everywhere, 5.5 deg/s. Paths need a high turn rate.
+    - `FollowUntilCombat`: the bot never leaves its spawn point (it sees the player at once).
+    - `FollowAimAtTarget`: it follows the line for a few seconds, then drifts toward the player's eye level.
+    - A 0.5 s pause at each end (`BotPauseTimeMin/Max`): the bot wobbles on the spot during the pause and loops after
+      it.
+    - **Waypoint bots ride above their line.** Every clean lane sat 0.21 to 0.23 deg (about 0.45 of the bot's
+      radius) above its waypoints; the still bot sat on its design height (0.07 deg low). A carved path shows the
+      bot about 0.2 deg high unless its waypoints are lowered by that much.
+    - The capture's view was turned 5.9 deg right and 2.8 deg down (the mouse had moved); `test_out/calib_view.py`
+      fits the turn from the base wall's corners (0.67 px) and `test_out/waypoint_probe.py` undoes it.
+- **The Movement probe (2026-09-27, OBS).** Eight flyers facing the player (an aim profile with no error) strafed left
+  and right, 1 s each way at 10 deg/s, one setting changed each:
+  - **Flyers ignore `BrakingDeceleration`.** The lane with braking 4 x speed drifted exactly like the reference.
+  - **Zero friction lets a strafing flyer spiral in.** With acceleration 2 x speed and `Friction` 0 both bots came
+    closer every second (to about 0.57 of their distance in 6 s) and rose out of view. `Friction` 8 kept its bot at
+    its distance for the whole 20 s. Instant acceleration (100 x speed) kept its distance while reversing every
+    second, but a bot strafing one way without stopping still closed in (28% nearer over 28 deg of travel). A bot
+    meant to circle the player at a fixed distance needs friction.
+  - **Reversals.** Instant acceleration swung the full 10.4 deg each second. Acceleration 2 x speed with friction 8
+    swung only 4.8 deg (90% of top speed 0.38 s after each turn).
+  - **A pause between strafes does not stop the bot.** With `StrafeSwapMin/MaxPause` 0.3 the bot coasted through
+    the pause (nearly still 6-8% of the time, not 23%), with or without braking, friction and braking friction.
+  - **`LeftStrafeTimeMult` counts the bot's own left**, which is the player's right while it faces the player: 2
+    made the bot drift right, 0.00001 switched its left strafes off, so it strafed to the player's left without
+    stopping (9.3 deg/s). The first strafe goes to the bot's right (`InitialRightMovementState` Right).
+- **How each hitbox type is drawn (the Shapes probe, 2026-09-27).** Three still bots, `MainBBRadius` 1.2 deg and
+  `MainBBHeight` 6 deg, `MainBBHide` false, measured in a full-size capture:
+  - `Spheroid` is a sphere of `MainBBRadius` (2.47 x 2.42 deg); it ignores `MainBBHeight`.
+  - `Cylindrical` is a capsule: 2.36 deg wide and 6.00 deg tall, so `MainBBHeight` is the whole height including
+    the round ends.
+  - `Cuboid` is a box `MainBBHeight` tall and 2 x `MainBBRadius` wide (it looked 2.76 deg wide at 8 deg off centre,
+    as a square box seen slightly from the side does).
+  - All three centres sat where designed (within 0.6 px, the box 2 px): a bot's centre is its spawn point plus its
+    full `MainBBHeight`, whatever the type, even for a sphere that is drawn smaller than that height.
+  - **Hits are tested against the same shapes (the Hitbox probe, 2026-09-27, two challenge runs plus OBS).** Bots of
+    each type (radius 1.2 deg, `MainBBHeight` 6 deg, `ProjBB` the same) strafed across the still crosshair at 4 deg/s
+    (0.04 deg a beam tick of 0.01 s) at set heights, with set health, so a kill meant at least that many ticks inside
+    the shape:
+    - Spheroid: killed when crossed through the centre; no hits at all when crossed 1.5, 2.7 or 3.45 deg above it.
+      A sphere of `MainBBRadius`.
+    - Cylindrical: killed at the centre and 2.7 deg above it (health 1); survived 2.7 deg above and below with
+      health 50 after about 39 hits each (a capsule gives 40, a cylinder 60); no hits 3.45 deg above; health 45 at
+      the centre died (60 ticks). A capsule `MainBBHeight` tall, `MainBBRadius` round.
+    - Cuboid: killed at the centre; killed 2.7 deg above it with health 50 (full width up to the top); no hits 3.45
+      deg above. A box `MainBBHeight` tall and 2 x `MainBBRadius` wide.
+    - Stats notes: a kill row's Hits and Shots count everything since the previous kill, on any bot; the bots
+      started about 1 s after the challenge start. `OverShots` was 25 on every kill.
+    - One Spheroid bot drifted toward the player during the run, even with friction 8, and passed close by the
+      camera; the others kept their distance.
+- **Score settings (the score probes, 2026-09-27, challenge runs, LG beam of 0.01 s, 1 damage a tick).** Checked
+  against the stats to the decimal:
+  - `ScoreMultAccuracy` true multiplies the score by the square root of accuracy (hits / shots): 5 kills x 100 x
+    sqrt(50 / 1217) = 101.35, the run's score.
+  - `ScoreMultDamageEfficiency` true multiplies by damage done / damage possible: 14 x 100 x 140 / 862 = 227.38.
+  - `ScoreMultKillEfficiency` true multiplies by kills / (kills + deaths); with no deaths it changes nothing (11 kills
+    scored 1,100).
+  - The square root comes from the scenario's own `MultSqrtAcc=true` (set in cA sixshot dense and so in every Flow
+    Fix build); installed scenarios without the key multiply by plain accuracy, as far as the survey shows.
+  - **`ScorePerTime` pays for the time left when a run ends early** (the Score Time Left probe): with
+    `EndChallengeAfterKills` 3 and a 30 s limit, three quick kills ended the run at 2.58 s and it scored 30.42 = 3 kills
+    + 27.42 s left. A run that ends at its time limit gets nothing from it (10 s idle scored 0; 20 s of beam scored
+    only its damage; 3.8 s of fight time paid nothing). The scenarios that use it end early by kills or `ScoreToWin`.
+    `Fight Time` in the stats is the sum of the kill times.
+- **The Open Questions probe (2026-09-27, one challenge run at a 60 FPS cap, theme off, OBS).**
+  - **Beam ticks at 60 FPS count as at 1000.** A beam ticking every 0.01 s fires about 1.7 times a frame at 60 FPS,
+    and the ticks still add up: the capsule crossing took 39 and 41 ticks (39 at 1000 FPS), the box needed its 50.
+    `OverShots` read 26-27 (the 0.25 s window rounded to whole frames).
+  - **`TargetStrafeOverride`.** Three bots with the same 1.5 s strafe timer moved as one until the player strafed
+    (A and D, 2 s each). Then `Ignore` kept its timer, `Mimic` dropped its timer and moved to the same side of the
+    screen as the player, and `Oppose` moved to the other side, both switching with each of the player's switches.
+    A bot facing the player therefore mirrors the player's keys: player's left is the bot's right.
+  - **`DamageReactionChangesDirection` works.** Two bots on the same 4 s timer stayed together until the player
+    started tapping them; from then on the reacting bot kept turning away from the control, and the control kept
+    its timer. The delay after a hit was not measured: `EnemyBodyColorOnHit` red never showed, so hits were not
+    visible in the capture.
+  - **`LOSReact` fires while the bot is in the player's sight, not when it hides.** The control swung normally and
+    vanished behind a block each swing. `ReturnToSpawn` kept its bot at its spawn point the whole run (it never swung),
+    and `LOSReactKillBot` killed its bot 0.4 s after the start, in plain view, before it reached the block.
+  - The capture now starts over when the player restarts the scenario (`obs_capture.mjs onstart`), so it always
+    holds the last attempt; the first try caught only aborted attempts.
+- **Leaderboards (web research, 2026-09-27; not tested).** Only Workshop scenarios have leaderboards (the podium
+  button); local scenarios log `LeaderboardId=0`. When an author updates a Workshop scenario, the upload offers
+  "Invalidate Old Scores": old scores stay on the server but are hidden or marked with an asterisk (Game Options, LBs),
+  and a player's first new score replaces an invalidated one even if it is lower. No source says a changed file
+  resets a board by itself, though the stats record a hash (the MD5 of the `.sce` file) with every run. Sources: the
+  KovaaK's patch notes on Steam (https://store.steampowered.com/news/posts/?feed=steam_community_announcements&appids=824270&enddate=1559689156)
+  and the wiki's Performance Files page (https://wiki.kovaaks.com/home/KovaaK's/PerformanceFiles).
+- **Knowing when a run started.** KovaaK's logs every start to
+  `%LOCALAPPDATA%\FPSAimTrainer\Saved\Logs\FPSAimTrainer.log` as "Scenario start broadcast: '<name>'", stamped in
+  UTC (the user's `D:\Projects\kovaaks-events` tool is built on this). `obs_capture.mjs onstart` waits for that line
+  and then captures, so the user starts the probe after "go" and every frame time counts from the start.
 - **The player's starting view.** The player SpawnPoint's `rotation` ("roll, pitch, yaw", degrees) sets where the
   player looks at the start (confirmed through OBS). VAI 1 Grandmaster TE uses a pitch of 1.75 there.
 - **Teleport chains.** A pad fires when the player moves into it. With player gravity 0 only the pad under the spawn

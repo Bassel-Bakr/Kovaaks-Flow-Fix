@@ -196,8 +196,14 @@ seem to steer the real target by pushing it; that is still to be tested.
 - **Timed bot lives.** VT Ground gives its bots 1,900 health and `HealthRegenPerSec` -100, so each bot dies by
   itself after 19 s. It is the same trick as Flow Fix's timed targets. The stats then log one row per bot life.
 - **Helper bots.** VT Pasu adds 8 tiny still "knocker" bots (radius 4, health 100). VT Controlsphere adds two invisible flyers ("Repel D", "Repel U": radius 0.01, speed 100000,
-  a "Seeking" dodge profile) next to the real target, in a map called "Wall Repellent Circle". Their exact role is
-  unknown; they seem to shape the sphere's movement.
+  a "Seeking" dodge profile) next to the real target, in a map called "Wall Repellent Circle". They are on the
+  player's team (`BotTeams=2;1;1`), and the sphere is a walker with gravity 0.3 that never jumps.
+  - **Probed (2026-09-27, OBS, VT Controlsphere Novice S5).** Made visible (radius 20, not hidden), the helpers fly
+    straight to the sphere and stay pressed against it, one on a different side each moment. So a bot can push
+    another bot. With them, the sphere stayed in the upper part of the view (screen height 153 to 358 of 720) and was
+    on screen only 25% of the time. In a copy without them it was on screen 80% of the time and sank to the floor
+    (down to 681 of 720). The helpers keep the sphere up off the floor and push it round the room; the sphere's own
+    movement still makes it float and drift without them.
 - **Abilities.** Bots can use movement abilities. "Blink" is a dash of 15,000 units per second for 0.075 s, with up
   to 3 charges, used in combat when the player is more than 1,500 units away. Weapon, melee and sprint abilities
   exist too.
@@ -380,6 +386,35 @@ Findings from the test copies:
   the flat vertical knockback could vary, and it is set on the weapon, so it is the same for every bot.
 
 ## Unknowns to test in game (probe scenarios)
+
+**The probe set (2026-09-27, played the same day, retired to `retired/tests/probes/`).** Results are in mechanics.md
+(the Waypoints, Movement, Shapes, Hitbox, Spawns and score entries), decoration.md (prop sizes), this file (the helper
+bots) and AGENTS.md (the FPS probes). The Open Questions probe and Score Time Left
+settled the rest (mechanics.md): strafe overrides, damage and line-of-sight reactions, `ScorePerTime`, and beam
+ticks at 60 FPS. The user asked for probes
+for every open question. `_probes.py` (ignored by git) builds 19 of them into `test_out/probes/`, with their settings
+and expected positions in `test_out/probes/layout.json`. Watch probes are measured through OBS: Waypoints (spacing,
+`WaypointLogic`, `WaypointTurnRate`, pauses), Movement (acceleration, braking, friction, pauses, strafe time mults),
+Shapes (combined brush rotations, prop sizes and pivots, how each hitbox type is drawn), Spawns
+(`InvertBlockedSpawn`) and Controlsphere (its helper bots made visible). Play probes are read from the stats:
+Hitbox (bots of each `MainBBType` cross the still crosshair at set heights with set health; which die tells the
+shape hits are tested against), eight FPS probes (the World Map's parts one at a time, one big block against 400
+blocks over the same area and 400 small ones), and the score settings `ScorePerTime`, `ScoreMultAccuracy`,
+`ScoreMultDamageEfficiency`, `ScoreMultKillEfficiency` and the `OverShots` column. The set broke the "one test
+installed at a time" rule on purpose: the FPS probes only compare when played back to back.
+
+Answered from files and stats without a probe (2026-09-27):
+- `Efficiency` in the stats is Damage Done / Damage Possible (all 190,513 kills in 4,000 sampled runs).
+- `WaypointLogic` takes four values in installed and Workshop scenarios: `Ignore` (2,864 profiles),
+  `FollowAimAtWaypoint` (42), `FollowUntilCombat` (26) and `FollowAimAtTarget` (8). `WaypointTurnRate` is 200 in
+  most profiles and 100,000 in the path scenarios.
+- `MainBBType` takes `Spheroid` (2,989), `Cylindrical` (2,106) or `Cuboid` (121).
+- `InvertBlockedSpawn`, `BlockSpawnFOV` and `BlockSpawnDistance` sit on the player's Character Profile (VT ww5t
+  Intermediate S5: true, 40, 9999).
+- VT Controlsphere's helper bots ("Repel D", "Repel U") are on the player's team (`BotTeams=2;1;1`), radius 0.01,
+  hidden, with a "Seeking" dodge profile; its target sphere is hidden too (`MainBBHide` true) yet shows in play.
+- `OverShots` sits near 25 per kill in tracking and pokeball scenarios whatever the kill time; its meaning needs
+  the probe. `Cheated` is 1 on 5 kills of 190,513, all in one 2024 run.
 
 - The units and feel of `MaxSpeed`, `Acceleration`, `Friction` and `BrakingDeceleration`, and how they combine at
   a reversal. Is there a coast, or an instant turn?
@@ -572,6 +607,10 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
   Track 70-74%. Stats for beam tracking hold no timeline, so they cannot say where on the tour the misses fall; an
   OBS capture can. Verdict: works, needs more runs. Avg FPS 757, the lowest of the night's tests (the frame look's
   tests read 870-930, the Classroom 796); no Overflick run in the same session, so the room's cost is not settled.
+- **Where World Map's frame time goes (the FPS probes, 2026-09-27).** Its parts on their own, 20 s each: the empty
+  map ran at the 1000 FPS cap (0.96 ms), and adding the 1,089 waypoints or the chalk mesh left it there; the hall's 83
+  blocks took it to 1.21 ms, the whole scenario to 1.22 ms. The room is the whole cost. Play read 757 FPS (1.32 ms)
+  with the beam and the moving bot on top.
 - **The conventional tracking score (v9).** The user asked for the usual 6,000 points per 60 s of tracking. The LG
   now ticks every 0.01 s (100 a second, as in Leisphere Easy) for 1 point, so a perfect 135 s run scores 13,500.
   v8's 21.7 ticks a second at 1 point each made a perfect run 2,934; its 64.5% equals about 8,700 on the new scale.

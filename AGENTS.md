@@ -37,7 +37,7 @@ this folder.
 | `docs/` | Human-facing docs: `scenarios.md` (every scenario's design, evidence and verdict), `look.md` (the shared look), `future.md` (suggestions), `README.md` (index and the loop). Keep them current with every change. |
 | `prop_test.py`, `prop_sampler.py`, `frame_test.py` | Retired prop tests for a frame that themes cannot repaint. Prop Test checks whether themes repaint props. Prop Sampler shows every candidate prop so the user can pick the opaque ones. Frame Test builds the arena frame from Container props. |
 | `patch_scenario.py` | Copies an installed scenario under a new name into `test_out/`, with chosen settings changed, map objects added or moved (for example an invisible Clip wall), and a note added to its description. For fixing other authors' scenarios, and the user's own, without touching the original. |
-| `obs_capture.mjs` | Grabs frames from OBS's KovaaK's capture (obs-websocket 5, settings from KovOBS's config): `node obs_capture.mjs info`, `shot`, `fast <dir> <seconds>` (about 100 JPEG frames a second). For measuring bots in game; tell the user before capturing. |
+| `obs_capture.mjs` | Grabs frames from OBS's KovaaK's capture (obs-websocket 5, settings from KovOBS's config): `node obs_capture.mjs info`, `shot`, `fast <dir> <seconds>` (about 100 JPEG frames a second), and `onstart <dir> <seconds> [scenario]`, which waits for KovaaK's log to record the scenario's start (the kovaaks-events method) before capturing. For measuring bots in game: start `onstart`, then tell the user "go" (their way, 2026-09-27). |
 | `survey_scenarios.py` | Read-only survey of every scenario installed in KovaaK's into `test_out/survey.json`: top-level keys, profile sections and map facts (both map formats). `python survey_scenarios.py workshop` does the same for the 1,422 Steam Workshop items into `test_out/survey_workshop.json`. The basis of `references/scenario-types.md`. |
 | `stats_basic.py`, `stats_varying_sizes.py`, `stats_all_in_one.py`, `stats_recovery.py`, `stats_slow_start.py` | Read-only analysis of the user's runs. |
 | `Flow Fix guide.md` | Player-facing guide, installed next to the scenarios. Keep it in sync with every change. |
@@ -85,6 +85,8 @@ GitHub Copilot and other agents that support the format discover them there; any
 - **Ask before changing.** Say what you will change and wait for a yes. Answer questions and audits
   directly. For test scenarios the user now wants the recommended option done without asking ("do recommended and
   don't ask me", 2026-09-27): say what you did, and still ask before anything irreversible.
+- **Say which mode before a run.** The user plays probes in freeplay unless told otherwise. Before asking for a run,
+  say which mode it needs: freeplay is fine for OBS captures, but stats files need challenge mode (user, 2026-09-27).
 - **Test the scenario, not the player.** When the user says "played X, check the stats", report what the data
   says about the scenario: does it force its demand, does the score pay for the right thing, is there
   luck or a shortcut. No coaching unless asked.
@@ -110,6 +112,13 @@ GitHub Copilot and other agents that support the format discover them there; any
   triangles and about 5 MB. Mesh triangles are cheap for the frame rate but not for the file: the game writes
   mesh data one number per line, and a 39 MB build gave the user a hitch on every restart. So `build.py` writes
   meshes compactly and leaves out faces the fixed eye can never see (`COMPACT_MESHES`, `SLIM_MESHES`).
+  **FPS probes (2026-09-27, two challenge passes, theme on and off, 20 s each, frame time in ms):** empty map 0.96
+  (at the 1000 FPS cap, so the costs below are lower bounds); 1,089 waypoints 0.96 and the World Map's chalk mesh
+  (2,860 triangles) 0.96, both free; the lecture hall's 83 blocks 1.21; the whole World Map 1.22; one block covering
+  80 x 50 deg 1.05; 400 blocks tiling that area 1.16; 400 blocks a sixteenth that size 1.12. The theme changed
+  nothing (within 0.02 ms). So the World Map's cost is its room: big surfaces that fill the screen in layers, not
+  object count, waypoints or mesh triangles; and 400 small blocks cost about 0.1 ms more than one block over the
+  same area.
   Compare frame time (1000/FPS) against Overflick read in the same session. Report the object count, triangle
   count and file size with every look change, and ask for an FPS check. The user's limit was 400 FPS on
   2026-09-23 and is 1000 since 2026-09-24 (`Max FPS (config)` in the stats). In play they averaged about 820
@@ -193,6 +202,10 @@ target spawns on its frame. Themes that paint every surface type the same hide i
 map setting can prevent this. The Egyptian window look replaced it. The Arena, Prop and Frame tests are in `retired/tests/`.
 
 Still open:
+- **Probes (2026-09-27, played and retired to `retired/tests/probes/`):** 20 probe scenarios built by the scratch script
+  `_probes.py` (the "Flow Fix Probes" playlist), measured through OBS (`obs_capture.mjs onstart`, `test_out/*.py`
+  readers) and the stats. Results are recorded in the references. A second script, `_probes2.py`, built the single "Open
+  Questions" probe and "Score Time Left" for what the first set left open (also retired).
 - **Tracking along a drawn path (2026-09-27):** the Lecture Hall Track Test is installed as `World Map` (the user's name, no prefix, with
   tracking tags, 2026-09-27; v8: names centred inside the outlines, chalk lines as shared-vertex ribbons, 3,240 mesh vertices,
   1.37 MB; v9 scores 100 a second on the bot, 13,500 for a perfect run; one run of v8): the
