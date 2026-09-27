@@ -548,7 +548,7 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
   straits and Hormuz keep those seas open), a light blur, the coast traced as one loop, and only its sharp spots
   eased. Sinai is cut at Suez and Panama at the Darien, so no two continents touch.
 - **Phases:** one continent per panel, then per classroom, with teleport chains (mechanics.md). Too slow to switch
-  and the next bot off the crosshair. **The Lecture Hall Track Test** (installed as `Flow Fix 2 World Map`, the user's name) puts the whole map on one wide
+  and the next bot off the crosshair. **The Lecture Hall Track Test** (installed as `World Map`, the user's name, no prefix) puts the whole map on one wide
   chalkboard in one room: the bot laps each continent and flies a dashed route to the next. Antarctica is a strip
   along the bottom, as on the user's reference map. Script `_lecture_hall_test.py` (ignored by git).
 - **Tracing each coast once.** v5 entered each continent at its point nearest the last one, went all the way round,
