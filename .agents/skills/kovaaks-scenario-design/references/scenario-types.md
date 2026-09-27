@@ -470,3 +470,58 @@ The user asked for a 10 s scenario: 5 s clicking, then 5 s tracking, each with i
     tracking by damage.
 - **Tracking bot:** a flyer strafes only with `AirControl` above 0 (the base has 0).
 - **First scores:** 5-10 points clicking and 2-6 tracking in the user's runs. The balance is not decided.
+
+## The Workshop survey (2026-09-26)
+
+`python survey_scenarios.py workshop` reads the Steam Workshop folder
+(`steamapps\workshop\content\824270`, one folder per item) into `test_out/survey_workshop.json`: 1,422 scenarios, 1,245
+of them not among the 388 installed ones. Each entry carries its `workshop_id`. What it adds:
+- **Player abilities are used:** melee in 15 scenarios, movement in 3, weapon in 1, sprint in 1. mccoyfrozentrack gives
+  the player all three kinds at once: a Rush dash (movement), a Stun Gren (weapon ability) and a Melee.
+- **Teleporters in 15 scenarios.** TP Track the Floating apex moves the player between 3 rooms (LEFT, RIGHT, MID)
+  with `TeleportDelay` 10: a rotation of positions every 10 s. Others use a delay of 0 as plain doors.
+- **Very short runs:** 25 scenarios have `Timelimit` of 20 s or less, several of 5 s (Close Long Strafes 5s,
+  shimPressure 5s).
+- **Penalties through damage taken:** 34 use `ScoreLossPerDamageTaken`. The pressure family (fuglaaPressure,
+  darkPressure, Pressure Aiming) gives its bots guns (`UseWeapons` true, aiming on) that shoot the player, 50 points
+  per point of damage, so a target left alive costs score. shimPressure 5s sends bots rushing at the player (a
+  movement ability of 10,000) with a melee hurtbox: "kill before they reach you".
+- **Bot counts:** the most in one Workshop scenario is 36 (1wall9000sphere); most "9000 targets" scenarios use about
+  30 that respawn.
+- **No charge weapons,** and `DelayBeforeShot` appears mostly on the self-destruct bots' weapons (explode250ms to
+  500ms).
+
+### Mechanics new to this project (Workshop study, 2026-09-26)
+
+Found by listing every setting whose value is rare (2-25 of 1,422 Workshop scenarios) against its usual value.
+- **Adaptive difficulty ("Adapt" scenarios, 7).** `IsTargetSizeActive` (or `IsTimeDilationActive` for speed) with
+  `PerformanceMetricType` (`Accuracy` or `KillsPerSecond`), `PerformanceTarget`, `AdjustmentInterval` (s) and
+  `AdjustmentRate`, bounded by `Min/MaxTargetSizeMultiplier` (or speed). The game resizes the targets every interval
+  to hold the player at the target: PeekShot Valorant Adapt aims at 2.1 kills per second every 5 s; Avasive Micro
+  Reflex Adapt shrinks targets down to half size by accuracy. The stats record `Avg Target Scale`.
+  Confirmed in Flow Fix 2 Adaptive Test (2026-09-26, 3 runs, accuracy target 0.9, 5% every 2 s, start 1x, floor
+  0.4x): accuracy stayed at 86-92%, Avg Target Scale came out 0.54-0.57, and kill times rose through each run
+  (0.43 s to 0.55 s) as the targets shrank. Starting at 1x spent half the run shrinking, so the average mixed that
+  descent with the player's level; v2 starts at 0.55x with a 0.25x floor, so the average tracks the level.
+- **Game speed.** `Timescale` runs the whole scenario slower or faster: 0.7 in the Pasu Raspberry family, 1.4 in
+  Reflex Flick - Mini, 2.0 in 1w4t Pressure Revosect and 16 others. `TimeDilationBaseMultiplier` scales only the
+  targets (0.66 to 1.4).
+- **Finish lines.** `EndChallengeAfterKills` ends the run at N kills: VT Air Advanced after 5 bots; Apostrophe Flick
+  Survival starts with 5 s, adds 0.3 s per kill and is won at 250 kills. `EndChallengeAfterDamage` does the same by
+  damage.
+- **Accuracy in the score.** `ScoreMultAccuracy` (with `MultSqrtAcc` for the square root) multiplies the score by
+  accuracy, in 135 Workshop scenarios. `ScoreMultKillEfficiency` and `ScoreMultDamageEfficiency` exist too;
+  `ScoreLossPerReload` charges per reload (25 in the REVENGE scenarios).
+- **A second weapon on every shot.** A weapon's `AlsoShoot` names another weapon profile fired with each shot:
+  Ascended Tracking fires an effect helper, the Revolving scenarios a "Gain Velocity For Stuck" helper that pushes
+  stuck bots.
+- **Lifetimes without HP.** A dodge profile's `LOSReactKillBot` true with `LOSReactKillBotTimerMin/Max` kills the bot
+  that long after it sees the player (0.7 s in Avasive Micro Reflex Adapt), which leaves the HP free for values.
+- **Phases by kill count.** 1 wall no bitches (5 phases of 45 to 65 kills) moves the player between rooms with
+  Teleporters driven by a fixed rotation of helper bots (tp-helper-1, tp-to-room-2, tp-helper-2, tp-to-room-3).
+  How a helper triggers the move is not worked out yet.
+- **Also seen:** `SpawnGroup` numbers on bot profiles (LineClick: 4 groups); `Pierces` (bullets pass through
+  targets); `DamageFalloffStart/StopDistance` (damage by distance); bot abilities with a negative `HealthRestore`
+  (a dodge costs the bot health, Reactive Clicking Hard); player survival settings (`PlayerMaxLives` 1,
+  `HealthRegainedonkill`, `LifeStealPercent`); `ScorePerTime`; movement scoring (`MBS*`, `DistanceScoreCondition`
+  LooseMirror and LooseAntiMirror).

@@ -421,3 +421,8 @@ file with a safe build. Test any map-structure change in a separate test scenari
   - **Scoring both phases:** each gun can hit both kinds of target, so score clicks by kill (`ScorePerKill` 1, the BB
     Gun doing 0.001 damage) and tracking by damage. At 1000 damage per shot, BB Gun hits on the tracking bot scored
     1000 each.
+- **No auto-fire for the player (2026-09-26).** The weapon's trigger bot (`TriggerBotEnabled` true,
+  `TriggerBotFOV` 360, `TriggerBotDelay` 0) did not make the player's gun fire without a click, with `BlockCheats`
+  on or off. `BlockCheats` only gates the cheat keys, and the controls list no trigger-bot key: only the Aimbot (X),
+  which aims for you. The trigger-bot settings seen on 26 player weapons in installed and Workshop scenarios are
+  most likely leftovers; on bots' weapons they work.

@@ -9,6 +9,7 @@ Usage: python survey_scenarios.py
 """
 import glob
 import json
+import sys
 import os
 import re
 from pathlib import Path
@@ -58,8 +59,22 @@ def parse(path):
     return {"file": os.path.basename(path)[:-4], "top": top, "sections": sections, "map": facts}
 
 
+WORKSHOP = r"C:\Program Files (x86)\Steam\steamapps\workshop\content\824270"
+
 if __name__ == "__main__":
-    out = [parse(f) for f in sorted(glob.glob(os.path.join(SCEN, "*.sce")))]
+    # python survey_scenarios.py                 the installed scenarios -> test_out/survey.json
+    # python survey_scenarios.py workshop        the Steam Workshop items (one folder per item, 2026-09-26)
+    #                                            -> test_out/survey_workshop.json, each entry with its "workshop_id"
+    if len(sys.argv) > 1 and sys.argv[1] == "workshop":
+        files, dest = sorted(glob.glob(os.path.join(WORKSHOP, "*", "*.sce"))), "test_out/survey_workshop.json"
+    else:
+        files, dest = sorted(glob.glob(os.path.join(SCEN, "*.sce"))), "test_out/survey.json"
+    out = []
+    for f in files:
+        entry = parse(f)
+        if dest.endswith("workshop.json"):
+            entry["workshop_id"] = os.path.basename(os.path.dirname(f))
+        out.append(entry)
     Path("test_out").mkdir(exist_ok=True)
-    Path("test_out/survey.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
-    print(f"{len(out)} scenarios -> test_out/survey.json")
+    Path(dest).write_text(json.dumps(out, indent=1), encoding="utf-8")
+    print(f"{len(out)} scenarios -> {dest}")
