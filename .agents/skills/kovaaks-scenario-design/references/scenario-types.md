@@ -548,8 +548,15 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
   straits and Hormuz keep those seas open), a light blur, the coast traced as one loop, and only its sharp spots
   eased. Sinai is cut at Suez and Panama at the Darien, so no two continents touch.
 - **Phases:** one continent per panel, then per classroom, with teleport chains (mechanics.md). Too slow to switch
-  and the next bot off the crosshair. **The Lecture Hall Track Test** (installed, v5) puts the whole map on one wide
-  chalkboard in one room: the bot laps each continent, entering at its point nearest the last one and leaving at
-  its point nearest the next, and flies a dashed route between them (North America, South America, Africa,
-  Antarctica, Australia, Eurasia; 157 s at 5 deg/s, waypoints 0.125 s apart). Antarctica is a strip along the
-  bottom, as on the user's reference map. Script `_lecture_hall_test.py` (ignored by git).
+  and the next bot off the crosshair. **The Lecture Hall Track Test** (installed, v6) puts the whole map on one wide
+  chalkboard in one room: the bot laps each continent and flies a dashed route to the next. Antarctica is a strip
+  along the bottom, as on the user's reference map. Script `_lecture_hall_test.py` (ignored by git).
+- **Tracing each coast once.** v5 entered each continent at its point nearest the last one, went all the way round,
+  then on round to its point nearest the next one, so it traced 160 of its 713 deg twice (the user: "we're tracing
+  the same spots twice"). A coast traced in full from an entry to a different exit must repeat the stretch between
+  them, so v6 laps each coast the way that repeats the shorter stretch and chooses the order, entries and exits
+  together for the shortest hops plus repeats. It searches every order (the best by nearest gaps first), exactly over
+  ports every 1 deg, then refines each port to 0.05 deg. Every straight hop keeps 0.3 deg from all coasts. The best
+  tour is North America, South America, Antarctica, Australia, Africa, Eurasia: 82 deg of routes, 16 deg repeated,
+  607 deg in all (133 s at 5 deg/s). One port per continent (no repeats at all) had no clear tour: a continent's two
+  neighbours lie on opposite sides, so both routes would have to hug its coast.

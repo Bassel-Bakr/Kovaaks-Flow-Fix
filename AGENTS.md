@@ -191,8 +191,9 @@ target spawns on its frame. Themes that paint every surface type the same hide i
 map setting can prevent this. The Egyptian window look replaced it. The Arena, Prop and Frame tests are in `retired/tests/`.
 
 Still open:
-- **Tracking along a drawn path (2026-09-27):** the Lecture Hall Track Test is installed (v5, not yet played): the
-  world map from Natural Earth carved on a chalkboard, the bot lapping each continent. Built by the scratch script
+- **Tracking along a drawn path (2026-09-27):** the Lecture Hall Track Test is installed (v6, not yet played): the
+  world map from Natural Earth carved on a chalkboard, the bot lapping each continent once (v5 traced a fifth of its
+  path twice; the user liked v5's look). Built by the scratch script
   `_lecture_hall_test.py` from `test_out/ne/`; findings in `references/mechanics.md` ("Flying bots, waypoint paths")
   and `references/scenario-types.md` ("Case: tracking along a drawn path"). Earlier versions and the Wobble Probes
   are in `retired/tests/`.
