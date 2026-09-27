@@ -132,6 +132,8 @@ GitHub Copilot and other agents that support the format discover them there; any
   enemy colours and turns every target black. The user prefers a grey or dark grey theme.
 - **Settings the user found or chose.** HP-as-score for value-weighted targets. The fire-delay trick
   in Hesitation. Keeping the frame off every target.
+  Tracking scores the conventional way: 6,000 for 60 s on target, so a perfect run scores 100 a second
+  (the beam ticks every 0.01 s for 1 point, as in Leisphere Easy; user, 2026-09-27).
 - **The user's view on arm tension.** A too-loose arm drags into the flick; it does not overflick.
   Do not prescribe "tense up".
 
@@ -193,7 +195,7 @@ map setting can prevent this. The Egyptian window look replaced it. The Arena, P
 Still open:
 - **Tracking along a drawn path (2026-09-27):** the Lecture Hall Track Test is installed as `World Map` (the user's name, no prefix, with
   tracking tags, 2026-09-27; v8: names centred inside the outlines, chalk lines as shared-vertex ribbons, 3,240 mesh vertices,
-  1.37 MB; not yet played): the
+  1.37 MB; v9 scores 100 a second on the bot, 13,500 for a perfect run; one run of v8): the
   world map from Natural Earth carved on a chalkboard, the bot lapping each continent once (v5 traced a fifth of its
   path twice; the user liked v5's look). Built by the scratch script
   `_lecture_hall_test.py` from `test_out/ne/`; findings in `references/mechanics.md` ("Flying bots, waypoint paths")

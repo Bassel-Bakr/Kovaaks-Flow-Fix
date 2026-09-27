@@ -565,3 +565,13 @@ Bot 2 and Silo "but better", then for the path to be carved on the wall behind t
   a set point, as they share one outline), at the widest clearance from every coast that fits there: 0.9 deg, else
   0.75, 0.6, 0.45 or 0.3. Lines stay 0.9 deg tall; a two-word name may take two lines. Result: every name 0.9 deg
   clear except Europe and Antarctica (0.6); South America on two lines.
+- **First run of World Map** (v8, hash 68b2e12e, 2026-09-27 07:01; the stats `Hash:` is the MD5 of the `.sce`
+  file). The whole 135 s ran, fire held throughout (2,934 LG ticks, 21.7 a second, as in every beam test), 64.5% of
+  them on the bot, score 1,891. For comparison, the same player earlier that night: Classroom 72.7%, Continents
+  74.2% (bigger coasts, gentler turns), the old World Map test 44-58% (hairpin loops), Split Track 80-94%, React
+  Track 70-74%. Stats for beam tracking hold no timeline, so they cannot say where on the tour the misses fall; an
+  OBS capture can. Verdict: works, needs more runs. Avg FPS 757, the lowest of the night's tests (the frame look's
+  tests read 870-930, the Classroom 796); no Overflick run in the same session, so the room's cost is not settled.
+- **The conventional tracking score (v9).** The user asked for the usual 6,000 points per 60 s of tracking. The LG
+  now ticks every 0.01 s (100 a second, as in Leisphere Easy) for 1 point, so a perfect 135 s run scores 13,500.
+  v8's 21.7 ticks a second at 1 point each made a perfect run 2,934; its 64.5% equals about 8,700 on the new scale.
